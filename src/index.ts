@@ -3,12 +3,12 @@ import fetchData from './featchData'
 import { SampleTreeDataProvider } from './tree';
 
 export function activate(context: vscode.ExtensionContext) {
-  const cmd = 'usewiki2.helloWorld'
+  const cmd = 'usewiki2.tiddlywiki'
   const disposable = vscode.commands.registerCommand(cmd, () => {
     fetchData((data) => {
       data && vscode.window.showInformationMessage('太微连接成功')
       const treeDataProvider = new SampleTreeDataProvider(data as ITiddlyWikiStatus);
-      vscode.window.createTreeView('info', { treeDataProvider });
+      vscode.window.createTreeView('usewiki2-info', { treeDataProvider });
 
     });
 

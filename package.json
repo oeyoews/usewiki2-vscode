@@ -44,14 +44,14 @@
     "views": {
       "usewiki2": [
         {
-          "id": "info",
+          "id": "usewiki2-info",
           "name": "信息面板"
         }
       ]
     },
     "commands": [
       {
-        "command": "usewiki2.helloWorld",
+        "command": "usewiki2.tiddlywiki",
         "title": "TiddlyWiki"
       }
     ]
