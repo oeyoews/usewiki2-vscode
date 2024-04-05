@@ -5,8 +5,6 @@ let twdata = {} as ITiddlyWikiStatus;
 
 export function activate(context: vscode.ExtensionContext) {
   const cmd = 'usewiki2.helloWorld'
-  const tw = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right)
-
   const disposable = vscode.commands.registerCommand(cmd, () => {
     fetchData((data) => {
       twdata = data
@@ -19,11 +17,6 @@ export function activate(context: vscode.ExtensionContext) {
   })
 
   context.subscriptions.push(disposable)
-
-  tw.text = '$(add)' + 'usewiki2'
-  tw.tooltip = 'usewiki2'
-  tw.command = cmd
-  tw.show()
 
 }
 
