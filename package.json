@@ -1,30 +1,27 @@
 {
-  "publisher": "antfu",
-  "name": "ext-name",
-  "displayName": "ext-name",
-  "version": "0.0.0",
+  "publisher": "oeyoews",
+  "name": "usewiki2",
+  "displayName": "usewiki2",
+  "version": "0.0.1",
   "private": true,
   "packageManager": "pnpm@8.10.5",
   "description": "",
-  "author": "Anthony Fu <anthonyfu117@hotmail.com>",
+  "author": {
+    "name": "oeyoews"
+  },
+  "pricing": "Free",
   "license": "MIT",
-  "funding": "https://github.com/sponsors/antfu",
-  "homepage": "https://github.com/antfu/ext-name#readme",
+  "funding": "https://github.com/sponsors/oeyoews",
+  "homepage": "https://github.com/oeyoews/usewiki2-vscode#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/antfu/ext-name"
-  },
-  "bugs": {
-    "url": "https://github.com/antfu/ext-name/issues"
-  },
-  "sponsor": {
-    "url": "https://github.com/sponsors/antfu"
+    "url": "https://github.com/oeyoews/usewiki2-vscode#readme"
   },
   "categories": [
     "Other"
   ],
   "main": "./dist/index.js",
-  "icon": "res/icon.png",
+  "icon": "res/tiddlywiki01.png",
   "files": [
     "dist"
   ],
@@ -34,6 +31,31 @@
   "activationEvents": [
     "onStartupFinished"
   ],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "usewiki2",
+          "title": "太微",
+          "icon": "res/tiddlywiki01.png"
+        }
+      ]
+    },
+    "views": {
+      "usewiki2": [
+        {
+          "id": "info",
+          "name": "信息面板"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "usewiki2.helloWorld",
+        "title": "TiddlyWiki"
+      }
+    ]
+  },
   "scripts": {
     "build": "tsup src/index.ts --external vscode",
     "dev": "nr build --watch",
