@@ -1,10 +1,14 @@
 import * as vscode from 'vscode';
+// import fetchData from './featchData';
 
 export class SampleTreeDataProvider implements vscode.TreeDataProvider<SampleTreeItem> {
 	private _onDidChangeTreeData: vscode.EventEmitter<SampleTreeItem | undefined> = new vscode.EventEmitter<SampleTreeItem | undefined>();
 	readonly onDidChangeTreeData: vscode.Event<SampleTreeItem | undefined> = this._onDidChangeTreeData.event;
 
-	constructor(private twdata: ITiddlyWikiStatus) { }
+	constructor(private twdata: ITiddlyWikiStatus) {
+
+		// vscode.window.onDidChangeTextEditorViewColumn(() => { });
+	}
 
 	getTreeItem(element: SampleTreeItem): vscode.TreeItem {
 		return element;
@@ -14,8 +18,8 @@ export class SampleTreeDataProvider implements vscode.TreeDataProvider<SampleTre
 		if (!element) {
 			// 返回根节点
 			return Promise.resolve([
-				new SampleTreeItem('Username', this.twdata.username, vscode.TreeItemCollapsibleState.None),
-				new SampleTreeItem('Version', this.twdata.tiddlywiki_version, vscode.TreeItemCollapsibleState.None)
+				new SampleTreeItem('Username', this.twdata.username, vscode.TreeItemCollapsibleState.None, 'res/tiddlywiki01.png'),
+				new SampleTreeItem('Version', this.twdata.tiddlywiki_version, vscode.TreeItemCollapsibleState.None, '../res/tiddlywiki01.png')
 			]);
 		}
 		return Promise.resolve([]);
@@ -28,10 +32,12 @@ class SampleTreeItem extends vscode.TreeItem {
 		public readonly label: string,
 		public readonly description: string,
 		public readonly collapsibleState: vscode.TreeItemCollapsibleState,
+		public readonly iconPath?: string | vscode.Uri | { light: string | vscode.Uri; dark: string | vscode.Uri }
 	) {
 		super(label, collapsibleState);
 	}
 
+	// 自定义标签和描述
 	// @ts-ignore
 	get tooltip(): string {
 		return `${this.label}`;
