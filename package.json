@@ -59,7 +59,7 @@
     "commands": [
       {
         "command": "usewiki2.tiddlywiki",
-        "title": "检测 TiddlyWiki"
+        "title": "更新 TiddlyWiki 数据"
       }
     ]
   },

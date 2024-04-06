@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
-import path from 'path';
 import { iconMappings } from './icon';
+import { notify } from './notify';
+import fetchData from './featchData';
 
 // 定义树形视图的数据提供者类
 export class TWTreeDataProvider implements vscode.TreeDataProvider<TWTreeItem> {
@@ -33,16 +34,17 @@ export class TWTreeDataProvider implements vscode.TreeDataProvider<TWTreeItem> {
 		}
 	}
 
-	// iconPath = {
-	// 	light: path.join(__filename, '..', '..', 'res', 'tw256.png',),
-	// 	dark: path.join(__filename, '..', '..', 'res', 'tw256.png',)
-	// };
+	// 手动触发树形视图数据变化事件
+	async refresh(): Promise<void> {
+		// 更新数据
+		// 这里只是示例，你需要根据实际情况更新 twdata 对象中的数据
+		const data = await fetchData();
+		// this.twdata = data;
 
-	refresh() {
-		vscode.window.showInformationMessage('refresh')
+		// 触发数据变化事件
+		// this._onDidChangeTreeData.fire();
+		notify('数据已更新', 'info');
 	}
-
-
 }
 
 // 树形视图节点类

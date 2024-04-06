@@ -1,5 +1,6 @@
 import http from 'node:http';
 import * as vscode from 'vscode';
+import { notify } from './notify';
 
 export default function fetchData(): Promise<ITiddlyWikiStatus> {
   const twurl = 'http://localhost:8000/status';
@@ -26,7 +27,7 @@ export default function fetchData(): Promise<ITiddlyWikiStatus> {
         }
       });
     }).on('error', (error) => {
-      vscode.window.showErrorMessage(`Error fetching data: ${error.message}`);
+      notify(`Error fetching data: ${error.message}`, 'error');
       reject(error);
     });
   });
