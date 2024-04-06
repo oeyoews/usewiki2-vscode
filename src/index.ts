@@ -20,7 +20,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
   const data = await fetchData();
   const treeDataProvider = new TWTreeDataProvider(data as ITiddlyWikiStatus);
-  const treeview = vscode.window.createTreeView('usewiki2-info', { treeDataProvider });
+  const treeview = vscode.window.createTreeView('usewiki2', { treeDataProvider });
 
   // vscode.commands.executeCommand(cmd)
   context.subscriptions.push(disposable)

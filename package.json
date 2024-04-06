@@ -32,6 +32,13 @@
     "onStartupFinished"
   ],
   "contributes": {
+    "menus": {
+      "view/title": [
+        {
+          "command": "usewiki2.tiddlywiki"
+        }
+      ]
+    },
     "viewsContainers": {
       "activitybar": [
         {
@@ -44,7 +51,7 @@
     "views": {
       "usewiki2": [
         {
-          "id": "usewiki2-info",
+          "id": "usewiki2",
           "name": "太微"
         }
       ]
@@ -52,7 +59,7 @@
     "commands": [
       {
         "command": "usewiki2.tiddlywiki",
-        "title": "TiddlyWiki"
+        "title": "检测 TiddlyWiki"
       }
     ]
   },

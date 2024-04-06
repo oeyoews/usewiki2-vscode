@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import path from 'path';
 import { iconMappings } from './icon';
 
 // 定义树形视图的数据提供者类
@@ -10,7 +11,7 @@ export class TWTreeDataProvider implements vscode.TreeDataProvider<TWTreeItem> {
 	constructor(private twdata: ITiddlyWikiStatus) {
 	}
 
-	// 获取树形视图节点
+	/** @see: https://code.visualstudio.com/api/extension-guides/tree-view */
 	getTreeItem(element: TWTreeItem): vscode.TreeItem {
 		return element;
 	}
@@ -31,6 +32,16 @@ export class TWTreeDataProvider implements vscode.TreeDataProvider<TWTreeItem> {
 			return Promise.resolve(element.children || []);
 		}
 	}
+
+	// iconPath = {
+	// 	light: path.join(__filename, '..', '..', 'res', 'tw256.png',),
+	// 	dark: path.join(__filename, '..', '..', 'res', 'tw256.png',)
+	// };
+
+	refresh() {
+		vscode.window.showInformationMessage('refresh')
+	}
+
 
 }
 
