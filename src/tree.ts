@@ -18,8 +18,9 @@ export class SampleTreeDataProvider implements vscode.TreeDataProvider<SampleTre
 		if (!element) {
 			// 返回根节点
 			return Promise.resolve([
-				new SampleTreeItem('Username', this.twdata.username, vscode.TreeItemCollapsibleState.None, 'res/tiddlywiki01.png'),
-				new SampleTreeItem('Version', this.twdata.tiddlywiki_version, vscode.TreeItemCollapsibleState.None, '../res/tiddlywiki01.png')
+				new SampleTreeItem('Username', this.twdata.username, vscode.TreeItemCollapsibleState.Expanded, 'res/tiddlywiki01.png'),
+				new SampleTreeItem('Version', this.twdata.tiddlywiki_version, vscode.TreeItemCollapsibleState.Expanded, '../res/tiddlywiki01.png'),
+				new SampleTreeItem('Port', '8000', vscode.TreeItemCollapsibleState.Expanded, 'res/tiddlywiki01.png'),
 			]);
 		}
 		return Promise.resolve([]);
