@@ -1,6 +1,6 @@
 import * as vscode from 'vscode'
 import fetchData from './featchData'
-import { SampleTreeDataProvider } from './tree';
+import { TWTreeDataProvider } from './tree';
 
 export function activate(context: vscode.ExtensionContext) {
   const cmd = 'usewiki2.tiddlywiki'
@@ -12,7 +12,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.window.showQuickPick(['8080', '8000', '8081'], { placeHolder: '选择你的太微端口' })
       }
 
-      const treeDataProvider = new SampleTreeDataProvider(data as ITiddlyWikiStatus);
+      const treeDataProvider = new TWTreeDataProvider(data as ITiddlyWikiStatus);
       const treeview = vscode.window.createTreeView('usewiki2-info', { treeDataProvider });
       treeview.onDidChangeSelection(event => {
         const { label } = event.selection[0]
