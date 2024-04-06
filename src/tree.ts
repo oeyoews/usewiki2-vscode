@@ -19,9 +19,9 @@ export class TWTreeDataProvider implements vscode.TreeDataProvider<TWTreeItem> {
 		if (!element) {
 			// 如果没有指定父节点，则返回根节点的子节点
 			return Promise.resolve([
-				new TWTreeItem('info', '', vscode.TreeItemCollapsibleState.Expanded, [
-					new TWTreeItem('username', this.twdata.username, vscode.TreeItemCollapsibleState.None),
-					new TWTreeItem('version', this.twdata.tiddlywiki_version, vscode.TreeItemCollapsibleState.None),
+				new TWTreeItem('信息', '', vscode.TreeItemCollapsibleState.Expanded, [
+					new TWTreeItem('用户名', this.twdata.username, vscode.TreeItemCollapsibleState.None),
+					new TWTreeItem('版本', this.twdata.tiddlywiki_version, vscode.TreeItemCollapsibleState.None),
 				])
 			]);
 		} else {
