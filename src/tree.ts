@@ -19,16 +19,18 @@ export class TWTreeDataProvider implements vscode.TreeDataProvider<TWTreeItem> {
 		if (!element) {
 			// 如果没有指定父节点，则返回根节点的子节点
 			return Promise.resolve([
+				new TWTreeItem('输入框', '输入框的描述', vscode.TreeItemCollapsibleState.None),
 				new TWTreeItem('信息', '', vscode.TreeItemCollapsibleState.Expanded, [
 					new TWTreeItem('用户名', this.twdata.username, vscode.TreeItemCollapsibleState.None),
 					new TWTreeItem('版本', this.twdata.tiddlywiki_version, vscode.TreeItemCollapsibleState.None),
-				])
+				]),
 			]);
 		} else {
 			// 如果有父节点，则返回父节点的子节点数组
 			return Promise.resolve(element.children || []);
 		}
 	}
+
 }
 
 // 树形视图节点类
