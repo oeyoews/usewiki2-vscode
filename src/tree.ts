@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { iconMappings } from './icon';
 
 // 定义树形视图的数据提供者类
 export class TWTreeDataProvider implements vscode.TreeDataProvider<TWTreeItem> {
@@ -42,9 +43,10 @@ class TWTreeItem extends vscode.TreeItem {
 		public readonly children?: TWTreeItem[]
 	) {
 		super(label, collapsibleState);
-		// 如果有子节点，则设置图标
-		if (this.children && this.children.length > 0) {
-			this.iconPath = new vscode.ThemeIcon('folder');
+
+		const icon = iconMappings[label];
+		if (icon) {
+			this.iconPath = new vscode.ThemeIcon(icon);
 		}
 	}
 }
