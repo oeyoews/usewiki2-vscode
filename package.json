@@ -18,7 +18,7 @@
     "url": "https://github.com/oeyoews/usewiki2-vscode#readme"
   },
   "categories": [
-    "Other"
+    "Education"
   ],
   "main": "./dist/index.js",
   "icon": "res/tiddlywiki01.png",
