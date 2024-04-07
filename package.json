@@ -39,6 +39,14 @@
           "type": "number",
           "default": 8080,
           "description": "端口 (请确定你已经启动了太微)"
+        },
+        "usewiki2.type": {
+          "type": "string",
+          "enum": [
+            "text/markdown",
+            "text/vnd.tiddlywiki"
+          ],
+          "description": "保存类型"
         }
       }
     },

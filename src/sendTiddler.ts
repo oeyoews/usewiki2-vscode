@@ -31,6 +31,7 @@ export default function sendTiddler(tiddler: ITiddler) {
 	})
 
 	req.write(JSON.stringify(tiddler));
+	// NOTE: 必须要手动结束
 	req.end()
 }
 

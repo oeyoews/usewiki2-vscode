@@ -1,7 +1,7 @@
 import fetchData from "./featchData";
 import * as vscode from 'vscode'
 import sendTiddler from "./sendTiddler";
-import { notify } from "./notify";
+import { getType } from "./config";
 
 export default async function usewikiCmd() {
 	const newdata = await fetchData();
@@ -26,7 +26,7 @@ export default async function usewikiCmd() {
 		modified: time,
 		tags: ['Journal'],
 		creator: newdata.username || '',
-		type: 'text/markdown',
+		type: getType(),
 		text,
 		title,
 	}

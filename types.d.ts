@@ -11,7 +11,7 @@ interface ITiddler {
 	text: string
 	created: Date | string
 	tags?: string[],
-	type: 'text/markdown'
+	type: 'text/markdown' | 'text/vnd.tiddlywiki'
 	creator?: string
 	modified?: Date | string
 }
