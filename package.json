@@ -32,6 +32,16 @@
     "onStartupFinished"
   ],
   "contributes": {
+    "configuration": {
+      "title": "UseWiki2 太微",
+      "properties": {
+        "usewiki2.port": {
+          "type": "number",
+          "default": 8080,
+          "description": "端口 (请确定你已经启动了太微)"
+        }
+      }
+    },
     "menus": {
       "view/title": [
         {
@@ -59,7 +69,7 @@
     "commands": [
       {
         "command": "usewiki2.tiddlywiki",
-        "title": "更新 TiddlyWiki 数据"
+        "title": "TiddlyWiki Journal 太微之书"
       }
     ]
   },
