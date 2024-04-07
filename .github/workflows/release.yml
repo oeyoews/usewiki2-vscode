@@ -1,25 +1,43 @@
-name: Release
-
-permissions:
-  contents: write
+name: Build
 
 on:
   push:
     tags:
-      - 'v*'
+      - 'v*.*.*'
+    branches:
+      - main
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+
+permissions:
+  contents: write
+  discussions: write
 
 jobs:
-  release:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
         with:
-          fetch-depth: 0
-
-      - uses: actions/setup-node@v3
+          version: 8
+      - name: Setup Node.js and Pnpm
+        uses: actions/setup-node@v3
         with:
-          node-version: lts/*
+          node-version: latest
+          cache: 'pnpm'
+      - name: Install Dependency
+        run: pnpm install
 
-      - run: npx changelogithub
+      - name: Build Page
+        run: pnpm run package
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            ./*.vsix
         env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
