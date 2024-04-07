@@ -54,6 +54,9 @@
       "view/title": [
         {
           "command": "usewiki2.tiddlywiki"
+        },
+        {
+          "command": "usewiki2.openwiki"
         }
       ]
     },
@@ -77,7 +80,11 @@
     "commands": [
       {
         "command": "usewiki2.tiddlywiki",
-        "title": "TiddlyWiki Journal 太微之书"
+        "title": "UseWiki2: Journal 太微之书"
+      },
+      {
+        "command": "usewiki2.openwiki",
+        "title": "UseWiki2: Open 打开太微"
       }
     ]
   },

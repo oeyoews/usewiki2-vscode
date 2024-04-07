@@ -3,6 +3,7 @@ import * as vscode from 'vscode'
 import sendTiddler from "./sendTiddler";
 import { getType } from "./config";
 
+export const usewikiCli = 'usewiki2.tiddlywiki'
 export default async function usewikiCmd() {
 	const newdata = await fetchData();
 	const random = Math.random().toString(36).slice(2)
