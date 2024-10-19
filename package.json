@@ -4,8 +4,11 @@
   "displayName": "usewiki2",
   "version": "0.0.2",
   "private": true,
-  "packageManager": "pnpm@8.10.5",
+  "packageManager": "pnpm@9.0.6",
   "description": "",
+  "keywords": [
+    "TiddlyWiki"
+  ],
   "author": {
     "name": "oeyoews"
   },
@@ -35,18 +38,41 @@
     "configuration": {
       "title": "UseWiki2 太微",
       "properties": {
+        "usewiki2.ip": {
+          "order": 0,
+          "type": "string",
+          "default": "127.0.0.1",
+          "markdownDescription": "你的TiddlyWiki地址 (请确定你已经启动了[太微](https://tiddlywiki.com/#Installing%20TiddlyWiki%20on%20Node.js))"
+        },
         "usewiki2.port": {
+          "order": 1,
           "type": "number",
           "default": 8080,
           "description": "端口 (请确定你已经启动了太微)"
         },
+        "enableHttps": {
+          "order": 2,
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "Enable or disable HTTPS"
+        },
         "usewiki2.type": {
+          "order": 3,
           "type": "string",
+          "default": "text/vnd.tiddlywiki",
           "enum": [
             "text/markdown",
             "text/vnd.tiddlywiki"
           ],
-          "description": "保存类型"
+          "enumItemLabels": [
+            "Markdown",
+            "WikiText"
+          ],
+          "markdownEnumDescriptions": [
+            "use Markdown",
+            "use WikiText"
+          ],
+          "description": "选择要使用的文本格式 (Markdown 或 TiddlyWiki)"
         }
       }
     },
@@ -100,19 +126,19 @@
     "release": "bumpp && nr publish"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^1.1.1",
-    "@antfu/ni": "^0.21.9",
-    "@types/node": "^20.9.0",
-    "@types/vscode": "^1.84.1",
-    "@vscode/vsce": "^2.22.0",
-    "bumpp": "^9.2.0",
-    "eslint": "^8.53.0",
-    "esno": "^4.0.0",
-    "pnpm": "^8.10.5",
-    "rimraf": "^5.0.5",
+    "@antfu/eslint-config": "^1.2.1",
+    "@antfu/ni": "^0.21.12",
+    "@types/node": "^20.14.11",
+    "@types/vscode": "^1.91.0",
+    "@vscode/vsce": "^2.31.1",
+    "bumpp": "^9.4.1",
+    "eslint": "^8.57.0",
+    "esno": "^4.7.0",
+    "pnpm": "^8.15.9",
+    "rimraf": "^5.0.9",
     "tsup": "^7.2.0",
-    "typescript": "^5.2.2",
-    "vite": "^4.5.0",
+    "typescript": "^5.5.4",
+    "vite": "^4.5.3",
     "vitest": "^0.34.6"
   }
 }

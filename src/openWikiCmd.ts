@@ -1,10 +1,11 @@
-import * as vscode from 'vscode'
-import { getPort } from './config'
+import * as vscode from 'vscode';
+import { getIp, getPort, enableHttps } from './config';
 
 export default async function openWikiCmd() {
-	const url = `http://localhost:${getPort()}`
+  const protocal = enableHttps() ? 'https' : 'http';
+  const url = `${protocal}://${getIp()}:${getPort()}`;
 
-	vscode.env.openExternal(vscode.Uri.parse(url))
+  vscode.env.openExternal(vscode.Uri.parse(url));
 }
 
-export const openWikiCli = 'usewiki2.openwiki'
+export const openWikiCli = 'usewiki2.openwiki';

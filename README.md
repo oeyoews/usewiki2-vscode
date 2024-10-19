@@ -7,3 +7,10 @@
 ## TODO
 
 * 加入条目标题配置
+* use vue framework to refactor usewiki2
+
+## For Dev
+
+`F5`
+
+* configuration: https://code.visualstudio.com/api/references/contribution-points#contributes.configuration
