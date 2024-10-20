@@ -1,24 +1,24 @@
-import * as vscode from 'vscode'
-import { TWTreeDataProvider } from './tree';
-import fetchData from './featchData';
+import * as vscode from 'vscode';
+import { usewikiViewProvider } from './webviews';
+
 import usewikiCmd, { usewikiCli } from './usewikiCmd';
 import openWikiCmd, { openWikiCli } from './openWikiCmd';
+import wikiInfoCmd, { wikiInfoCli } from './commands/wikiInfo';
 
 export async function activate(context: vscode.ExtensionContext) {
+  const provider = new usewikiViewProvider(context);
+  context.subscriptions.push(
+    vscode.window.registerWebviewViewProvider('usewiki2', provider)
+  );
+  const disposable = vscode.commands.registerCommand(usewikiCli, usewikiCmd);
+  const openDisposable = vscode.commands.registerCommand(
+    openWikiCli,
+    openWikiCmd
+  );
+  const wikiInfoDisposable = vscode.commands.registerCommand(
+    wikiInfoCli,
+    wikiInfoCmd
+  );
 
-  // send cmd
-  const disposable = vscode.commands.registerCommand(usewikiCli, usewikiCmd)
-
-  // open cmd
-  const openDisposable = vscode.commands.registerCommand(openWikiCli, openWikiCmd)
-
-  context.subscriptions.push(disposable)
-  context.subscriptions.push(openDisposable)
-
-
-  // tree
-  const data = await fetchData();
-  const tree = new TWTreeDataProvider(data)
-  vscode.window.createTreeView('usewiki2', { treeDataProvider: tree })
-
+  context.subscriptions.push(disposable, openDisposable);
 }
