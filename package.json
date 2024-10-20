@@ -2,7 +2,7 @@
   "publisher": "oeyoews",
   "name": "usewiki2",
   "displayName": "usewiki2",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@9.0.6",
   "description": "",
@@ -25,11 +25,8 @@
   ],
   "main": "./dist/index.js",
   "icon": "res/tiddlywiki01.png",
-  "files": [
-    "dist"
-  ],
   "engines": {
-    "vscode": "^1.84.0"
+    "vscode": "^1.94.0"
   },
   "activationEvents": [
     "onStartupFinished"
@@ -97,7 +94,7 @@
         {
           "id": "Container",
           "title": "usewiki",
-          "icon": "res/tiddlywiki01.png"
+          "icon": "res/tw.svg"
         }
       ]
     },
@@ -148,7 +145,7 @@
     "@antfu/ni": "^0.21.12",
     "@types/node": "^20.14.11",
     "@types/vscode": "^1.91.0",
-    "@vscode/vsce": "^2.31.1",
+    "@vscode/vsce": "3.2.0",
     "bumpp": "^9.4.1",
     "eslint": "^8.57.0",
     "esno": "^4.7.0",
@@ -158,5 +155,10 @@
     "typescript": "^5.5.4",
     "vite": "^4.5.3",
     "vitest": "^0.34.6"
-  }
+  },
+  "files": [
+    "dist",
+    "res",
+    "LICENSE"
+  ]
 }
