@@ -89,21 +89,29 @@
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "usewiki2",
-          "title": "太微",
+          "id": "ollamaContainer",
+          "title": "Ollama",
           "icon": "res/tiddlywiki01.png"
         }
       ]
     },
     "views": {
-      "usewiki2": [
+      "ollamaContainer": [
         {
-          "id": "usewiki2",
-          "name": "太微"
+          "type": "webview",
+          "id": "ollamaView",
+          "name": "Ask ai chat"
         }
       ]
     },
+    "activationEvents": [
+      "onView:customSidebarView"
+    ],
     "commands": [
+      {
+        "command": "extension.showWebview",
+        "title": "显示输入框侧边栏"
+      },
       {
         "command": "usewiki2.tiddlywiki",
         "title": "UseWiki2: Journal 太微之书"
