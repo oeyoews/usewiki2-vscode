@@ -1,20 +1,60 @@
-body {
-	font-family: Arial, sans-serif;
-	padding: 10px;
-}
-
 input {
 	width: 100%;
 	padding: 8px;
 	margin-bottom: 10px;
-	font-size: 14px;
 }
 
 button {
 	width: 100%;
 	padding: 8px;
-	background-color: #007acc;
+	background-color: #4CAF50;
 	color: white;
 	border: none;
 	cursor: pointer;
+}
+
+.container {
+	margin: 10px;
+	position: relative;
+	height: calc(100vh - 20px)
+}
+.input-box {
+	position: absolute;
+	bottom: 10px;
+	left: 0px;
+	right: 0px;
+	display: flex;
+	flex-direction: column;
+}
+
+html {
+	box-sizing: border-box;
+	font-size: 14px;
+}
+
+
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
 }

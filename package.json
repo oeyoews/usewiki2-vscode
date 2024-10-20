@@ -79,46 +79,56 @@
     "menus": {
       "view/title": [
         {
-          "command": "usewiki2.tiddlywiki"
+          "command": "usewiki2.openwiki",
+          "group": "navigation"
         },
         {
-          "command": "usewiki2.openwiki"
+          "command": "usewiki2.wikiinfo",
+          "group": "navigation"
+        },
+        {
+          "command": "usewiki2.refreshwiki",
+          "group": "navigation"
         }
       ]
     },
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "ollamaContainer",
-          "title": "Ollama",
+          "id": "Container",
+          "title": "usewiki",
           "icon": "res/tiddlywiki01.png"
         }
       ]
     },
     "views": {
-      "ollamaContainer": [
+      "Container": [
         {
           "type": "webview",
-          "id": "ollamaView",
-          "name": "Ask ai chat"
+          "id": "usewiki2",
+          "name": "Chat"
         }
       ]
     },
-    "activationEvents": [
-      "onView:customSidebarView"
-    ],
     "commands": [
-      {
-        "command": "extension.showWebview",
-        "title": "显示输入框侧边栏"
-      },
       {
         "command": "usewiki2.tiddlywiki",
         "title": "UseWiki2: Journal 太微之书"
       },
       {
         "command": "usewiki2.openwiki",
-        "title": "UseWiki2: Open 打开太微"
+        "title": "Open 打开太微",
+        "icon": "$(info)"
+      },
+      {
+        "command": "usewiki2.wikiinfo",
+        "title": "太微详情",
+        "icon": "res/tw.svg"
+      },
+      {
+        "command": "usewiki2.refreshwiki",
+        "title": "Refresh",
+        "icon": "$(refresh)"
       }
     ]
   },

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Security-Policy"
+		content="default-src 'none'; style-src ${webview.cspSource}; script-src 'nonce-${nonce}';">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>TiddlyWiki</title>
+	<link href="${styleMainUri}" rel="stylesheet">
+</head>
+
+<body>
+	<h3>TiddlyWiki</h3>
+	<input type="text" id="inputField" placeholder="在这里输入..." />
+	<button class="send-wiki">提交</button>
+
+	<script nonce="${nonce}" src="${scriptUri}"></script>
+</body>
+
+</html>
