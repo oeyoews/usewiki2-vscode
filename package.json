@@ -2,7 +2,7 @@
   "publisher": "oeyoews",
   "name": "usewiki2",
   "displayName": "usewiki2",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "packageManager": "pnpm@9.0.6",
   "description": "",
@@ -77,33 +77,36 @@
       "view/title": [
         {
           "command": "usewiki2.openwiki",
-          "group": "navigation"
+          "group": "navigation",
+          "when": "view == usewiki2"
         },
         {
           "command": "usewiki2.wikiinfo",
-          "group": "navigation"
+          "group": "navigation",
+          "when": "view == usewiki2"
         },
         {
           "command": "usewiki2.refreshwiki",
-          "group": "navigation"
+          "group": "navigation",
+          "when": "view == usewiki2"
         }
       ]
     },
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "Container",
+          "id": "usewiki2Container",
           "title": "usewiki",
           "icon": "res/tw.svg"
         }
       ]
     },
     "views": {
-      "Container": [
+      "usewiki2Container": [
         {
-          "type": "webview",
           "id": "usewiki2",
-          "name": "Chat"
+          "type": "webview",
+          "name": "TiddlyWiki"
         }
       ]
     },
