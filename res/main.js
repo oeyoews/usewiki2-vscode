@@ -3,14 +3,20 @@
 (function () {
   const vscode = acquireVsCodeApi();
   const sendBtn = document.querySelector('.send-wiki');
+  const inputBox = document.querySelector('.input-box');
+  // ctrl enter to save
+  inputBox.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.key === 'Enter') {
+      submitInput();
+    }
+  });
   sendBtn.addEventListener('click', () => {
-    console.log('click');
     submitInput();
   });
   function submitInput() {
-    const input = document.getElementById('inputField').value;
-    console.log('inptu', input);
-    vscode.postMessage({ type: 'sendWiki', data: { text: input } });
+    const inputNode = document.getElementById('inputField');
+    vscode.postMessage({ type: 'sendWiki', data: { text: inputNode.value } });
+    inputNode.value = '';
   }
 
   /**
