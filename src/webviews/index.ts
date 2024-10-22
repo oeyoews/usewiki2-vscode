@@ -60,10 +60,10 @@ export class usewikiViewProvider implements vscode.WebviewViewProvider {
   }
   private getWebviewContent(webview: vscode.Webview) {
     const scriptUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, 'res', 'main.js')
+      vscode.Uri.joinPath(this._extensionUri, 'react-dist', 'main.js')
     );
-    const styleMainUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, 'res', 'main.css')
+    const styleAppUri = webview.asWebviewUri(
+      vscode.Uri.joinPath(this._extensionUri, 'react-dist', 'main.css')
     );
     const { tiddlywiki_version, username } = this._twdata;
     const nonce = getNonce();
@@ -75,17 +75,10 @@ export class usewikiViewProvider implements vscode.WebviewViewProvider {
 	      <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource}; script-src 'nonce-${nonce}';">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>Custom Sidebar</title>
-	              <link href="${styleMainUri}" rel="stylesheet">
+	              <link href="${styleAppUri}" rel="stylesheet">
             </head>
             <body>
-                <div class="container">
-                <h3>TiddlyWiki (${username} - ${tiddlywiki_version})</h3>
-                <div class="input-box">
-                <input type="text" id="inputField" placeholder="input..." />
-                <button class="send-wiki">Save</button>
-                </div>
-                </div>
-
+            <div id="root"></div>
 	          <script nonce="${nonce}" src="${scriptUri}"></script>
             </body>
             </html>

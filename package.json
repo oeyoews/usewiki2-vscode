@@ -2,7 +2,7 @@
   "publisher": "oeyoews",
   "name": "usewiki2",
   "displayName": "usewiki2",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "private": true,
   "packageManager": "pnpm@9.0.6",
   "description": "",
@@ -162,6 +162,7 @@
   "files": [
     "dist",
     "res",
+    "react-dist",
     "LICENSE"
   ]
 }
