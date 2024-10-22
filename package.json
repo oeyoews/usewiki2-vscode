@@ -42,7 +42,7 @@
         },
         "usewiki2.defaultUsername": {
           "type": "string",
-          "default": "",
+          "default": "99",
           "description": "默认用户名"
         },
         "usewiki2.ip": {
