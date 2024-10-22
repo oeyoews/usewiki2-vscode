@@ -2,7 +2,7 @@
   "publisher": "oeyoews",
   "name": "usewiki2",
   "displayName": "usewiki2",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "private": true,
   "packageManager": "pnpm@9.0.6",
   "description": "",
@@ -81,6 +81,11 @@
           "when": "view == usewiki2"
         },
         {
+          "command": "usewiki2.opensettings",
+          "group": "navigation",
+          "when": "view == usewiki2"
+        },
+        {
           "command": "usewiki2.wikiinfo",
           "group": "navigation",
           "when": "view == usewiki2"
@@ -129,6 +134,11 @@
         "command": "usewiki2.refreshwiki",
         "title": "Refresh",
         "icon": "$(refresh)"
+      },
+      {
+        "command": "usewiki2.opensettings",
+        "title": "设置",
+        "icon": "$(gear)"
       }
     ]
   },

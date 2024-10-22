@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import fetchData from '../featchData';
 import sendTiddler from '../sendTiddler';
-import openWikiCmd from '../openWikiCmd';
+import * as openWikiCmd from '../openWikiCmd';
 import { getType } from '../config';
 
 export class usewikiViewProvider implements vscode.WebviewViewProvider {
@@ -30,7 +30,7 @@ export class usewikiViewProvider implements vscode.WebviewViewProvider {
     webviewView.webview.onDidReceiveMessage(async (message) => {
       switch (message.type) {
         case 'openWiki':
-          openWikiCmd();
+          openWikiCmd.cli();
           break;
         case 'sendWiki':
           const random = Math.random().toString(36).slice(2);

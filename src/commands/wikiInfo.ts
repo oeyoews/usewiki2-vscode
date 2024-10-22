@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 
-export default async function wikiInfoCmd() {
+export async function cli() {
   // 居中弹窗显示详情
   vscode.window
     .showInformationMessage('wikiinfo', 'version', 'username')
@@ -11,4 +11,4 @@ export default async function wikiInfoCmd() {
     });
 }
 
-export const wikiInfoCli = 'usewiki2.wikiinfo';
+export const name = 'usewiki2.wikiinfo';
