@@ -20,6 +20,7 @@ function App() {
   }
 
   function submitInput() {
+    if (!inputValue) return;
     // @ts-expect-error
     vscode.postMessage({ type: 'sendWiki', data: { text: inputValue } });
     setInputValue('');
