@@ -14,7 +14,10 @@
 
 ## For Dev
 
-`F5`
+```bash
+pnpm install
+pnpm dev ## and press `F5` to debug
+```
 
 * configuration: https://code.visualstudio.com/api/references/contribution-points#contributes.configuration
 
