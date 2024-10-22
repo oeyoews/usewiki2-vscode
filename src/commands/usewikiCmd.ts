@@ -1,11 +1,12 @@
-import fetchData from './featchData';
+// import fetchData from '../featchData';
 import * as vscode from 'vscode';
-import sendTiddler from './sendTiddler';
-import { defaultTag, getType } from './config';
+import sendTiddler from '../sendTiddler';
+import { defaultTag, getType, defaultUsername } from '../config';
+import { notify } from '../notify';
 
 export const name = 'usewiki2.tiddlywiki';
 export async function cli() {
-  const newdata = await fetchData();
+  // const newdata = await fetchData();
   const random = Math.random().toString(36).slice(2);
   let title = new Date().toLocaleString().split(' ').shift() + '-' + random;
   const time = new Date().toISOString().split('.').shift()!.replace(/\D/g, '');
@@ -17,7 +18,7 @@ export async function cli() {
   });
 
   if (!text) {
-    // notify('输入取消', 'warning')
+    notify('请输入文本', 'warning');
     return;
   }
 
@@ -25,7 +26,7 @@ export async function cli() {
     created: time,
     modified: time,
     tags: [defaultTag()],
-    creator: newdata.username || '',
+    creator: defaultUsername(),
     type: getType(),
     text,
     title,

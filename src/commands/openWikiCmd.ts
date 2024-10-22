@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { getIp, getPort, enableHttps } from './config';
+import { getIp, getPort, enableHttps } from '../config';
 
 export function cli() {
   const protocal = enableHttps() ? 'https' : 'http';

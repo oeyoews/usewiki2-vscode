@@ -1,12 +1,12 @@
 import * as vscode from 'vscode';
-import fetchData from '../featchData';
+// import fetchData from '../featchData';
 import sendTiddler from '../sendTiddler';
-import * as openWikiCmd from '../openWikiCmd';
+import * as openWikiCmd from '../commands/openWikiCmd';
 import { defaultTag, defaultUsername, getType } from '../config';
 
 export class usewikiViewProvider implements vscode.WebviewViewProvider {
   private _view?: vscode.WebviewView;
-  private _twdata = {} as ITiddlyWikiStatus;
+  // private _twdata = {} as ITiddlyWikiStatus;
   constructor(
     private context: vscode.ExtensionContext,
     private _extensionUri = context.extensionUri
@@ -18,7 +18,7 @@ export class usewikiViewProvider implements vscode.WebviewViewProvider {
     _token: vscode.CancellationToken
   ) {
     this._view = webviewView;
-    this._twdata = await fetchData();
+    // this._twdata = await fetchData();
 
     webviewView.webview.options = {
       enableScripts: true,
@@ -64,7 +64,7 @@ export class usewikiViewProvider implements vscode.WebviewViewProvider {
     const styleAppUri = webview.asWebviewUri(
       vscode.Uri.joinPath(this._extensionUri, 'react-dist', 'main.css')
     );
-    const { tiddlywiki_version, username } = this._twdata;
+    // const { tiddlywiki_version, username } = this._twdata;
     const nonce = getNonce();
     return `
             <!DOCTYPE html>
