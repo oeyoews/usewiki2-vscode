@@ -2,7 +2,7 @@
   "publisher": "oeyoews",
   "name": "usewiki2",
   "displayName": "usewiki2",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "private": true,
   "packageManager": "pnpm@9.0.6",
   "description": "",
@@ -35,6 +35,16 @@
     "configuration": {
       "title": "UseWiki2 太微",
       "properties": {
+        "usewiki2.defaultTag": {
+          "type": "string",
+          "default": "Journalp",
+          "description": "默认标签"
+        },
+        "usewiki2.defaultUsername": {
+          "type": "string",
+          "default": "",
+          "description": "默认用户名"
+        },
         "usewiki2.ip": {
           "order": 0,
           "type": "string",

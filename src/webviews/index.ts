@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import fetchData from '../featchData';
 import sendTiddler from '../sendTiddler';
 import * as openWikiCmd from '../openWikiCmd';
-import { getType } from '../config';
+import { defaultTag, defaultUsername, getType } from '../config';
 
 export class usewikiViewProvider implements vscode.WebviewViewProvider {
   private _view?: vscode.WebviewView;
@@ -46,9 +46,8 @@ export class usewikiViewProvider implements vscode.WebviewViewProvider {
           const tiddler: ITiddler = {
             created: time,
             modified: time,
-            // TODO:
-            tags: ['Journal'],
-            creator: 'usewiki2-vscode',
+            tags: [defaultTag()],
+            creator: defaultUsername(),
             type: getType(),
             text: message.data.text,
             title,

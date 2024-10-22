@@ -1,7 +1,7 @@
 import fetchData from './featchData';
 import * as vscode from 'vscode';
 import sendTiddler from './sendTiddler';
-import { getType } from './config';
+import { defaultTag, getType } from './config';
 
 export const name = 'usewiki2.tiddlywiki';
 export async function cli() {
@@ -24,7 +24,7 @@ export async function cli() {
   const tiddler: ITiddler = {
     created: time,
     modified: time,
-    tags: ['Journal'],
+    tags: [defaultTag()],
     creator: newdata.username || '',
     type: getType(),
     text,
