@@ -1,6 +1,6 @@
 # Usewiki2
 
-![alt text](banner.png)
+![alt text](https://github.com/oeyoews/usewiki2-vscode/raw/main/banner.png)
 
 > TiddlyWiki AnyWhere. 快速发送文本保存到Tiddlywiki, 随时随地记录下你的想法.
 

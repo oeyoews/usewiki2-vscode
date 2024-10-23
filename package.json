@@ -2,7 +2,7 @@
   "publisher": "oeyoews",
   "name": "usewiki2",
   "displayName": "usewiki2",
-  "version": "0.8.3",
+  "version": "0.8.4",
   "private": true,
   "packageManager": "pnpm@9.0.6",
   "description": "",
@@ -127,17 +127,17 @@
       },
       {
         "command": "usewiki2.wikiinfo",
-        "title": "usewiki2: Info",
+        "title": "Usewiki2: Info",
         "icon": "$(info)"
       },
       {
         "command": "usewiki2.openwiki",
-        "title": "usewiki2: Open TiddlyWiki Instance",
+        "title": "Usewiki2: Open TiddlyWiki Instance",
         "icon": "res/tw.svg"
       },
       {
         "command": "usewiki2.opensettings",
-        "title": "usewiki2: Settings",
+        "title": "Usewiki2: Settings",
         "icon": "$(gear)"
       }
     ]

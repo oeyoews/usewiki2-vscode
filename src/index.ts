@@ -1,11 +1,12 @@
 import * as vscode from 'vscode';
 import { usewikiViewProvider } from './webviews';
 
-import * as usewikiCmd from './commands/usewikiCmd';
 import * as openWiki from './commands/openWikiCmd';
 import * as wikiInfo from './commands/wikiInfo';
 import * as opensetting from './commands/openSettings';
-import * as refreshWiki from './commands/refreshWiki';
+
+// import * as usewikiCmd from './commands/usewikiCmd';
+// import * as refreshWiki from './commands/refreshWiki';
 
 export async function activate(context: vscode.ExtensionContext) {
   const provider = new usewikiViewProvider(context);
@@ -13,7 +14,7 @@ export async function activate(context: vscode.ExtensionContext) {
     vscode.window.registerWebviewViewProvider('usewiki2', provider)
   );
 
-  const cmds = [opensetting, wikiInfo, openWiki, usewikiCmd, refreshWiki];
+  const cmds = [opensetting, wikiInfo, openWiki];
 
   // 注册命令
   cmds.forEach((cmd: { name: string; cli: any }) => {
