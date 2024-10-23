@@ -2,7 +2,7 @@
   "publisher": "oeyoews",
   "name": "usewiki2",
   "displayName": "usewiki2",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "private": true,
   "packageManager": "pnpm@9.0.6",
   "description": "",
@@ -99,11 +99,6 @@
           "command": "usewiki2.wikiinfo",
           "group": "navigation",
           "when": "view == usewiki2"
-        },
-        {
-          "command": "usewiki2.refreshwiki",
-          "group": "navigation",
-          "when": "view == usewiki2"
         }
       ]
     },
@@ -128,26 +123,21 @@
     "commands": [
       {
         "command": "usewiki2.tiddlywiki",
-        "title": "UseWiki2: Journal 太微之书"
-      },
-      {
-        "command": "usewiki2.openwiki",
-        "title": "Open 打开太微",
-        "icon": "$(info)"
+        "title": "UseWiki2: Add Journal"
       },
       {
         "command": "usewiki2.wikiinfo",
-        "title": "太微详情",
+        "title": "usewiki2: Info",
+        "icon": "$(info)"
+      },
+      {
+        "command": "usewiki2.openwiki",
+        "title": "usewiki2: Open TiddlyWiki Instance",
         "icon": "res/tw.svg"
       },
       {
-        "command": "usewiki2.refreshwiki",
-        "title": "Refresh",
-        "icon": "$(refresh)"
-      },
-      {
         "command": "usewiki2.opensettings",
-        "title": "设置",
+        "title": "usewiki2: Settings",
         "icon": "$(gear)"
       }
     ]
