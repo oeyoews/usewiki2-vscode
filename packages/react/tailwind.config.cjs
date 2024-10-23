@@ -1,7 +1,7 @@
-// const {
-//   iconsPlugin,
-//   getIconCollections,
-// } = require('@egoist/tailwindcss-icons');
+const {
+  iconsPlugin,
+  getIconCollections,
+} = require('@egoist/tailwindcss-icons');
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -63,10 +63,8 @@ export default {
   },
   plugins: [
     require('tailwindcss-animate'),
-    require('@egoist/tailwindcss-icons').iconsPlugin({
-      collections: require('@egoist/tailwindcss-icons').getIconCollections([
-        'lucide',
-      ]),
+    iconsPlugin({
+      collections: getIconCollections(['lucide']),
     }),
   ],
 };
