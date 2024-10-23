@@ -43,3 +43,8 @@ pnpm dev ## and press `F5` to debug
 <!-- ## Credits
 
 https://github.com/microsoft/vscode-extension-samples/blob/main/webview-view-sample -->
+
+## Related Projects
+
+* [usewiki2](https://github.com/oeyoews/usewiki2)
+* [other tiddlywiki projects](https://github.com/stars/oeyoews/lists/tiddlywiki)
