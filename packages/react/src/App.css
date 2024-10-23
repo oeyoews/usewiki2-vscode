@@ -29,3 +29,9 @@ img {
 	max-width: 100%;
 	height: auto;
 } */
+
+.input-bg {
+  border: none;
+  background: var(--vscode-input-background) !important;
+  color: var(--vscode-input-foreground) !important;
+}

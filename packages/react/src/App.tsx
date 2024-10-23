@@ -40,6 +40,7 @@ function App() {
   }
 
   return (
+    // vscode-dark
     <div className="relative h-screen">
       <h1 className="text-3xl font-bold">TiddlyWiki</h1>
       <ContextMenu>
@@ -50,13 +51,12 @@ function App() {
           <ContextMenuItem>Coming</ContextMenuItem>
         </ContextMenuContent>
       </ContextMenu>
-
       <div className="absolute inset-x-0 bottom-2 flex flex-col gap-2 p-0">
         <Input
           ref={inputRef}
           type="text"
           placeholder="input..."
-          className="focus-visible:ring-0"
+          className="focus-visible:ring-0 border-none input-bg"
           onKeyDown={handleInputBoxSave}
           onChange={(e) => setInputValue(e.target.value)}
           value={inputValue}
