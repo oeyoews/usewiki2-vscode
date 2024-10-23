@@ -158,7 +158,8 @@
     "lint": "eslint .",
     "vscode:prepublish": "nr build",
     "publish": "vsce publish --no-dependencies",
-    "package": "vsce package --no-dependencies",
+    "build:react": "cd packages/react && pnpm build && cd ../..",
+    "package": "pnpm build:react && vsce package --no-dependencies",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
     "release": "bumpp && nr publish"
