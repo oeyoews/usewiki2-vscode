@@ -55,7 +55,7 @@ function App() {
         <Input
           ref={inputRef}
           type="text"
-          placeholder="input..."
+          placeholder="Write something... Ctrl+Enter to save"
           className="focus-visible:ring-0 border-none input-bg"
           onKeyDown={handleInputBoxSave}
           onChange={(e) => setInputValue(e.target.value)}
@@ -64,7 +64,7 @@ function App() {
         <Button
           onClick={submitInput}
           className="bg-green-500 inset-x-0 hover:bg-green-600">
-          Save
+          Save To TiddlyWiki
         </Button>
       </div>
     </div>
