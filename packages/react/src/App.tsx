@@ -1,5 +1,13 @@
 import { useRef, useState, useEffect, type KeyboardEvent } from 'react';
 import './App.css';
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from '@/components/ui/context-menu';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 function App() {
   const [inputValue, setInputValue] = useState('');
@@ -8,8 +16,12 @@ function App() {
 
   useEffect(() => {
     inputRef.current?.focus();
+
     // @ts-expect-error
-    setVscode(acquireVsCodeApi());
+    if (typeof acquireVsCodeApi === 'function') {
+      // @ts-expect-error
+      setVscode(acquireVsCodeApi());
+    }
   }, []);
 
   // support ctrl enter to save
@@ -28,24 +40,32 @@ function App() {
   }
 
   return (
-    <div className="container">
-      <h1>TiddlyWiki</h1>
+    <div className="relative h-screen">
+      <h1 className="text-3xl font-bold">TiddlyWiki</h1>
+      <ContextMenu>
+        <ContextMenuTrigger className="i-lucide-more-horizontal hidden">
+          More
+        </ContextMenuTrigger>
+        <ContextMenuContent>
+          <ContextMenuItem>Coming</ContextMenuItem>
+        </ContextMenuContent>
+      </ContextMenu>
 
-      <div className="input-box">
-        <input
+      <div className="absolute inset-x-0 bottom-2 flex flex-col gap-2 p-0">
+        <Input
           ref={inputRef}
           type="text"
-          id="inputField"
           placeholder="input..."
+          className="focus-visible:ring-0"
           onKeyDown={handleInputBoxSave}
           onChange={(e) => setInputValue(e.target.value)}
           value={inputValue}
         />
-        <button
+        <Button
           onClick={submitInput}
-          className="send-wiki">
+          className="bg-green-500 inset-x-0 hover:bg-green-600">
           Save
-        </button>
+        </Button>
       </div>
     </div>
   );
