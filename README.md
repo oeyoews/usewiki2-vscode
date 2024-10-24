@@ -10,6 +10,7 @@
 * manage: https://marketplace.visualstudio.com/manage/publishers/oeyoews
 * publish: https://vscode.github.net.cn/api/working-with-extensions/publishing-extension
 * https://code.visualstudio.com/api/extension-guides/webview
+* icon: https://code.visualstudio.com/api/references/icons-in-labels
 -->
 
 ## prerequisites
