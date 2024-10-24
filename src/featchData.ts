@@ -1,14 +1,18 @@
 import http from 'node:http';
+import https from 'node:https';
 import * as vscode from 'vscode';
 import { enableHttps, config, getIp, getPort } from './config';
+import { notify } from './notify';
 
 export default function fetchData(): Promise<ITiddlyWikiStatus> {
   // notify(`正在获取数据${getPort()}`, 'info');
   const protocal = enableHttps() ? 'https' : 'http';
   const twurl = `${protocal}://${getIp()}:${getPort()}/status`;
+  // notify(`正在获取数据${twurl}`, 'info');
+  const protocalMethos = enableHttps() ? https : http;
 
   return new Promise((resolve, reject) => {
-    http
+    protocalMethos
       .get(twurl, (response) => {
         let data: any = null;
         response.on('data', (chunk) => {
