@@ -7,9 +7,9 @@ const {
 export default {
   darkMode: ['class'],
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
-  corePlugins: {
-    preflight: true,
-  },
+  // corePlugins: {
+  //   preflight: true,
+  // },
   theme: {
     extend: {
       borderRadius: {

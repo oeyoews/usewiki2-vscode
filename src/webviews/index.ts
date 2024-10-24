@@ -61,6 +61,9 @@ export class usewikiViewProvider implements vscode.WebviewViewProvider {
     const scriptUri = webview.asWebviewUri(
       vscode.Uri.joinPath(this._extensionUri, 'react-dist', 'main.js')
     );
+    const styleResetUri = webview.asWebviewUri(
+      vscode.Uri.joinPath(this._extensionUri, 'res', 'reset.css')
+    );
     const styleAppUri = webview.asWebviewUri(
       vscode.Uri.joinPath(this._extensionUri, 'react-dist', 'main.css')
     );
@@ -74,6 +77,7 @@ export class usewikiViewProvider implements vscode.WebviewViewProvider {
 	      <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource}; script-src 'nonce-${nonce}';">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>Custom Sidebar</title>
+	              <link href="${styleResetUri}" rel="stylesheet">
 	              <link href="${styleAppUri}" rel="stylesheet">
             </head>
             <body>

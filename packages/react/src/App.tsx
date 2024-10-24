@@ -6,12 +6,12 @@ import {
   ContextMenuItem,
   ContextMenuTrigger,
 } from '@/components/ui/context-menu';
-import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Textarea } from './components/ui/textarea';
 
 function App() {
   const [inputValue, setInputValue] = useState('');
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
   const [vscode, setVscode] = useState(null);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ function App() {
   }, []);
 
   // support ctrl enter to save
-  function handleInputBoxSave(e: KeyboardEvent<HTMLInputElement>) {
+  function handleInputBoxSave(e: KeyboardEvent<HTMLTextAreaElement>) {
     if (e.ctrlKey && e.key === 'Enter') {
       submitInput();
     }
@@ -41,29 +41,30 @@ function App() {
 
   return (
     // vscode-dark
-    <div className="relative h-screen">
+    <div className="relative h-screen p-3">
       <h1 className="text-3xl font-bold">TiddlyWiki5</h1>
       <ContextMenu>
-        <ContextMenuTrigger className="i-lucide-more-horizontal hidden">
+        <ContextMenuTrigger className="i-lucide-more-horizontal">
           More
         </ContextMenuTrigger>
         <ContextMenuContent>
           <ContextMenuItem>Coming</ContextMenuItem>
         </ContextMenuContent>
       </ContextMenu>
-      <div className="absolute inset-x-0 bottom-2 flex flex-col gap-2 p-0">
-        <Input
+      <div className="absolute inset-x-3 bottom-3 flex flex-col gap-2 p-0">
+        <Textarea
           ref={inputRef}
-          type="text"
-          placeholder="Write something... Ctrl+Enter to save"
-          className="focus-visible:ring-0 border-none input-bg"
           onKeyDown={handleInputBoxSave}
+          rows={5}
+          placeholder="Write something... Ctrl+Enter to save"
+          className="focus-visible:ring-0 border-none input-bg resize-none"
           onChange={(e) => setInputValue(e.target.value)}
           value={inputValue}
         />
         <Button
           onClick={submitInput}
-          className="bg-green-500 inset-x-0 hover:bg-green-600">
+          className="bg-green-500 hover:bg-green-600">
+          <span className="i-lucide-more-horizontal"></span>
           Save To TiddlyWiki
         </Button>
       </div>
