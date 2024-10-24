@@ -12,7 +12,7 @@
       },
       "problemMatcher": {
         "background": {
-          "activeOnStart": true,
+          "activeOnStart": false,
           "beginsPattern": "Build start",
           "endsPattern": "Build success"
         }
