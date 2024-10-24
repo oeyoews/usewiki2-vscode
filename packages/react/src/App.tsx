@@ -44,9 +44,7 @@ function App() {
     <div className="relative h-screen p-3">
       <h1 className="text-3xl font-bold">TiddlyWiki5</h1>
       <ContextMenu>
-        <ContextMenuTrigger className="i-lucide-more-horizontal">
-          More
-        </ContextMenuTrigger>
+        <ContextMenuTrigger className="i-lucide-more-horizontal hidden"></ContextMenuTrigger>
         <ContextMenuContent>
           <ContextMenuItem>Coming</ContextMenuItem>
         </ContextMenuContent>
@@ -64,7 +62,7 @@ function App() {
         <Button
           onClick={submitInput}
           className="bg-green-500 hover:bg-green-600">
-          <span className="i-lucide-more-horizontal"></span>
+          <span className="i-lucide-send"></span>
           Save To TiddlyWiki
         </Button>
       </div>
