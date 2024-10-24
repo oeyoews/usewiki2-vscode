@@ -33,6 +33,9 @@ export default function sendTiddler(tiddler: ITiddler) {
       });
     }
   );
+  req.on('error', (error) => {
+    notify(error.message, 'error');
+  });
 
   req.write(JSON.stringify(tiddler));
   // NOTE: 必须要手动结束
