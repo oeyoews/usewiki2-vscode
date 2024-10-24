@@ -1,4 +1,4 @@
-import { useRef, useState, type KeyboardEvent } from 'react';
+import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import './App.css';
 import {
   ContextMenu,
@@ -100,17 +100,15 @@ function App() {
   function submitInput() {
     if (!inputValue) return;
     messenger.send('sendWiki', { text: inputValue });
-    // NOTE: 如果需要确保发送成功后触发声音需要使用双向通信， vscode 本身不支持播放声音???
-    // TODO: 添加配置， 同样需要借助双向通信拿到vscode 配置
-    // messenger.send('playSound', {});
-
-    playSound();
     setInputValue('');
     inputRef.current?.focus();
   }
-  // messenger.on('playSound', () => {
-  //   playSound();
-  // });
+
+  useEffect(() => {
+    messenger.on('playSound', () => {
+      playSound();
+    });
+  }, []);
 
   return (
     // vscode-dark

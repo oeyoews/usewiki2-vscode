@@ -25,22 +25,16 @@ export class usewikiViewProvider implements vscode.WebviewViewProvider {
     webviewView.webview.html = this.getWebviewContent(webviewView.webview);
     const messenger = new WebviewMessenger({ context: this._view });
 
-    // 直接写 callback，处理来自 Webview 的 Ping 消息
-    // messenger.on('ping', (data) => {
-    //   vscode.window.showInformationMessage(data.text); // 直接处理消息
-    //   messenger.send('pong', { text: 'Pong from VSCode!' });
-    // });
-
-    // messenger.send('startup', { text: 'Startup from VSCode!' });
-
     messenger.on('openLink', (data) => {
       vscode.env.openExternal(vscode.Uri.parse(data.link));
     });
-    messenger.on('openWiki', (data) => {
+    messenger.on('openWiki', () => {
       openWikiCmd.cli();
     });
-    messenger.on('sendWiki', (data) => {
-      sendTiddler(data.text);
+    messenger.on('sendWiki', ({ text }) => {
+      sendTiddler(text).then(() => {
+        messenger.send('playSound');
+      });
     });
   }
   private getWebviewContent(webview: vscode.Webview) {

@@ -37,5 +37,6 @@ export default async function sendTiddler(text: string) {
     }
   } catch (error) {
     notify((error as Error).message, 'error');
+    throw Error((error as Error).message);
   }
 }
