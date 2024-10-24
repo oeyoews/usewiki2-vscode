@@ -4,6 +4,7 @@ export const config = () => vscode.workspace.getConfiguration('usewiki2');
 // todo
 export const placeholder = () =>
   config().get('placeholder', 'Write something... Ctrl+Enter to save');
+export const enableSendSound = () => config().get('enableSendSound', false);
 
 export const enableHttps = () => config().get('enableHttps', false);
 export const defaultTag = () => config().get('defaultTag', 'Journal');

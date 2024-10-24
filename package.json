@@ -2,7 +2,7 @@
   "publisher": "oeyoews",
   "name": "usewiki2",
   "displayName": "usewiki2",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "private": true,
   "packageManager": "pnpm@9.0.6",
   "description": "",
@@ -35,6 +35,11 @@
     "configuration": {
       "title": "UseWiki2",
       "properties": {
+        "usewiki2.enableSendSound": {
+          "type": "boolean",
+          "default": false,
+          "description": "启用发送声音"
+        },
         "usewiki2.placeholder": {
           "type": "string",
           "default": "Write something... Ctrl+Enter to save",

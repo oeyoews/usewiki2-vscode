@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import sendTiddler from '../sendTiddler';
 import * as openWikiCmd from '../commands/openWikiCmd';
 import { WebviewMessenger } from '../utils/extensionMessenger';
-import { placeholder } from '../config';
+import { enableSendSound, placeholder } from '../config';
 
 export class usewikiViewProvider implements vscode.WebviewViewProvider {
   private _view?: vscode.WebviewView;
@@ -38,7 +38,9 @@ export class usewikiViewProvider implements vscode.WebviewViewProvider {
     });
     messenger.on('sendWiki', ({ text }) => {
       sendTiddler(text).then(() => {
-        messenger.send('playSound');
+        if (enableSendSound()) {
+          messenger.send('playSound');
+        }
       });
     });
   }

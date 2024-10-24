@@ -108,9 +108,8 @@ function App() {
   }, []);
 
   return (
-    // vscode-dark
     <div className="relative h-screen p-3 antialiased">
-      <h1 className="text-3xl font-bold">TiddlyWiki5</h1>
+      <h1 className="text-xl font-bold">UseWiki2</h1>
       <ContextMenu>
         <ContextMenuTrigger className="i-lucide-more-horizontal hidden"></ContextMenuTrigger>
         <ContextMenuContent>
