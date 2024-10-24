@@ -1,43 +1,28 @@
-import http from 'node:http';
 import { notify } from './notify';
 import { getPort, getIp } from './config';
 
-export default function sendTiddler(tiddler: ITiddler) {
+export default async function sendTiddler(tiddler: ITiddler) {
   const port = getPort();
   const ip = getIp();
 
-  const req = http.request(
-    {
-      hostname: ip,
-      port,
-      path: `/recipes/default/tiddlers/${tiddler.title}`,
+  const url = `http://${ip}:${port}/recipes/default/tiddlers/${tiddler.title}`;
+
+  try {
+    const response = await fetch(url, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         'x-requested-with': 'TiddlyWiki',
       },
-    },
-    (response) => {
-      let responseData = '';
+      body: JSON.stringify(tiddler),
+    });
 
-      response.on('data', (chunk) => {
-        responseData += chunk;
-      });
-
-      response.on('end', () => {
-        if (response.statusCode === 204) {
-          notify('发送成功', 'info');
-        } else {
-          notify('发送失败', 'error');
-        }
-      });
+    if (response.status === 204) {
+      notify('发送成功', 'info');
+    } else {
+      notify('发送失败', 'error');
     }
-  );
-  req.on('error', (error) => {
-    notify(error.message, 'error');
-  });
-
-  req.write(JSON.stringify(tiddler));
-  // NOTE: 必须要手动结束
-  req.end();
+  } catch (error) {
+    notify((error as Error).message, 'error');
+  }
 }
