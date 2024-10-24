@@ -19,6 +19,14 @@
 > [!WARNING]
 > 你必须有一个可以在线或本地访问nodejs tiddlywiki实例.
 
+## Features
+
+* 快速发送文本到 TiddlyWiki
+* 配置丰富
+* 支持声音提示
+* ...
+
+
 ## Install
 
 * 直接在vscode 的扩展里面搜索 `usewiki2` 或者直接点击 [安装](#https://marketplace.visualstudio.com/items?itemName=oeyoews.usewiki2) 即可
