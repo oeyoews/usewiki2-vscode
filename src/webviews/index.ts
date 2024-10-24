@@ -29,6 +29,9 @@ export class usewikiViewProvider implements vscode.WebviewViewProvider {
 
     webviewView.webview.onDidReceiveMessage(async (message) => {
       switch (message.type) {
+        case 'openLink':
+          vscode.env.openExternal(vscode.Uri.parse(message.data.link));
+          break;
         case 'openWiki':
           openWikiCmd.cli();
           break;
