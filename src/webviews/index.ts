@@ -1,13 +1,10 @@
 import * as vscode from 'vscode';
-// import fetchData from '../featchData';
 import sendTiddler from '../sendTiddler';
 import * as openWikiCmd from '../commands/openWikiCmd';
-import { defaultTag, defaultUsername, getType } from '../config';
 import { WebviewMessenger } from '../utils/extensionMessenger';
 
 export class usewikiViewProvider implements vscode.WebviewViewProvider {
   private _view?: vscode.WebviewView;
-  // private _twdata = {} as ITiddlyWikiStatus;
   constructor(
     private context: vscode.ExtensionContext,
     private _extensionUri = context.extensionUri
@@ -19,7 +16,6 @@ export class usewikiViewProvider implements vscode.WebviewViewProvider {
     _token: vscode.CancellationToken
   ) {
     this._view = webviewView;
-    // this._twdata = await fetchData();
 
     webviewView.webview.options = {
       enableScripts: true,
@@ -37,37 +33,14 @@ export class usewikiViewProvider implements vscode.WebviewViewProvider {
 
     // messenger.send('startup', { text: 'Startup from VSCode!' });
 
-    webviewView.webview.onDidReceiveMessage(async (message) => {
-      switch (message.type) {
-        case 'openLink':
-          vscode.env.openExternal(vscode.Uri.parse(message.data.link));
-          break;
-        case 'openWiki':
-          openWikiCmd.cli();
-          break;
-        case 'sendWiki':
-          const random = Math.random().toString(36).slice(2);
-          let title =
-            new Date().toISOString().split('T')[0].replace('-', '/') +
-            '-' +
-            random;
-          const time = new Date()
-            .toISOString()
-            .split('.')
-            .shift()!
-            .replace(/\D/g, '');
-          const tiddler: ITiddler = {
-            created: time,
-            modified: time,
-            tags: [defaultTag()],
-            creator: defaultUsername(),
-            type: getType(),
-            text: message.data.text,
-            title,
-          };
-          sendTiddler(tiddler);
-          break;
-      }
+    messenger.on('openLink', (data) => {
+      vscode.env.openExternal(vscode.Uri.parse(data.link));
+    });
+    messenger.on('openWiki', (data) => {
+      openWikiCmd.cli();
+    });
+    messenger.on('sendWiki', (data) => {
+      sendTiddler(data.text);
     });
   }
   private getWebviewContent(webview: vscode.Webview) {

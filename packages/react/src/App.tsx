@@ -21,14 +21,14 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { sound } from './sound';
-// import { WebviewMessenger } from './utils/WebViewMessenger';
+import { WebviewMessenger } from './utils/WebViewMessenger';
 
 // @ts-expect-error
 const vscode = acquireVsCodeApi();
+const messenger = new WebviewMessenger({ vscode });
 function App() {
   const [inputValue, setInputValue] = useState('');
   const inputRef = useRef<HTMLTextAreaElement>(null);
-  // const messenger = new WebviewMessenger({ vscode });
 
   const cards = [
     {
@@ -78,12 +78,7 @@ function App() {
 
   function openLink(link: string) {
     if (vscode) {
-      vscode.postMessage({
-        type: 'openLink',
-        data: {
-          link: link.toString(),
-        },
-      });
+      messenger.send('openLink', { link });
     } else {
       window.open(link.toString(), '_blank');
     }
@@ -104,7 +99,7 @@ function App() {
 
   function submitInput() {
     if (!inputValue) return;
-    vscode.postMessage({ type: 'sendWiki', data: { text: inputValue } });
+    messenger.send('sendWiki', { text: inputValue });
     // NOTE: 如果需要确保发送成功后触发声音需要使用双向通信， vscode 本身不支持播放声音???
     // TODO: 添加配置， 同样需要借助双向通信拿到vscode 配置
     // messenger.send('playSound', {});
