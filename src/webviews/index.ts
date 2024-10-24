@@ -3,6 +3,7 @@ import * as vscode from 'vscode';
 import sendTiddler from '../sendTiddler';
 import * as openWikiCmd from '../commands/openWikiCmd';
 import { defaultTag, defaultUsername, getType } from '../config';
+import { WebviewMessenger } from '../utils/extensionMessenger';
 
 export class usewikiViewProvider implements vscode.WebviewViewProvider {
   private _view?: vscode.WebviewView;
@@ -26,6 +27,15 @@ export class usewikiViewProvider implements vscode.WebviewViewProvider {
     };
 
     webviewView.webview.html = this.getWebviewContent(webviewView.webview);
+    const messenger = new WebviewMessenger({ context: this._view });
+
+    // 直接写 callback，处理来自 Webview 的 Ping 消息
+    // messenger.on('ping', (data) => {
+    //   vscode.window.showInformationMessage(data.text); // 直接处理消息
+    //   messenger.send('pong', { text: 'Pong from VSCode!' });
+    // });
+
+    // messenger.send('startup', { text: 'Startup from VSCode!' });
 
     webviewView.webview.onDidReceiveMessage(async (message) => {
       switch (message.type) {
