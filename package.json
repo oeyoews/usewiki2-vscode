@@ -2,7 +2,7 @@
   "publisher": "oeyoews",
   "name": "usewiki2",
   "displayName": "usewiki2",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "private": true,
   "packageManager": "pnpm@9.0.6",
   "description": "",
@@ -33,11 +33,16 @@
   ],
   "contributes": {
     "configuration": {
-      "title": "UseWiki2 太微",
+      "title": "UseWiki2",
       "properties": {
+        "usewiki2.placeholder": {
+          "type": "string",
+          "default": "Write something... Ctrl+Enter to save",
+          "description": "默认提示符"
+        },
         "usewiki2.defaultTag": {
           "type": "string",
-          "default": "Journalp",
+          "default": "Journal",
           "description": "默认标签"
         },
         "usewiki2.defaultUsername": {

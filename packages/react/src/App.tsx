@@ -29,6 +29,7 @@ const messenger = new WebviewMessenger({ vscode });
 function App() {
   const [inputValue, setInputValue] = useState('');
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const [placeholder, setPlaceholder] = useState('');
 
   const cards = [
     {
@@ -70,12 +71,6 @@ function App() {
   //   });
   // }
 
-  // useEffect(() => {
-  //   messenger.on('startup', (data) => {
-  //     console.log(data);
-  //   });
-  // }, []);
-
   function openLink(link: string) {
     if (vscode) {
       messenger.send('openLink', { link });
@@ -108,6 +103,8 @@ function App() {
     messenger.on('playSound', () => {
       playSound();
     });
+    messenger.send('placeholder');
+    messenger.on('placeholder', ({ text }) => setPlaceholder(text));
   }, []);
 
   return (
@@ -157,7 +154,7 @@ function App() {
           autoFocus
           onKeyDown={handleInputBoxSave}
           rows={5}
-          placeholder="Write something... Ctrl+Enter to save"
+          placeholder={placeholder}
           className="focus-visible:ring-0 border-none input-bg resize-none"
           onChange={(e) => setInputValue(e.target.value)}
           value={inputValue}

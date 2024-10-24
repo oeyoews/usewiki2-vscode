@@ -2,7 +2,8 @@ import * as vscode from 'vscode';
 
 export const config = () => vscode.workspace.getConfiguration('usewiki2');
 // todo
-export const placeholder = () => config().get('placeholder', '请输入你的内容');
+export const placeholder = () =>
+  config().get('placeholder', 'Write something... Ctrl+Enter to save');
 
 export const enableHttps = () => config().get('enableHttps', false);
 export const defaultTag = () => config().get('defaultTag', 'Journal');

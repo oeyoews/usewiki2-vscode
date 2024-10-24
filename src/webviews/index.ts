@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import sendTiddler from '../sendTiddler';
 import * as openWikiCmd from '../commands/openWikiCmd';
 import { WebviewMessenger } from '../utils/extensionMessenger';
+import { placeholder } from '../config';
 
 export class usewikiViewProvider implements vscode.WebviewViewProvider {
   private _view?: vscode.WebviewView;
@@ -24,6 +25,10 @@ export class usewikiViewProvider implements vscode.WebviewViewProvider {
 
     webviewView.webview.html = this.getWebviewContent(webviewView.webview);
     const messenger = new WebviewMessenger({ context: this._view });
+
+    messenger.on('placeholder', () => {
+      messenger.send('placeholder', { text: placeholder() });
+    });
 
     messenger.on('openLink', (data) => {
       vscode.env.openExternal(vscode.Uri.parse(data.link));
