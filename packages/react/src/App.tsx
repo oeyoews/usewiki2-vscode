@@ -20,6 +20,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { sound } from './sound';
 
 function App() {
   const [inputValue, setInputValue] = useState('');
@@ -83,6 +84,12 @@ function App() {
     }
   }
 
+  function playSound() {
+    const currentAudio = new Audio('data:audio/mp3;base64,' + sound);
+    currentAudio.volume = 0.9;
+    currentAudio.play();
+  }
+
   // support ctrl enter to save
   function handleInputBoxSave(e: KeyboardEvent<HTMLTextAreaElement>) {
     if (e.ctrlKey && e.key === 'Enter') {
@@ -94,13 +101,16 @@ function App() {
     if (!inputValue) return;
     // @ts-expect-error
     vscode.postMessage({ type: 'sendWiki', data: { text: inputValue } });
+    // NOTE: 如果需要确保发送成功后触发声音需要使用双向通信， vscode 本身不支持播放声音???
+    // TODO: 添加配置， 同样需要借助双向通信拿到vscode 配置
+    playSound();
     setInputValue('');
     inputRef.current?.focus();
   }
 
   return (
     // vscode-dark
-    <div className="relative h-screen p-3">
+    <div className="relative h-screen p-3 antialiased">
       <h1 className="text-3xl font-bold">TiddlyWiki5</h1>
       <ContextMenu>
         <ContextMenuTrigger className="i-lucide-more-horizontal hidden"></ContextMenuTrigger>
