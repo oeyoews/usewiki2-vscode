@@ -19,19 +19,43 @@ export default async function sendTiddler(text: string) {
   };
 
   const url = `http://${ip}:${port}/recipes/default/tiddlers/${title}`;
+  const headers = {
+    'Content-Type': 'application/json',
+    'x-requested-with': 'TiddlyWiki',
+  };
+
+  async function undoSendTiddler() {
+    const url = `http://${ip}:${port}/bags/default/tiddlers/${title}`;
+
+    const response = await fetch(url, {
+      method: 'DELETE',
+      headers,
+    });
+
+    if (response.status === 204) {
+      // '撤回并重新编辑'
+      notify(`已撤回(${title})`, 'warning');
+      // window.showInformationMessage('发送成功', 'demo').then(() => {});
+    } else {
+      notify(`撤回失败${title}`, 'error');
+    }
+  }
 
   try {
     const response = await fetch(url, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-requested-with': 'TiddlyWiki',
-      },
+      headers,
       body: JSON.stringify(tiddler),
     });
 
     if (response.status === 204) {
-      notify('发送成功', 'info');
+      notify(`发送成功(${title})`, 'info', ['撤销']).then((data) => {
+        if (data === '撤销') {
+          undoSendTiddler();
+        } else if (data === '撤回并重新编辑') {
+          // postmessage
+        }
+      });
     } else {
       notify('发送失败', 'error');
     }
