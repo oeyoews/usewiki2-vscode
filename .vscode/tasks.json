@@ -10,13 +10,17 @@
       "presentation": {
         "reveal": "never"
       },
-      "problemMatcher": {
-        "background": {
-          "activeOnStart": false,
-          "beginsPattern": "Build start",
-          "endsPattern": "Build success"
+      "problemMatcher": [
+        {
+          "base": "$ts-webpack-watch",
+          "background": {
+            "activeOnStart": false,
+            "beginsPattern": "Build start",
+            "endsPattern": "Build success"
+          }
         }
-      }
+      ],
+      "group": "build"
     }
   ]
 }

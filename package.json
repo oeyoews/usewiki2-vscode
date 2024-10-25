@@ -2,7 +2,7 @@
   "publisher": "oeyoews",
   "name": "usewiki2",
   "displayName": "usewiki2",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "private": true,
   "packageManager": "pnpm@9.0.6",
   "description": "",
@@ -33,6 +33,7 @@
   ],
   "contributes": {
     "configuration": {
+      "type": "object",
       "title": "UseWiki2",
       "properties": {
         "usewiki2.enableSendSound": {
@@ -155,6 +156,7 @@
   "scripts": {
     "build": "tsup src/index.ts --external vscode",
     "dev": "nr build --watch",
+    "update": "vscode-ext-gen --output src/generated/meta.ts",
     "lint": "eslint .",
     "vscode:prepublish": "nr build",
     "publish": "vsce publish --no-dependencies",
@@ -177,13 +179,24 @@
     "rimraf": "^5.0.9",
     "tsup": "^7.2.0",
     "typescript": "^5.5.4",
-    "vite": "^4.5.3",
-    "vitest": "^0.34.6"
+    "vite": "^5.4.1",
+    "vitest": "^2.0.5",
+    "vscode-ext-gen": "^0.4.1"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
+    }
   },
   "files": [
     "dist",
     "res",
     "react-dist",
     "LICENSE"
-  ]
+  ],
+  "dependencies": {
+    "reactive-vscode": "0.2.0"
+  }
 }

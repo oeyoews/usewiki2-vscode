@@ -34,6 +34,34 @@
 ## Usage
 
 * 点击侧边栏出现的小猫图片， 点击右上方的齿轮图标， 请先配置你的TiddlyWiki地址.
+
+## Commands
+
+<!-- commands -->
+
+| Command                 | Title                              |
+| ----------------------- | ---------------------------------- |
+| `usewiki2.tiddlywiki`   | UseWiki2: Add Journal              |
+| `usewiki2.wikiinfo`     | Usewiki2: Info                     |
+| `usewiki2.openwiki`     | Usewiki2: Open TiddlyWiki Instance |
+| `usewiki2.opensettings` | Usewiki2: Settings                 |
+
+<!-- commands -->
+
+## Configurations
+
+<!-- configs -->
+
+| Key                        | Description                                                                                    | Type      | Default                                   |
+| -------------------------- | ---------------------------------------------------------------------------------------------- | --------- | ----------------------------------------- |
+| `usewiki2.enableSendSound` | 启用发送声音                                                                                         | `boolean` | `false`                                   |
+| `usewiki2.placeholder`     | 默认提示符                                                                                          | `string`  | `"Write something... Ctrl+Enter to save"` |
+| `usewiki2.defaultTag`      | 默认标签                                                                                           | `string`  | `"Journal"`                               |
+| `usewiki2.defaultUsername` | 默认用户名                                                                                          | `string`  | `""`                                      |
+| `usewiki2.ip`              | 你的TiddlyWiki地址 (请确定你已经启动了[太微](https://tiddlywiki.com/#Installing%20TiddlyWiki%20on%20Node.js)) | `string`  | `"127.0.0.1"`                             |
+| `usewiki2.port`            | 端口 (请确定你已经启动了太微)                                                                               | `number`  | `8080`                                    |
+| `usewiki2.enableHttps`     | Enable or Disable HTTPS(untest for https)                                                      | `boolean` | `false`                                   |
+| `usewiki2.type`            | 选择要使用的文本格式 (Markdown 或 TiddlyWiki)                                                             | `string`  | `"text/vnd.tiddlywiki"`                   |
 <!-- ## TODO
 
 * [ ] 加入条目标题配置, author
