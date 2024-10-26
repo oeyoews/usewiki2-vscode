@@ -4,6 +4,8 @@ import sendTiddler from '../sendTiddler';
 import { notify } from '../notify';
 
 export const name = 'usewiki2.tiddlywiki';
+
+/** @deprecated */
 export async function cli() {
   const text = await vscode.window.showInputBox({
     title: '书写太微之书',

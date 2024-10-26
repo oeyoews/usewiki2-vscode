@@ -105,6 +105,10 @@ function App() {
     });
     messenger.send('placeholder');
     messenger.on('placeholder', ({ text }) => setPlaceholder(text));
+    messenger.on('edit', ({ text }) => {
+      setInputValue(text);
+      inputRef.current?.focus();
+    });
   }, []);
 
   return (

@@ -37,7 +37,7 @@ export class usewikiViewProvider implements vscode.WebviewViewProvider {
       openWikiCmd.cli();
     });
     messenger.on('sendWiki', ({ text }) => {
-      sendTiddler(text).then(() => {
+      sendTiddler(text, messenger).then(() => {
         if (enableSendSound()) {
           messenger.send('playSound');
         }

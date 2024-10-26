@@ -1,6 +1,12 @@
 import { notify } from './notify';
 import { defaultTag, getPort, getIp, defaultUsername, getType } from './config';
-export default async function sendTiddler(text: string) {
+import { type WebviewMessenger } from './utils/extensionMessenger';
+const UNDO = '撤回';
+const UNDOEDIT = '撤回并编辑';
+export default async function sendTiddler(
+  text: string,
+  messenger: WebviewMessenger
+) {
   const port = getPort();
   const ip = getIp();
 
@@ -49,11 +55,12 @@ export default async function sendTiddler(text: string) {
     });
 
     if (response.status === 204) {
-      notify(`发送成功(${title})`, 'info', ['撤销']).then((data) => {
-        if (data === '撤销') {
+      notify(`发送成功(${title})`, 'info', [UNDO, UNDOEDIT]).then((data) => {
+        if (data === UNDO) {
           undoSendTiddler();
-        } else if (data === '撤回并重新编辑') {
-          // postmessage
+        } else if (data === UNDOEDIT) {
+          undoSendTiddler();
+          messenger.send('edit', { text });
         }
       });
     } else {
