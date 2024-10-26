@@ -22,6 +22,7 @@ import {
 } from '@/components/ui/accordion';
 import { sound } from './sound';
 import { WebviewMessenger } from './utils/WebViewMessenger';
+import { links as cards } from './links';
 
 // @ts-expect-error
 const vscode = acquireVsCodeApi();
@@ -30,39 +31,6 @@ function App() {
   const [inputValue, setInputValue] = useState('');
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const [placeholder, setPlaceholder] = useState('');
-
-  const cards = [
-    {
-      title: '太微官网',
-      description: 'a non-linear personal web notebook',
-      link: 'https://tiddlywiki.com',
-      class: 'bg-green-300/15',
-    },
-    {
-      title: '太微 GitHub',
-      description: 'The TiddlyWiki5 source code',
-      link: 'https://github.com/TiddlyWiki/TiddlyWiki5',
-      class: 'bg-rose-300/15',
-    },
-    {
-      title: '太微官方论坛',
-      description: 'The official TiddlyWiki5 forum',
-      link: 'https://talk.tiddlywiki.org',
-      class: 'bg-yellow-300/15',
-    },
-    {
-      title: '中文太微文档',
-      description: 'The TiddlyWiki5 Chinese documentation',
-      link: 'https://bramchen.github.io/tw5-docs/zh-Hans',
-      class: 'bg-purple-300/15',
-    },
-    {
-      title: '中文太微教程',
-      description: 'The TiddlyWiki5 Chinese tutorial',
-      link: 'https://tw-cn.netlify.app',
-      class: 'bg-orange-300/15',
-    },
-  ];
 
   // function test() {
   //   messenger.send('ping', { text: 'Ping from Webview!' });
@@ -111,6 +79,15 @@ function App() {
     });
   }, []);
 
+  if (!vscode) {
+    return (
+      <div className="relative h-screen p-3 antialiased">
+        <h1 className="text-xl font-bold">UseWiki2</h1>
+        <p className="text-sm">Please use VS Code.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="relative h-screen p-3 antialiased">
       <h1 className="text-xl font-bold">UseWiki2</h1>
@@ -130,17 +107,20 @@ function App() {
             Realted Links
           </AccordionTrigger>
           <AccordionContent>
-            <div className="grid grid-cols-2 gap-3 mt-4">
+            <div className="grid grid-cols-1 min-[540px]:grid-cols-2 md:grid-cols-3 gap-3 mt-4">
               {cards.map((card) => (
                 <Card
                   className={`rounded-sm shadow-none border-none cursor-pointer ${card.class}`}
                   onClick={() => openLink(card.link)}>
                   <CardHeader className="p-3">
-                    <CardTitle className="text-blue-400">
+                    <CardTitle className="">
                       <span className="i-lucide-link text-sm mr-1 align-top"></span>
                       {card.title}
                     </CardTitle>
-                    <CardDescription className="text-gray-400 text-sm">
+                    <CardDescription
+                      className={`text-[12px] line-clamp-2 ${card.class
+                        .split(' ')
+                        .pop()}`}>
                       {card.description}
                     </CardDescription>
                   </CardHeader>
@@ -156,7 +136,7 @@ function App() {
           ref={inputRef}
           autoFocus
           onKeyDown={handleInputBoxSave}
-          rows={5}
+          rows={6}
           placeholder={placeholder}
           className="focus-visible:ring-0 border-none input-bg resize-none"
           onChange={(e) => setInputValue(e.target.value)}
