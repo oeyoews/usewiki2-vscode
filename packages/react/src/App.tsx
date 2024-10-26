@@ -87,7 +87,6 @@ function App() {
     // language
 
     messenger.on('changeLanguage', ({ text }) => {
-      console.log('change language', text);
       changeLanguage(text);
       // 由于切换lang的情况过多， 暂时不支持用户自定义placeholder
       setPlaceholder(t('placeholder'));
@@ -113,7 +112,7 @@ function App() {
         UseWiki2{' '}
         <span
           className="i-lucide-languages size-4"
-          onClick={showVsCodeLanguageInputBox}></span>{' '}
+          onClick={showVsCodeLanguageInputBox}></span>
       </h1>
       <ContextMenu>
         <ContextMenuTrigger className="i-lucide-more-horizontal hidden"></ContextMenuTrigger>

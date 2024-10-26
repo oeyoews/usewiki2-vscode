@@ -4,6 +4,7 @@ import * as openWikiCmd from '../commands/openWikiCmd';
 import { WebviewMessenger } from '../utils/extensionMessenger';
 import { config, enableSendSound, getLang } from '../config';
 import { ILanguage } from '../../packages/react/src/i18n';
+import { showLanguagePicker } from './showLangPicker';
 
 interface ILanguageOptions extends vscode.QuickPickItem {
   value: ILanguage;
@@ -66,19 +67,7 @@ export class usewikiViewProvider implements vscode.WebviewViewProvider {
     // console.log('current lang is', getLang());
     messenger.send('changeLanguage', { text: getLang() });
     messenger.on('showVsCodeLanguageInputBox', async () => {
-      // 选择不同的语言 en, zhCN 下拉框
-      const langItem = await vscode.window.showQuickPick(langOptions, {
-        title: 'Setup Usewiki2 Language',
-        placeHolder: 'Select Language',
-        canPickMany: false,
-        matchOnDetail: true,
-        onDidSelectItem: (item) => {
-          // TODO: 如何实时预览切换， 并且在取消时恢复, 是否回多次触发输入时
-        },
-      });
-      if (!langItem) return;
-      messenger.send('changeLanguage', { text: langItem.value });
-      config().update('lang', langItem.value, true);
+      showLanguagePicker(messenger);
     });
 
     messenger.on('openLink', (data) => {
