@@ -43,7 +43,8 @@
         },
         "usewiki2.placeholder": {
           "type": "string",
-          "default": "Write something... Ctrl+Enter to save",
+          "default": "",
+          "deprecationMessage": "已废弃",
           "description": "默认提示符"
         },
         "usewiki2.defaultTag": {
@@ -73,6 +74,19 @@
           "type": "boolean",
           "default": false,
           "markdownDescription": "Enable or Disable HTTPS(untest for https)"
+        },
+        "usewiki2.lang": {
+          "type": "string",
+          "default": "en",
+          "enum": [
+            "en",
+            "zhCN"
+          ],
+          "enumItemLabels": [
+            "English",
+            "Simplified Chinese"
+          ],
+          "description": "Setup the language of the UseWiki2"
         },
         "usewiki2.type": {
           "order": 3,
@@ -144,7 +158,7 @@
       {
         "command": "usewiki2.openwiki",
         "title": "Usewiki2: Open TiddlyWiki Instance",
-        "icon": "$(globe)"
+        "icon": "$(link-external)"
       },
       {
         "command": "usewiki2.opensettings",

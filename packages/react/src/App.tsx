@@ -23,21 +23,21 @@ import {
 import { sound } from './sound';
 import { WebviewMessenger } from './utils/WebViewMessenger';
 import { links as cards } from './links';
+import { useTranslation } from 'react-i18next';
+import { ILanguage } from './i18n';
 
 // @ts-expect-error
 const vscode = acquireVsCodeApi();
 const messenger = new WebviewMessenger({ vscode });
 function App() {
+  const { t, i18n } = useTranslation();
   const [inputValue, setInputValue] = useState('');
   const inputRef = useRef<HTMLTextAreaElement>(null);
-  const [placeholder, setPlaceholder] = useState('');
+  const [placeholder, setPlaceholder] = useState(t('placeholder'));
 
-  // function test() {
-  //   messenger.send('ping', { text: 'Ping from Webview!' });
-  //   messenger.on('pong', (data) => {
-  //     console.log(data);
-  //   });
-  // }
+  function changeLanguage(lang: ILanguage) {
+    i18n.changeLanguage(lang);
+  }
 
   function openLink(link: string) {
     if (vscode) {
@@ -71,13 +71,32 @@ function App() {
     messenger.on('playSound', () => {
       playSound();
     });
-    messenger.send('placeholder');
-    messenger.on('placeholder', ({ text }) => setPlaceholder(text));
+
+    // messenger.send('placeholder');
+    // messenger.on('placeholder', ({ text }) => {
+    //   if (text) {
+    //     setPlaceholder(text);
+    //   }
+    // });
+
     messenger.on('edit', ({ text }) => {
       setInputValue(text);
       inputRef.current?.focus();
     });
+
+    // language
+
+    messenger.on('changeLanguage', ({ text }) => {
+      console.log('change language', text);
+      changeLanguage(text);
+      // 由于切换lang的情况过多， 暂时不支持用户自定义placeholder
+      setPlaceholder(t('placeholder'));
+    });
   }, []);
+
+  function showVsCodeLanguageInputBox() {
+    messenger.send('showVsCodeLanguageInputBox');
+  }
 
   if (!vscode) {
     return (
@@ -90,7 +109,12 @@ function App() {
 
   return (
     <div className="relative h-screen p-3 antialiased">
-      <h1 className="text-xl font-bold">UseWiki2</h1>
+      <h1 className="text-xl font-bold">
+        UseWiki2{' '}
+        <span
+          className="i-lucide-languages size-4"
+          onClick={showVsCodeLanguageInputBox}></span>{' '}
+      </h1>
       <ContextMenu>
         <ContextMenuTrigger className="i-lucide-more-horizontal hidden"></ContextMenuTrigger>
         <ContextMenuContent>
@@ -104,7 +128,7 @@ function App() {
         collapsible>
         <AccordionItem value="item-1">
           <AccordionTrigger className="hover:no-underline">
-            Realted Links
+            {t('relatedLinks')}
           </AccordionTrigger>
           <AccordionContent>
             <div className="grid grid-cols-1 min-[540px]:grid-cols-2 md:grid-cols-3 gap-3 mt-4">
@@ -146,7 +170,7 @@ function App() {
           onClick={submitInput}
           className="bg-green-500 hover:bg-green-600">
           <span className="i-lucide-send"></span>
-          Save To TiddlyWiki
+          {t('sendToTiddlywiki')}
         </Button>
       </div>
     </div>

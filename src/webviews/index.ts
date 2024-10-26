@@ -2,7 +2,12 @@ import * as vscode from 'vscode';
 import sendTiddler from '../sendTiddler';
 import * as openWikiCmd from '../commands/openWikiCmd';
 import { WebviewMessenger } from '../utils/extensionMessenger';
-import { enableSendSound, placeholder } from '../config';
+import { config, enableSendSound, getLang } from '../config';
+import { ILanguage } from '../../packages/react/src/i18n';
+
+interface ILanguageOptions extends vscode.QuickPickItem {
+  value: ILanguage;
+}
 
 export class usewikiViewProvider implements vscode.WebviewViewProvider {
   private _view?: vscode.WebviewView;
@@ -24,18 +29,66 @@ export class usewikiViewProvider implements vscode.WebviewViewProvider {
     };
 
     webviewView.webview.html = this.getWebviewContent(webviewView.webview);
+
+    vscode.workspace.onDidChangeConfiguration((e) => {
+      if (e.affectsConfiguration('usewiki2.lang')) {
+        messenger.send('changeLanguage', { text: getLang() });
+        // 全局刷新, 但是需要webview 主动检查语言配置
+        // webviewView.webview.html = this.getWebviewContent(webviewView.webview);
+      }
+    });
+
     const messenger = new WebviewMessenger({ context: this._view });
 
-    messenger.on('placeholder', () => {
-      messenger.send('placeholder', { text: placeholder() });
+    // messenger.on('placeholder', () => {
+    //   messenger.send('placeholder', { text: placeholder() });
+    // });
+
+    // const currentLang = getLang();
+    // language
+    const langOptions: ILanguageOptions[] = [
+      {
+        label: 'English',
+        value: 'en',
+      },
+      {
+        label: 'Simplified Chinese',
+        value: 'zhCN',
+        picked: true, // not work ???
+      },
+    ];
+    // langOptions.forEach((item, index) => {
+    //   if (item.value === currentLang) {
+    //     langOptions[index].picked = true;
+    //   }
+    // });
+
+    // console.log('current lang is', getLang());
+    messenger.send('changeLanguage', { text: getLang() });
+    messenger.on('showVsCodeLanguageInputBox', async () => {
+      // 选择不同的语言 en, zhCN 下拉框
+      const langItem = await vscode.window.showQuickPick(langOptions, {
+        title: 'Setup Usewiki2 Language',
+        placeHolder: 'Select Language',
+        canPickMany: false,
+        matchOnDetail: true,
+        onDidSelectItem: (item) => {
+          // TODO: 如何实时预览切换， 并且在取消时恢复, 是否回多次触发输入时
+        },
+      });
+      if (!langItem) return;
+      messenger.send('changeLanguage', { text: langItem.value });
+      config().update('lang', langItem.value, true);
     });
 
     messenger.on('openLink', (data) => {
       vscode.env.openExternal(vscode.Uri.parse(data.link));
     });
+
     messenger.on('openWiki', () => {
       openWikiCmd.cli();
     });
+
     messenger.on('sendWiki', ({ text }) => {
       sendTiddler(text, messenger).then(() => {
         if (enableSendSound()) {

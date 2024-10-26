@@ -55,6 +55,7 @@ export type ConfigKey =
   | "usewiki2.ip"
   | "usewiki2.port"
   | "usewiki2.enableHttps"
+  | "usewiki2.lang"
   | "usewiki2.type"
 
 export interface ConfigKeyTypeMap {
@@ -65,6 +66,7 @@ export interface ConfigKeyTypeMap {
   "usewiki2.ip": string,
   "usewiki2.port": number,
   "usewiki2.enableHttps": boolean,
+  "usewiki2.lang": ("en" | "zhCN"),
   "usewiki2.type": ("text/markdown" | "text/vnd.tiddlywiki"),
 }
 
@@ -76,6 +78,7 @@ export interface ConfigShorthandMap {
   ip: "usewiki2.ip",
   port: "usewiki2.port",
   enableHttps: "usewiki2.enableHttps",
+  lang: "usewiki2.lang",
   type: "usewiki2.type",
 }
 
@@ -102,12 +105,12 @@ export const configs = {
   /**
    * 默认提示符
    * @key `usewiki2.placeholder`
-   * @default `"Write something... Ctrl+Enter to save"`
+   * @default `""`
    * @type `string`
    */
   placeholder: {
     key: "usewiki2.placeholder",
-    default: "Write something... Ctrl+Enter to save",
+    default: "",
   } as ConfigItem<"usewiki2.placeholder">,
   /**
    * 默认标签
@@ -160,6 +163,16 @@ export const configs = {
     default: false,
   } as ConfigItem<"usewiki2.enableHttps">,
   /**
+   * Setup the language of the UseWiki2
+   * @key `usewiki2.lang`
+   * @default `"en"`
+   * @type `string`
+   */
+  lang: {
+    key: "usewiki2.lang",
+    default: "en",
+  } as ConfigItem<"usewiki2.lang">,
+  /**
    * 选择要使用的文本格式 (Markdown 或 TiddlyWiki)
    * @key `usewiki2.type`
    * @default `"text/vnd.tiddlywiki"`
@@ -179,6 +192,7 @@ export interface ScopedConfigKeyTypeMap {
   "ip": string,
   "port": number,
   "enableHttps": boolean,
+  "lang": ("en" | "zhCN"),
   "type": ("text/markdown" | "text/vnd.tiddlywiki"),
 }
 
@@ -186,12 +200,13 @@ export const scopedConfigs = {
   scope: "usewiki2",
   defaults: {
     "enableSendSound": false,
-    "placeholder": "Write something... Ctrl+Enter to save",
+    "placeholder": "",
     "defaultTag": "Journal",
     "defaultUsername": "",
     "ip": "127.0.0.1",
     "port": 8080,
     "enableHttps": false,
+    "lang": "en",
     "type": "text/vnd.tiddlywiki",
   } satisfies ScopedConfigKeyTypeMap,
 }
