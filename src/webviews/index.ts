@@ -2,13 +2,8 @@ import * as vscode from 'vscode';
 import sendTiddler from '../sendTiddler';
 import * as openWikiCmd from '../commands/openWikiCmd';
 import { WebviewMessenger } from '../utils/extensionMessenger';
-import { config, enableSendSound, getLang } from '../config';
-import { ILanguage } from '../../packages/react/src/i18n';
+import { enableSendSound, getLang } from '../config';
 import { showLanguagePicker } from './showLangPicker';
-
-interface ILanguageOptions extends vscode.QuickPickItem {
-  value: ILanguage;
-}
 
 export class usewikiViewProvider implements vscode.WebviewViewProvider {
   private _view?: vscode.WebviewView;
@@ -41,30 +36,6 @@ export class usewikiViewProvider implements vscode.WebviewViewProvider {
 
     const messenger = new WebviewMessenger({ context: this._view });
 
-    // messenger.on('placeholder', () => {
-    //   messenger.send('placeholder', { text: placeholder() });
-    // });
-
-    // const currentLang = getLang();
-    // language
-    const langOptions: ILanguageOptions[] = [
-      {
-        label: 'English',
-        value: 'en',
-      },
-      {
-        label: 'Simplified Chinese',
-        value: 'zhCN',
-        picked: true, // not work ???
-      },
-    ];
-    // langOptions.forEach((item, index) => {
-    //   if (item.value === currentLang) {
-    //     langOptions[index].picked = true;
-    //   }
-    // });
-
-    // console.log('current lang is', getLang());
     messenger.send('changeLanguage', { text: getLang() });
     messenger.on('showVsCodeLanguageInputBox', async () => {
       showLanguagePicker(messenger);
