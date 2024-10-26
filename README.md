@@ -29,7 +29,7 @@
 
 ## Install
 
-* 直接在vscode 的扩展里面搜索 `usewiki2` 或者直接点击 [安装](#https://marketplace.visualstudio.com/items?itemName=oeyoews.usewiki2) 即可
+* 直接在vscode 的扩展里面搜索 `usewiki2` 或者直接点击 [安装](https://marketplace.visualstudio.com/items?itemName=oeyoews.usewiki2) 即可
 
 ## Usage
 
