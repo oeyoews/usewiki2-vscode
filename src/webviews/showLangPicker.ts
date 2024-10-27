@@ -21,12 +21,13 @@ export async function showLanguagePicker(messenger: WebviewMessenger) {
   quickPick.items = langOptions;
   quickPick.title = 'Setup Language';
   quickPick.placeholder = 'Select Language';
+  // quickPick.title = t('setup_language');
+  // quickPick.placeholder = t('select_language');
   quickPick.activeItems = [langOptions[activeItemIndex]];
 
   // TODO: selection 不起作用， 用active 的话accept 的时候也会触发active 事件
   // 当选择变化时实时预览
   //   quickPick.onDidChangeSelection((selectedItems) => {
-  //     console.log(selectedItems[0].description, 'active');
   //     if (selectedItems.length > 0) {
   //       const selectedLanguage = selectedItems[0].description;
   //       messenger.send('changeLanguage', { text: selectedLanguage });

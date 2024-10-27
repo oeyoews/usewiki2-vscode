@@ -27,9 +27,6 @@ importers:
       '@types/vscode':
         specifier: ^1.91.0
         version: 1.94.0
-      '@vscode/l10n-dev':
-        specifier: ^0.0.35
-        version: 0.0.35
       '@vscode/vsce':
         specifier: 3.2.0
         version: 3.2.0
@@ -190,14 +187,6 @@ packages:
 
   '@antfu/utils@0.7.10':
     resolution: {integrity: sha512-+562v9k4aI80m1+VuMHehNJWLOFjBnXn3tdOitzD0il5b7smkSBal4+a3oKiQTbrwMmN/TBUMDvbdoWDehgOww==}
-
-  '@azure-rest/ai-translation-text@1.0.0':
-    resolution: {integrity: sha512-Zt1nwHdvfEzM6EVnx4cLz6GNYS5gxYWbwA3dAr6+NM9CWb3vk+p2Vy/mleU53OSeJvkzhpjXJ78qiJh42JmcXA==}
-    engines: {node: '>=18.0.0'}
-
-  '@azure-rest/core-client@1.4.0':
-    resolution: {integrity: sha512-ozTDPBVUDR5eOnMIwhggbnVmOrka4fXCs8n8mvUo4WLLc38kki6bAOByDoVZZPz/pZy2jMt2kwfpvy/UjALj6w==}
-    engines: {node: '>=18.0.0'}
 
   '@azure/abort-controller@2.1.2':
     resolution: {integrity: sha512-nBrLsEWm4J2u5LpAPjxADTlq3trDgVZZXHNKabeXZtpq3d3AbN/KGO82R87rdDz5/lYB024rtEf10/q0urNgsA==}
@@ -1584,10 +1573,6 @@ packages:
   '@vitest/utils@2.1.3':
     resolution: {integrity: sha512-xpiVfDSg1RrYT0tX6czgerkpcKFmFOF/gCr30+Mve5V2kewCy4Prn1/NDMSRwaSmT7PRaOF83wu+bEtsY1wrvA==}
 
-  '@vscode/l10n-dev@0.0.35':
-    resolution: {integrity: sha512-s6uzBXsVDSL69Z85HSqpc5dfKswQkeucY8L00t1TWzGalw7wkLQUKMRwuzqTq+AMwQKrRd7Po14cMoTcd11iDw==}
-    hasBin: true
-
   '@vscode/l10n@0.0.18':
     resolution: {integrity: sha512-KYSIHVmslkaCDyw013pphY+d7x1qV8IZupYfeIfzNA+nsaWHbn5uPuQRvdRFsa9zFzGeudPuoGoZ1Op4jrJXIQ==}
 
@@ -1976,10 +1961,6 @@ packages:
 
   deep-is@0.1.4:
     resolution: {integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==}
-
-  deepmerge-json@1.5.0:
-    resolution: {integrity: sha512-jZRrDmBKjmGcqMFEUJ14FjMJwm05Qaked+1vxaALRtF0UAl7lPU8OLWXFxvoeg3jbQM249VPFVn8g2znaQkEtA==}
-    engines: {node: '>=4.0.0'}
 
   define-data-property@1.1.4:
     resolution: {integrity: sha512-rBMvIzlpA8v6E+SJZoo++HAYqsLrkg7MSfIinMPFhmkorw7X+dOXVJQs+QT69zGkzMyfDnIMN2Wid1+NbL3T+A==}
@@ -2388,10 +2369,6 @@ packages:
     resolution: {integrity: sha512-f7ccFPK3SXFHpx15UIGyRJ/FJQctuKZ0zVuN3frBo4HnK3cay9VEW0R6yPYFHC0AgqhukPzKjq22t5DmAyqGyw==}
     engines: {node: '>=16'}
 
-  flat@5.0.2:
-    resolution: {integrity: sha512-b6suED+5/3rTpUBdG1gupIl8MPFCAMA0QXwmljLhvCUKcUvdE4gWky9zpuGCcXHOsz4J9wPGNWq6OKpmIzz3hQ==}
-    hasBin: true
-
   flatted@3.3.1:
     resolution: {integrity: sha512-X8cqMLLie7KsNUDSdzeN8FYK9rEt4Dt67OsG/DNGnYTSDBG4uFAJFBnUeiV+zCVAvwFy56IjM9sH51jVaEhNxw==}
 
@@ -2439,10 +2416,6 @@ packages:
   get-nonce@1.0.1:
     resolution: {integrity: sha512-FJhYRoDaiatfEkUK8HKlicmu/3SGFD51q3itKDGoSTysQJBnfOcxU5GxnhE1E6soB76MbT0MBtnKJuXyAx+96Q==}
     engines: {node: '>=6'}
-
-  get-stdin@7.0.0:
-    resolution: {integrity: sha512-zRKcywvrXlXsA0v0i9Io4KDRaAw7+a1ZpjRwl9Wox8PFlVCCHra7E9c4kqXCoCM9nR5tBkaTTZRBoCm60bFqTQ==}
-    engines: {node: '>=8'}
 
   get-stream@6.0.1:
     resolution: {integrity: sha512-ts6Wi+2j3jQjqi70w5AlN8DFnkSwC+MqmxEzdEALB2qXZYV3X/b1CTfgPLGJNMeAWxdPfU8FO1ms3NUfaHCPYg==}
@@ -2531,10 +2504,6 @@ packages:
   hasown@2.0.2:
     resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
     engines: {node: '>= 0.4'}
-
-  he@1.2.0:
-    resolution: {integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==}
-    hasBin: true
 
   hosted-git-info@2.8.9:
     resolution: {integrity: sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==}
@@ -2990,13 +2959,6 @@ packages:
   node-fetch-native@1.6.4:
     resolution: {integrity: sha512-IhOigYzAKHd244OC0JIMIUrjzctirCmPkaIfhDeGcEETWof5zKYUW7e7MYvChGWh/4CJeXEgsRyGzuF334rOOQ==}
 
-  node-html-markdown@1.3.0:
-    resolution: {integrity: sha512-OeFi3QwC/cPjvVKZ114tzzu+YoR+v9UXW5RwSXGUqGb0qCl0DvP406tzdL7SFn8pZrMyzXoisfG2zcuF9+zw4g==}
-    engines: {node: '>=10.0.0'}
-
-  node-html-parser@6.1.13:
-    resolution: {integrity: sha512-qIsTMOY4C/dAa5Q5vsobRpOOvPfC4pB61UVW2uSwZNUp0QU/jCekTal1vMmbO0DgdHeLUJpv/ARmDqErVxA3Sg==}
-
   node-releases@2.0.18:
     resolution: {integrity: sha512-d9VeXT4SJ7ZeOqGX6R5EM022wpL+eWPooLI+5UpWn2jCT1aosUQEhQP214x33Wkwx3JQMvIm+tIoVOdodFS40g==}
 
@@ -3242,10 +3204,6 @@ packages:
   prompts@2.4.2:
     resolution: {integrity: sha512-NxNv/kLguCA7p3jE8oL2aEBsrJWgAakBpgmgK6lpPWV+WuOmY6r2/zbAVnP+T8bQlA0nzHXSJSJW0Hq7ylaD2Q==}
     engines: {node: '>= 6'}
-
-  pseudo-localization@2.4.0:
-    resolution: {integrity: sha512-ISYMOKY8+f+PmiXMFw2y6KLY74LBrv/8ml/VjjoVEV2k+MS+OJZz7ydciK5ntJwxPrKQPTU1+oXq9Mx2b0zEzg==}
-    hasBin: true
 
   pump@3.0.2:
     resolution: {integrity: sha512-tUPXtzlGM8FE3P0ZL6DVs/3P58k9nk8/jZeQCurTJylQA8qFYzHFfhBJkuqyE0FifOsQ0uKWekiZ5g8wtr28cw==}
@@ -3719,11 +3677,6 @@ packages:
       typescript:
         optional: true
 
-  typescript@4.9.5:
-    resolution: {integrity: sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==}
-    engines: {node: '>=4.2.0'}
-    hasBin: true
-
   typescript@5.6.3:
     resolution: {integrity: sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw==}
     engines: {node: '>=14.17'}
@@ -3864,9 +3817,6 @@ packages:
     engines: {node: ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: '>=6.0.0'
-
-  web-tree-sitter@0.20.8:
-    resolution: {integrity: sha512-weOVgZ3aAARgdnb220GqYuh7+rZU0Ka9k9yfKtGAzEYMa6GgiCzW9JjQRJyCJakvibQW+dfjJdihjInKuuCAUQ==}
 
   webidl-conversions@4.0.2:
     resolution: {integrity: sha512-YQ+BmxuTgd6UXZW3+ICGfyqRyHXVlD5GtQr5+qjiNW7bF0cqrzX500HVXPBOvgXb5YnzDd+h0zqyv61KUD7+Sg==}
@@ -4020,27 +3970,6 @@ snapshots:
   '@antfu/ni@0.21.12': {}
 
   '@antfu/utils@0.7.10': {}
-
-  '@azure-rest/ai-translation-text@1.0.0':
-    dependencies:
-      '@azure-rest/core-client': 1.4.0
-      '@azure/core-auth': 1.9.0
-      '@azure/core-rest-pipeline': 1.17.0
-      '@azure/logger': 1.1.4
-      tslib: 2.8.0
-    transitivePeerDependencies:
-      - supports-color
-
-  '@azure-rest/core-client@1.4.0':
-    dependencies:
-      '@azure/abort-controller': 2.1.2
-      '@azure/core-auth': 1.9.0
-      '@azure/core-rest-pipeline': 1.17.0
-      '@azure/core-tracing': 1.2.0
-      '@azure/core-util': 1.11.0
-      tslib: 2.8.0
-    transitivePeerDependencies:
-      - supports-color
 
   '@azure/abort-controller@2.1.2':
     dependencies:
@@ -5372,21 +5301,6 @@ snapshots:
       loupe: 3.1.2
       tinyrainbow: 1.2.0
 
-  '@vscode/l10n-dev@0.0.35':
-    dependencies:
-      '@azure-rest/ai-translation-text': 1.0.0
-      debug: 4.3.7
-      deepmerge-json: 1.5.0
-      glob: 10.4.5
-      markdown-it: 14.1.0
-      node-html-markdown: 1.3.0
-      pseudo-localization: 2.4.0
-      web-tree-sitter: 0.20.8
-      xml2js: 0.5.0
-      yargs: 17.7.2
-    transitivePeerDependencies:
-      - supports-color
-
   '@vscode/l10n@0.0.18': {}
 
   '@vscode/vsce-sign-alpine-arm64@2.0.2':
@@ -5796,8 +5710,6 @@ snapshots:
     optional: true
 
   deep-is@0.1.4: {}
-
-  deepmerge-json@1.5.0: {}
 
   define-data-property@1.1.4:
     dependencies:
@@ -6380,8 +6292,6 @@ snapshots:
       flatted: 3.3.1
       keyv: 4.5.4
 
-  flat@5.0.2: {}
-
   flatted@3.3.1: {}
 
   foreground-child@3.3.0:
@@ -6424,8 +6334,6 @@ snapshots:
       hasown: 2.0.2
 
   get-nonce@1.0.1: {}
-
-  get-stdin@7.0.0: {}
 
   get-stream@6.0.1: {}
 
@@ -6524,8 +6432,6 @@ snapshots:
   hasown@2.0.2:
     dependencies:
       function-bind: 1.1.2
-
-  he@1.2.0: {}
 
   hosted-git-info@2.8.9: {}
 
@@ -6948,15 +6854,6 @@ snapshots:
 
   node-fetch-native@1.6.4: {}
 
-  node-html-markdown@1.3.0:
-    dependencies:
-      node-html-parser: 6.1.13
-
-  node-html-parser@6.1.13:
-    dependencies:
-      css-select: 5.1.0
-      he: 1.2.0
-
   node-releases@2.0.18: {}
 
   normalize-package-data@2.5.0:
@@ -7196,13 +7093,6 @@ snapshots:
     dependencies:
       kleur: 3.0.3
       sisteransi: 1.0.5
-
-  pseudo-localization@2.4.0:
-    dependencies:
-      flat: 5.0.2
-      get-stdin: 7.0.0
-      typescript: 4.9.5
-      yargs: 17.7.2
 
   pump@3.0.2:
     dependencies:
@@ -7703,8 +7593,6 @@ snapshots:
       - eslint
       - supports-color
 
-  typescript@4.9.5: {}
-
   typescript@5.6.3: {}
 
   uc.micro@2.1.0: {}
@@ -7837,8 +7725,6 @@ snapshots:
       semver: 7.6.3
     transitivePeerDependencies:
       - supports-color
-
-  web-tree-sitter@0.20.8: {}
 
   webidl-conversions@4.0.2: {}
 

@@ -2,12 +2,13 @@
   "publisher": "oeyoews",
   "name": "usewiki2",
   "displayName": "usewiki2",
-  "version": "2.6.0",
+  "version": "2.6.1",
   "private": true,
   "packageManager": "pnpm@9.0.6",
   "description": "",
   "keywords": [
-    "TiddlyWiki"
+    "TiddlyWiki",
+    "Usewiki2"
   ],
   "author": {
     "name": "oeyoews"
@@ -24,11 +25,11 @@
     "Education"
   ],
   "main": "./dist/index.js",
+  "l10n": "./l10n",
   "icon": "res/tiddlywiki01.png",
   "engines": {
     "vscode": "^1.94.0"
   },
-  "l10n": "./l10n",
   "activationEvents": [
     "onStartupFinished"
   ],
@@ -176,7 +177,6 @@
     "@antfu/ni": "^0.21.12",
     "@types/node": "^20.14.11",
     "@types/vscode": "^1.91.0",
-    "@vscode/l10n-dev": "^0.0.35",
     "@vscode/vsce": "3.2.0",
     "bumpp": "^9.4.1",
     "eslint": "^8.57.0",

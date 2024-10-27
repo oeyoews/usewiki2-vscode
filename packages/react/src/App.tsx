@@ -111,7 +111,6 @@ function App() {
   }, []);
 
   function showVsCodeLanguageInputBox() {
-    console.log('showVsCodeLanguageInputBox');
     messenger.send('showVsCodeLanguageInputBox');
   }
 
