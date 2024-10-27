@@ -4,7 +4,7 @@
 // Meta info
 export const publisher = "oeyoews"
 export const name = "usewiki2"
-export const version = "2.6.1"
+export const version = "2.6.2"
 export const displayName = "usewiki2"
 export const description = undefined
 export const extensionId = `${publisher}.${name}`
