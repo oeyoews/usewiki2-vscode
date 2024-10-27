@@ -1,0 +1,13 @@
+{
+	"usewiki2.tiddlywiki.title": "显示tiddlywiki实例信息",
+	"usewiki2.openwiki.title": "在浏览器中打开tiddlywiki实例",
+	"usewiki2.opensettings.title": "配置太微助手",
+	"usewiki2.enableSendSound.title": "开启发送声音",
+	"usewiki2.defaultTag.title": "默认标签",
+	"usewiki2.defaultUsername": "用户名",
+	"usewiki2.ip": "太微 IP 地址",
+	"usewiki2.port": "端口号",
+	"usewiki2.enableHttps": "使用 Htttps",
+	"usewiki2.lang": "设置太微助手语言",
+	"usewiki2.type": "保存类型"
+}

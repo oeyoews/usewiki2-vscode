@@ -8,6 +8,7 @@ export async function showLanguagePicker(messenger: WebviewMessenger) {
     { label: 'English', description: 'en' },
     { label: '中文', description: 'zhCN' },
   ];
+  const t = vscode.l10n.t;
 
   // 存储原始语言设置，用于恢复
   const originalLanguage = getLang(); // 自定义函数，假设获取当前语言
@@ -18,7 +19,7 @@ export async function showLanguagePicker(messenger: WebviewMessenger) {
   // 创建自定义 QuickPick
   const quickPick = vscode.window.createQuickPick();
   quickPick.items = langOptions;
-  quickPick.title = 'Setup Usewiki2 Language';
+  quickPick.title = 'Setup Language';
   quickPick.placeholder = 'Select Language';
   quickPick.activeItems = [langOptions[activeItemIndex]];
 

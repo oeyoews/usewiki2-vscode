@@ -4,7 +4,7 @@
 // Meta info
 export const publisher = "oeyoews"
 export const name = "usewiki2"
-export const version = "2.5.0"
+export const version = "2.6.0"
 export const displayName = "usewiki2"
 export const description = undefined
 export const extensionId = `${publisher}.${name}`
@@ -13,7 +13,6 @@ export const extensionId = `${publisher}.${name}`
  * Type union of all commands
  */
 export type CommandKey = 
-  | "usewiki2.tiddlywiki"
   | "usewiki2.wikiinfo"
   | "usewiki2.openwiki"
   | "usewiki2.opensettings"
@@ -23,22 +22,17 @@ export type CommandKey =
  */
 export const commands = {
   /**
-   * UseWiki2: Add Journal
-   * @value `usewiki2.tiddlywiki`
-   */
-  tiddlywiki: "usewiki2.tiddlywiki",
-  /**
-   * Usewiki2: Info
+   * %usewiki2.tiddlywiki.title%
    * @value `usewiki2.wikiinfo`
    */
   wikiinfo: "usewiki2.wikiinfo",
   /**
-   * Usewiki2: Open TiddlyWiki Instance
+   * %usewiki2.openwiki.title%
    * @value `usewiki2.openwiki`
    */
   openwiki: "usewiki2.openwiki",
   /**
-   * Usewiki2: Settings
+   * %usewiki2.opensettings.title%
    * @value `usewiki2.opensettings`
    */
   opensettings: "usewiki2.opensettings",
@@ -49,7 +43,6 @@ export const commands = {
  */
 export type ConfigKey = 
   | "usewiki2.enableSendSound"
-  | "usewiki2.placeholder"
   | "usewiki2.defaultTag"
   | "usewiki2.defaultUsername"
   | "usewiki2.ip"
@@ -60,7 +53,6 @@ export type ConfigKey =
 
 export interface ConfigKeyTypeMap {
   "usewiki2.enableSendSound": boolean,
-  "usewiki2.placeholder": string,
   "usewiki2.defaultTag": string,
   "usewiki2.defaultUsername": string,
   "usewiki2.ip": string,
@@ -72,7 +64,6 @@ export interface ConfigKeyTypeMap {
 
 export interface ConfigShorthandMap {
   enableSendSound: "usewiki2.enableSendSound",
-  placeholder: "usewiki2.placeholder",
   defaultTag: "usewiki2.defaultTag",
   defaultUsername: "usewiki2.defaultUsername",
   ip: "usewiki2.ip",
@@ -93,7 +84,7 @@ export interface ConfigItem<T extends keyof ConfigKeyTypeMap> {
  */
 export const configs = {
   /**
-   * 启用发送声音
+   * %usewiki2.enableSendSound.title%
    * @key `usewiki2.enableSendSound`
    * @default `false`
    * @type `boolean`
@@ -103,17 +94,7 @@ export const configs = {
     default: false,
   } as ConfigItem<"usewiki2.enableSendSound">,
   /**
-   * 默认提示符
-   * @key `usewiki2.placeholder`
-   * @default `""`
-   * @type `string`
-   */
-  placeholder: {
-    key: "usewiki2.placeholder",
-    default: "",
-  } as ConfigItem<"usewiki2.placeholder">,
-  /**
-   * 默认标签
+   * %usewiki2.defaultTag.title%
    * @key `usewiki2.defaultTag`
    * @default `"Journal"`
    * @type `string`
@@ -123,7 +104,7 @@ export const configs = {
     default: "Journal",
   } as ConfigItem<"usewiki2.defaultTag">,
   /**
-   * 默认用户名
+   * %usewiki2.defaultUsername%
    * @key `usewiki2.defaultUsername`
    * @default `""`
    * @type `string`
@@ -133,7 +114,7 @@ export const configs = {
     default: "",
   } as ConfigItem<"usewiki2.defaultUsername">,
   /**
-   * 
+   * %usewiki2.ip%
    * @key `usewiki2.ip`
    * @default `"127.0.0.1"`
    * @type `string`
@@ -143,7 +124,7 @@ export const configs = {
     default: "127.0.0.1",
   } as ConfigItem<"usewiki2.ip">,
   /**
-   * 端口 (请确定你已经启动了太微)
+   * %usewiki2.port%
    * @key `usewiki2.port`
    * @default `8080`
    * @type `number`
@@ -153,7 +134,7 @@ export const configs = {
     default: 8080,
   } as ConfigItem<"usewiki2.port">,
   /**
-   * 
+   * %usewiki2.enableHttps%
    * @key `usewiki2.enableHttps`
    * @default `false`
    * @type `boolean`
@@ -163,7 +144,7 @@ export const configs = {
     default: false,
   } as ConfigItem<"usewiki2.enableHttps">,
   /**
-   * Setup the language of the UseWiki2
+   * %usewiki2.lang%
    * @key `usewiki2.lang`
    * @default `"en"`
    * @type `string`
@@ -173,7 +154,7 @@ export const configs = {
     default: "en",
   } as ConfigItem<"usewiki2.lang">,
   /**
-   * 选择要使用的文本格式 (Markdown 或 TiddlyWiki)
+   * %usewiki2.type%
    * @key `usewiki2.type`
    * @default `"text/vnd.tiddlywiki"`
    * @type `string`
@@ -186,7 +167,6 @@ export const configs = {
 
 export interface ScopedConfigKeyTypeMap {
   "enableSendSound": boolean,
-  "placeholder": string,
   "defaultTag": string,
   "defaultUsername": string,
   "ip": string,
@@ -200,7 +180,6 @@ export const scopedConfigs = {
   scope: "usewiki2",
   defaults: {
     "enableSendSound": false,
-    "placeholder": "",
     "defaultTag": "Journal",
     "defaultUsername": "",
     "ip": "127.0.0.1",

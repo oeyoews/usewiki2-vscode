@@ -2,7 +2,7 @@
   "publisher": "oeyoews",
   "name": "usewiki2",
   "displayName": "usewiki2",
-  "version": "2.5.0",
+  "version": "2.6.0",
   "private": true,
   "packageManager": "pnpm@9.0.6",
   "description": "",
@@ -28,6 +28,7 @@
   "engines": {
     "vscode": "^1.94.0"
   },
+  "l10n": "./l10n",
   "activationEvents": [
     "onStartupFinished"
   ],
@@ -39,41 +40,35 @@
         "usewiki2.enableSendSound": {
           "type": "boolean",
           "default": false,
-          "description": "启用发送声音"
-        },
-        "usewiki2.placeholder": {
-          "type": "string",
-          "default": "",
-          "deprecationMessage": "已废弃",
-          "description": "默认提示符"
+          "description": "%usewiki2.enableSendSound.title%"
         },
         "usewiki2.defaultTag": {
           "type": "string",
           "default": "Journal",
-          "description": "默认标签"
+          "description": "%usewiki2.defaultTag.title%"
         },
         "usewiki2.defaultUsername": {
           "type": "string",
           "default": "",
-          "description": "默认用户名"
+          "description": "%usewiki2.defaultUsername%"
         },
         "usewiki2.ip": {
           "order": 0,
           "type": "string",
           "default": "127.0.0.1",
-          "markdownDescription": "你的TiddlyWiki地址 (请确定你已经启动了[太微](https://tiddlywiki.com/#Installing%20TiddlyWiki%20on%20Node.js))"
+          "description": "%usewiki2.ip%"
         },
         "usewiki2.port": {
           "order": 1,
           "type": "number",
           "default": 8080,
-          "description": "端口 (请确定你已经启动了太微)"
+          "description": "%usewiki2.port%"
         },
         "usewiki2.enableHttps": {
           "order": 2,
           "type": "boolean",
           "default": false,
-          "markdownDescription": "Enable or Disable HTTPS(untest for https)"
+          "description": "%usewiki2.enableHttps%"
         },
         "usewiki2.lang": {
           "type": "string",
@@ -86,7 +81,7 @@
             "English",
             "Simplified Chinese"
           ],
-          "description": "Setup the language of the UseWiki2"
+          "description": "%usewiki2.lang%"
         },
         "usewiki2.type": {
           "order": 3,
@@ -104,7 +99,7 @@
             "use Markdown",
             "use WikiText"
           ],
-          "description": "选择要使用的文本格式 (Markdown 或 TiddlyWiki)"
+          "description": "%usewiki2.type%"
         }
       }
     },
@@ -147,22 +142,18 @@
     },
     "commands": [
       {
-        "command": "usewiki2.tiddlywiki",
-        "title": "UseWiki2: Add Journal"
-      },
-      {
         "command": "usewiki2.wikiinfo",
-        "title": "Usewiki2: Info",
+        "title": "%usewiki2.tiddlywiki.title%",
         "icon": "$(info)"
       },
       {
         "command": "usewiki2.openwiki",
-        "title": "Usewiki2: Open TiddlyWiki Instance",
+        "title": "%usewiki2.openwiki.title%",
         "icon": "$(link-external)"
       },
       {
         "command": "usewiki2.opensettings",
-        "title": "Usewiki2: Settings",
+        "title": "%usewiki2.opensettings.title%",
         "icon": "$(gear)"
       }
     ]
@@ -185,6 +176,7 @@
     "@antfu/ni": "^0.21.12",
     "@types/node": "^20.14.11",
     "@types/vscode": "^1.91.0",
+    "@vscode/l10n-dev": "^0.0.35",
     "@vscode/vsce": "3.2.0",
     "bumpp": "^9.4.1",
     "eslint": "^8.57.0",
@@ -211,6 +203,7 @@
     "LICENSE"
   ],
   "dependencies": {
+    "@vscode/l10n": "^0.0.18",
     "reactive-vscode": "0.2.0"
   }
 }

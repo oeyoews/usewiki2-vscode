@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { l10n } from 'vscode';
 import { usewikiViewProvider } from './webviews';
 
 import * as openWiki from './commands/openWikiCmd';

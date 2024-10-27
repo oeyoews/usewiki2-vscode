@@ -10,6 +10,7 @@
 * publish: https://vscode.github.net.cn/api/working-with-extensions/publishing-extension
 * https://code.visualstudio.com/api/extension-guides/webview
 * icon: https://code.visualstudio.com/api/references/icons-in-labels
+* l10n: https://code.visualstudio.com/api/references/vscode-api#l10n
 -->
 
 ## prerequisites
@@ -41,12 +42,11 @@
 
 <!-- commands -->
 
-| Command                 | Title                              |
-| ----------------------- | ---------------------------------- |
-| `usewiki2.tiddlywiki`   | UseWiki2: Add Journal              |
-| `usewiki2.wikiinfo`     | Usewiki2: Info                     |
-| `usewiki2.openwiki`     | Usewiki2: Open TiddlyWiki Instance |
-| `usewiki2.opensettings` | Usewiki2: Settings                 |
+| Command                 | Title                         |
+| ----------------------- | ----------------------------- |
+| `usewiki2.wikiinfo`     | %usewiki2.tiddlywiki.title%   |
+| `usewiki2.openwiki`     | %usewiki2.openwiki.title%     |
+| `usewiki2.opensettings` | %usewiki2.opensettings.title% |
 
 <!-- commands -->
 

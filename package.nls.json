@@ -1,0 +1,13 @@
+{
+	"usewiki2.tiddlywiki.title": "Show Tiddlywiki Info",
+	"usewiki2.openwiki.title": "Open Tiddlywiki Instance",
+	"usewiki2.opensettings.title": "Open Tiddlywiki Settings",
+	"usewiki2.enableSendSound.title": "Enable Send Sound",
+	"usewiki2.defaultTag.title": "Tag",
+	"usewiki2.defaultUsername": "username",
+	"usewiki2.ip": "Your Nodejs Tiddlywiki IP",
+	"usewiki2.port": "Port",
+	"usewiki2.enableHttps": "Enable HTTPS",
+	"usewiki2.lang": "Setup Usewiki2 Language",
+	"usewiki2.type": "saved type"
+}
