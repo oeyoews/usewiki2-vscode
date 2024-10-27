@@ -18,10 +18,9 @@ export async function showLanguagePicker(messenger: WebviewMessenger) {
   // 创建自定义 QuickPick
   const quickPick = window.createQuickPick();
   quickPick.items = langOptions;
-  // quickPick.title = 'Setup Language';
-  quickPick.title = l10n.t('setup_language');
-  quickPick.placeholder = 'Select Language';
-  // quickPick.placeholder = t('select_language');
+
+  quickPick.title = l10n.t('Setup Language');
+  quickPick.placeholder = l10n.t('Select Language');
   quickPick.activeItems = [langOptions[activeItemIndex]];
 
   // TODO: selection 不起作用， 用active 的话accept 的时候也会触发active 事件
