@@ -8,6 +8,7 @@ import {
 } from '@/components/ui/context-menu';
 import { Button } from '@/components/ui/button';
 import { Textarea } from './components/ui/textarea';
+import twsvg from '../../../res/tw.svg';
 import {
   Card,
   CardDescription,
@@ -26,8 +27,10 @@ import { getLinks } from './links';
 import { useTranslation } from 'react-i18next';
 import { ILanguage } from './i18n';
 
-// @ts-expect-error
-const vscode = acquireVsCodeApi();
+const vscode =
+  // @ts-expect-error
+  typeof acquireVsCodeApi === 'function' ? acquireVsCodeApi() : null;
+
 const messenger = new WebviewMessenger({ vscode });
 function App() {
   const { t, i18n } = useTranslation();
@@ -96,24 +99,30 @@ function App() {
   }, []);
 
   function showVsCodeLanguageInputBox() {
+    console.log('showVsCodeLanguageInputBox');
     messenger.send('showVsCodeLanguageInputBox');
   }
 
-  if (!vscode) {
-    return (
-      <div className="relative h-screen p-3 antialiased">
-        <h1 className="text-xl font-bold">UseWiki2</h1>
-        <p className="text-sm">Please use VS Code.</p>
-      </div>
-    );
-  }
+  // if (!vscode) {
+  //   return (
+  //     <div className="relative h-screen p-3 antialiased">
+  //       <h1 className="text-xl font-bold">UseWiki2</h1>
+  //       <p className="text-sm">Please use VS Code.</p>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="relative h-screen p-3 antialiased">
       <h1 className="text-xl font-bold">
-        UseWiki2{' '}
+        {t('app_name')}
+        <img
+          src={twsvg}
+          className="inline align-baseline mx-1"
+          alt=""
+        />
         <span
-          className="i-lucide-languages size-4"
+          className="i-lucide-languages size-4 cursor-pointer hover:scale-125 transition-all"
           onClick={showVsCodeLanguageInputBox}></span>
       </h1>
       <ContextMenu>
