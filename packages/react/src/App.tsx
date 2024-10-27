@@ -52,6 +52,11 @@ function App() {
     }
   }
 
+  function updateInputValue(value: string) {
+    setInputValue(value);
+    localStorage.setItem('text', value);
+  }
+
   function playSound() {
     const currentAudio = new Audio('data:audio/mp3;base64,' + sound);
     currentAudio.volume = 0.9;
@@ -69,8 +74,15 @@ function App() {
     if (!inputValue) return;
     messenger.send('sendWiki', { text: inputValue });
     setInputValue('');
+    localStorage.removeItem('text');
     inputRef.current?.focus();
   }
+
+  useEffect(() => {
+    if (localStorage.getItem('text')) {
+      setInputValue(localStorage.getItem('text')!);
+    }
+  }, []);
 
   useEffect(() => {
     messenger.on('playSound', () => {
@@ -173,7 +185,7 @@ function App() {
           rows={6}
           placeholder={placeholder}
           className="focus-visible:ring-0 border-none input-bg resize-none"
-          onChange={(e) => setInputValue(e.target.value)}
+          onChange={(e) => updateInputValue(e.target.value)}
           value={inputValue}
         />
         <Button
