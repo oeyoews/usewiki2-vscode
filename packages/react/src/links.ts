@@ -1,3 +1,5 @@
+import { type TFunction } from 'i18next';
+
 type Colors =
   | 'green'
   | 'rose'
@@ -22,35 +24,37 @@ const getClass = (color: Colors) => {
   return colors[color];
 };
 
-export const links = [
-  {
-    title: '太微官网',
-    description: 'A non-linear personal web notebook',
-    link: 'https://tiddlywiki.com',
-    class: getClass('green'),
-  },
-  {
-    title: '太微 GitHub',
-    description: 'The TiddlyWiki5 source code',
-    link: 'https://github.com/TiddlyWiki/TiddlyWiki5',
-    class: getClass('rose'),
-  },
-  {
-    title: '太微官方论坛',
-    description: 'The official TiddlyWiki5 forum',
-    link: 'https://talk.tiddlywiki.org',
-    class: getClass('yellow'),
-  },
-  {
-    title: '中文太微文档',
-    description: 'The TiddlyWiki5 Chinese documentation',
-    link: 'https://bramchen.github.io/tw5-docs/zh-Hans',
-    class: getClass('purple'),
-  },
-  {
-    title: '中文太微教程',
-    description: 'The TiddlyWiki5 Chinese tutorial',
-    link: 'https://tw-cn.netlify.app',
-    class: getClass('indigo'),
-  },
-];
+export function getLinks(t: TFunction<'links', undefined>) {
+  return [
+    {
+      title: t('tw_official_site'),
+      description: t('tw_official_site_description'),
+      link: 'https://tiddlywiki.com',
+      class: getClass('green'),
+    },
+    {
+      title: t('github'),
+      description: t('github_description'),
+      link: 'https://github.com/TiddlyWiki/TiddlyWiki5',
+      class: getClass('rose'),
+    },
+    {
+      title: t('forum'),
+      description: t('forum_description'),
+      link: 'https://talk.tiddlywiki.org',
+      class: getClass('yellow'),
+    },
+    {
+      title: t('docs_cn'),
+      description: t('docs_cn_description'),
+      link: 'https://bramchen.github.io/tw5-docs/zh-Hans',
+      class: getClass('purple'),
+    },
+    {
+      title: t('tutorial_cn'),
+      description: t('tutorial_cn_description'),
+      link: 'https://tw-cn.netlify.app',
+      class: getClass('indigo'),
+    },
+  ];
+}

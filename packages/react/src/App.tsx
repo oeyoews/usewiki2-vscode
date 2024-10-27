@@ -22,7 +22,7 @@ import {
 } from '@/components/ui/accordion';
 import { sound } from './sound';
 import { WebviewMessenger } from './utils/WebViewMessenger';
-import { links as cards } from './links';
+import { getLinks } from './links';
 import { useTranslation } from 'react-i18next';
 import { ILanguage } from './i18n';
 
@@ -31,6 +31,8 @@ const vscode = acquireVsCodeApi();
 const messenger = new WebviewMessenger({ vscode });
 function App() {
   const { t, i18n } = useTranslation();
+  const { t: t2 } = useTranslation('links');
+  const cards = getLinks(t2);
   const [inputValue, setInputValue] = useState('');
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const [placeholder, setPlaceholder] = useState(t('placeholder'));
