@@ -3,5 +3,7 @@
 	"relatedLinks": "相关链接",
 	"sendToTiddlywiki": "发送到 TiddlyWiki",
 	"selectLang": "选择语言",
-	"placeholder": "写点什么... Ctrl+Enter 保存"
+	"placeholder": "写点什么... Ctrl+Enter 保存",
+	"undo": "撤回",
+	"undo_edit": "重新编辑"
 }

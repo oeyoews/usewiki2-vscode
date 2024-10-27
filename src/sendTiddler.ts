@@ -1,12 +1,13 @@
 import { notify } from './notify';
 import { defaultTag, getPort, getIp, defaultUsername, getType } from './config';
 import { type WebviewMessenger } from './utils/extensionMessenger';
-const UNDO = '撤回';
-const UNDOEDIT = '撤回并编辑';
+import { l10n } from 'vscode';
 export default async function sendTiddler(
   text: string,
   messenger: WebviewMessenger
 ) {
+  const UNDO = l10n.t('Undo');
+  const UNDOEDIT = l10n.t('Undo And Edit');
   const port = getPort();
   const ip = getIp();
 
