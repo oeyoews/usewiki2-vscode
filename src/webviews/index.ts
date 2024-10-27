@@ -1,21 +1,31 @@
-import * as vscode from 'vscode';
 import sendTiddler from '../sendTiddler';
 import * as openWikiCmd from '../commands/openWikiCmd';
 import { WebviewMessenger } from '../utils/extensionMessenger';
 import { enableSendSound, getLang } from '../config';
 import { showLanguagePicker } from './showLangPicker';
+import {
+  Uri,
+  workspace,
+  env,
+  type Webview,
+  type WebviewView,
+  type WebviewViewResolveContext,
+  type CancellationToken,
+  type ExtensionContext,
+  type WebviewViewProvider,
+} from 'vscode';
 
-export class usewikiViewProvider implements vscode.WebviewViewProvider {
-  private _view?: vscode.WebviewView;
+export class usewikiViewProvider implements WebviewViewProvider {
+  private _view?: WebviewView;
   constructor(
-    private context: vscode.ExtensionContext,
+    private context: ExtensionContext,
     private _extensionUri = context.extensionUri
   ) {}
 
   async resolveWebviewView(
-    webviewView: vscode.WebviewView,
-    context: vscode.WebviewViewResolveContext,
-    _token: vscode.CancellationToken
+    webviewView: WebviewView,
+    context: WebviewViewResolveContext,
+    _token: CancellationToken
   ) {
     this._view = webviewView;
 
@@ -26,7 +36,7 @@ export class usewikiViewProvider implements vscode.WebviewViewProvider {
 
     webviewView.webview.html = this.getWebviewContent(webviewView.webview);
 
-    vscode.workspace.onDidChangeConfiguration((e) => {
+    workspace.onDidChangeConfiguration((e) => {
       if (e.affectsConfiguration('usewiki2.lang')) {
         messenger.send('changeLanguage', { text: getLang() });
         // 全局刷新, 但是需要webview 主动检查语言配置
@@ -42,7 +52,7 @@ export class usewikiViewProvider implements vscode.WebviewViewProvider {
     });
 
     messenger.on('openLink', (data) => {
-      vscode.env.openExternal(vscode.Uri.parse(data.link));
+      env.openExternal(Uri.parse(data.link));
     });
 
     messenger.on('openWiki', () => {
@@ -57,15 +67,15 @@ export class usewikiViewProvider implements vscode.WebviewViewProvider {
       });
     });
   }
-  private getWebviewContent(webview: vscode.Webview) {
+  private getWebviewContent(webview: Webview) {
     const scriptUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, 'react-dist', 'main.js')
+      Uri.joinPath(this._extensionUri, 'react-dist', 'main.js')
     );
     const styleResetUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, 'res', 'reset.css')
+      Uri.joinPath(this._extensionUri, 'res', 'reset.css')
     );
     const styleAppUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, 'react-dist', 'main.css')
+      Uri.joinPath(this._extensionUri, 'react-dist', 'main.css')
     );
     // const { tiddlywiki_version, username } = this._twdata;
     const nonce = getNonce();

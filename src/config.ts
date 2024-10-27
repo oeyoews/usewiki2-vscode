@@ -1,6 +1,6 @@
-import * as vscode from 'vscode';
+import { workspace } from 'vscode';
 
-export const config = () => vscode.workspace.getConfiguration('usewiki2');
+export const config = () => workspace.getConfiguration('usewiki2');
 // export const placeholder = () => config().get('placeholder', '');
 export const enableSendSound = () => config().get('enableSendSound', false);
 

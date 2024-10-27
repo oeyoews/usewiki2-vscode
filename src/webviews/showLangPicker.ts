@@ -1,14 +1,13 @@
-import * as vscode from 'vscode';
 import { config, getLang } from '../config';
+import { l10n, window, type QuickPickItem } from 'vscode';
 
 import { WebviewMessenger } from '../utils/extensionMessenger';
 
 export async function showLanguagePicker(messenger: WebviewMessenger) {
-  const langOptions: vscode.QuickPickItem[] = [
+  const langOptions: QuickPickItem[] = [
     { label: 'English', description: 'en' },
     { label: '中文', description: 'zhCN' },
   ];
-  const t = vscode.l10n.t;
 
   // 存储原始语言设置，用于恢复
   const originalLanguage = getLang(); // 自定义函数，假设获取当前语言
@@ -17,11 +16,11 @@ export async function showLanguagePicker(messenger: WebviewMessenger) {
   );
 
   // 创建自定义 QuickPick
-  const quickPick = vscode.window.createQuickPick();
+  const quickPick = window.createQuickPick();
   quickPick.items = langOptions;
-  quickPick.title = 'Setup Language';
+  // quickPick.title = 'Setup Language';
+  quickPick.title = l10n.t('setup_language');
   quickPick.placeholder = 'Select Language';
-  // quickPick.title = t('setup_language');
   // quickPick.placeholder = t('select_language');
   quickPick.activeItems = [langOptions[activeItemIndex]];
 

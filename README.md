@@ -10,7 +10,7 @@
 * publish: https://vscode.github.net.cn/api/working-with-extensions/publishing-extension
 * https://code.visualstudio.com/api/extension-guides/webview
 * icon: https://code.visualstudio.com/api/references/icons-in-labels
-* l10n: https://code.visualstudio.com/api/references/vscode-api#l10n
+* l10n: https://code.visualstudio.com/api/references/vscode-api#l10n and https://github.com/microsoft/vscode-extension-samples/tree/main/l10n-sample and https://github.com/microsoft/vscode-l10n/issues/150
 -->
 
 ## prerequisites
