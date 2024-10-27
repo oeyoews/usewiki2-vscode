@@ -200,7 +200,9 @@
     "dist",
     "res",
     "react-dist",
-    "LICENSE"
+    "LICENSE",
+    "l10n",
+    "package.nls*.json"
   ],
   "dependencies": {
     "@vscode/l10n": "^0.0.18",
