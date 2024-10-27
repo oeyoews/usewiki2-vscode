@@ -41,7 +41,7 @@ export default async function sendTiddler(
 
     if (response.status === 204) {
       // '撤回并重新编辑'
-      notify(`已撤回(${title})`, 'warning');
+      notify(`${l10n.t('Successfully Undone')}(${title})`, 'info');
       // window.showInformationMessage('发送成功', 'demo').then(() => {});
     } else {
       notify(`撤回失败${title}`, 'error');
