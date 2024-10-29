@@ -26,7 +26,10 @@ import { WebviewMessenger } from './utils/WebViewMessenger';
 import { getLinks } from './links';
 import { useTranslation } from 'react-i18next';
 import { ILanguage } from './i18n';
-
+interface PastedImage {
+  src: string;
+  name: string;
+}
 const vscode =
   // @ts-expect-error
   typeof acquireVsCodeApi === 'function' ? acquireVsCodeApi() : null;
@@ -39,7 +42,7 @@ function App() {
   const [inputValue, setInputValue] = useState('');
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const [placeholder, setPlaceholder] = useState(t('placeholder'));
-
+  const [pastedImages, setPastedImages] = useState<PastedImage[]>([]);
   function changeLanguage(lang: ILanguage) {
     i18n.changeLanguage(lang);
   }
@@ -55,6 +58,16 @@ function App() {
   function updateInputValue(value: string) {
     setInputValue(value);
     localStorage.setItem('text', value);
+  }
+  function removeImage(index: number) {
+    setPastedImages((prevImages) => prevImages.filter((_, i) => i !== index));
+  }
+  function updateImageName(index: number, newName: string) {
+    setPastedImages((prevImages) =>
+      prevImages.map((img, i) =>
+        i === index ? { ...img, name: newName } : img
+      )
+    );
   }
 
   function playSound() {
@@ -77,6 +90,27 @@ function App() {
     localStorage.removeItem('text');
     inputRef.current?.focus();
   }
+
+  useEffect(() => {
+    // support input listen image paste
+    inputRef.current?.addEventListener('paste', (event) => {
+      const items = event.clipboardData?.items;
+      for (let item of items!) {
+        if (item.kind === 'file' && item.type.startsWith('image/')) {
+          const file = item.getAsFile();
+          const imgSrc = URL.createObjectURL(file!);
+          const imgName = file?.name || '未命名图片';
+          setPastedImages((prevImages) => [
+            ...prevImages,
+            {
+              src: imgSrc,
+              name: imgName,
+            },
+          ]);
+        }
+      }
+    });
+  }, []);
 
   useEffect(() => {
     if (localStorage.getItem('text')) {
@@ -142,6 +176,30 @@ function App() {
           <ContextMenuItem>Coming</ContextMenuItem>
         </ContextMenuContent>
       </ContextMenu>
+      <div className="flex gap-2 mt-2">
+        {pastedImages.map((image, index) => (
+          <div
+            key={index}
+            className="relative">
+            <img
+              src={image.src}
+              alt="Pasted Preview"
+              className="h-20 w-full object-cover"
+            />
+            <button
+              onClick={() => removeImage(index)}
+              className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1">
+              X
+            </button>
+            <input
+              type="text"
+              value={image.name}
+              onChange={(e) => updateImageName(index, e.target.value)}
+              className="mt-1 text-center text-sm border border-gray-300 rounded p-1 w-full"
+            />
+          </div>
+        ))}
+      </div>
 
       {/* https://talks.antfu.me/2024/vue-fes-japan/15?clicks=6 */}
       <Accordion
@@ -152,7 +210,7 @@ function App() {
             {t('relatedLinks')}
           </AccordionTrigger>
           <AccordionContent>
-            <div className="grid grid-cols-1 min-[540px]:grid-cols-2 md:grid-cols-3 gap-3 mt-4">
+            <div className="grid grid-cols-1 min-h-0:hidden min-[540px]:grid-cols-2 md:grid-cols-3 gap-3 mt-4">
               {cards.map((card) => (
                 <Card
                   className={`rounded-sm shadow-none border-none cursor-pointer ${card.class}`}
