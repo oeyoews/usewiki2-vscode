@@ -5,6 +5,10 @@
 
 > [usewiki2](https://github.com/oeyoews/usewiki2) 浏览器扩展的 的 vscode 插件
 
+<video controls>
+	<source src="https://github.com/oeyoews/usewiki2-vscode/raw/main/demo.mp4" type="video/mp4">
+</video>
+
 <!--
 * manage: https://marketplace.visualstudio.com/manage/publishers/oeyoews
 * publish: https://vscode.github.net.cn/api/working-with-extensions/publishing-extension
