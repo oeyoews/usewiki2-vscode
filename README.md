@@ -7,6 +7,7 @@
 
 <video controls>
 	<source src="https://github.com/oeyoews/usewiki2-vscode/raw/main/demo.mp4" type="video/mp4">
+	<source src="demo.mp4" type="video/mp4">
 </video>
 
 <!--
