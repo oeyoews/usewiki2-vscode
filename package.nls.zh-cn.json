@@ -9,5 +9,6 @@
 	"usewiki2.port": "端口号",
 	"usewiki2.enableHttps": "使用 Https",
 	"usewiki2.lang": "设置太微助手语言",
-	"usewiki2.type": "保存类型"
+	"usewiki2.type": "保存类型",
+	"usewiki2.enableMeteors": "开启流星特效"
 }

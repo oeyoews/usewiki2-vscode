@@ -9,5 +9,6 @@
 	"usewiki2.port": "Port",
 	"usewiki2.enableHttps": "Enable HTTPS",
 	"usewiki2.lang": "Setup Usewiki2 Language",
-	"usewiki2.type": "saved type"
+	"usewiki2.type": "saved type",
+	"usewiki2.enableMeteors": "Enable Meteors"
 }

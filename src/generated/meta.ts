@@ -42,6 +42,7 @@ export const commands = {
  * Type union of all configs
  */
 export type ConfigKey = 
+  | "usewiki2.enableMeteors"
   | "usewiki2.enableSendSound"
   | "usewiki2.defaultTag"
   | "usewiki2.defaultUsername"
@@ -52,6 +53,7 @@ export type ConfigKey =
   | "usewiki2.type"
 
 export interface ConfigKeyTypeMap {
+  "usewiki2.enableMeteors": boolean,
   "usewiki2.enableSendSound": boolean,
   "usewiki2.defaultTag": string,
   "usewiki2.defaultUsername": string,
@@ -63,6 +65,7 @@ export interface ConfigKeyTypeMap {
 }
 
 export interface ConfigShorthandMap {
+  enableMeteors: "usewiki2.enableMeteors",
   enableSendSound: "usewiki2.enableSendSound",
   defaultTag: "usewiki2.defaultTag",
   defaultUsername: "usewiki2.defaultUsername",
@@ -83,6 +86,16 @@ export interface ConfigItem<T extends keyof ConfigKeyTypeMap> {
  * Configs map registed by `oeyoews.usewiki2`
  */
 export const configs = {
+  /**
+   * %usewiki2.enableMeteors%
+   * @key `usewiki2.enableMeteors`
+   * @default `false`
+   * @type `boolean`
+   */
+  enableMeteors: {
+    key: "usewiki2.enableMeteors",
+    default: false,
+  } as ConfigItem<"usewiki2.enableMeteors">,
   /**
    * %usewiki2.enableSendSound.title%
    * @key `usewiki2.enableSendSound`
@@ -166,6 +179,7 @@ export const configs = {
 }
 
 export interface ScopedConfigKeyTypeMap {
+  "enableMeteors": boolean,
   "enableSendSound": boolean,
   "defaultTag": string,
   "defaultUsername": string,
@@ -179,6 +193,7 @@ export interface ScopedConfigKeyTypeMap {
 export const scopedConfigs = {
   scope: "usewiki2",
   defaults: {
+    "enableMeteors": false,
     "enableSendSound": false,
     "defaultTag": "Journal",
     "defaultUsername": "",

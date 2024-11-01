@@ -41,6 +41,7 @@ function App() {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const [placeholder, setPlaceholder] = useState(t('placeholder'));
   const [dark, setDark] = useState(false);
+  const [enableMeteors, setEnableMeteors] = useState(false);
 
   function changeLanguage(lang: ILanguage) {
     i18n.changeLanguage(lang);
@@ -79,6 +80,18 @@ function App() {
     localStorage.removeItem('text');
     inputRef.current?.focus();
   }
+
+  useEffect(() => {
+    messenger.send('enableMeteors');
+    messenger.on('enableMeteors', ({ text }) => {
+      console.log('enableMeteors', text);
+      if (text === true) {
+        setEnableMeteors(true);
+      } else {
+        setEnableMeteors(false);
+      }
+    });
+  }, []);
 
   useEffect(() => {
     if (localStorage.getItem('text')) {
@@ -167,8 +180,7 @@ function App() {
         </ContextMenuContent>
       </ContextMenu>
       {/* meeteors */}
-      {/* TODO: 添加开关配置 */}
-      {dark && (
+      {dark && enableMeteors && (
         <div className="flex w-full flex-col items-center justify-center overflow-hidden pointer-events-none">
           <Meteors number={20} />
         </div>

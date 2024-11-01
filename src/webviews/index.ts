@@ -1,7 +1,7 @@
 import sendTiddler from '../sendTiddler';
 import * as openWikiCmd from '../commands/openWikiCmd';
 import { WebviewMessenger } from '../utils/extensionMessenger';
-import { enableSendSound, getLang } from '../config';
+import { enableMeteors, enableSendSound, getLang } from '../config';
 import { showLanguagePicker } from './showLangPicker';
 import {
   Uri,
@@ -38,9 +38,21 @@ export class usewikiViewProvider implements WebviewViewProvider {
       localResourceRoots: [this._extensionUri],
     };
 
+    const messenger = new WebviewMessenger({ context: this._view });
     webviewView.webview.html = this.getWebviewContent(webviewView.webview);
 
+    messenger.on('enableMeteors', () => {
+      messenger.send('enableMeteors', { text: enableMeteors() });
+    });
+
     workspace.onDidChangeConfiguration((e) => {
+      // switch meteors
+      if (e.affectsConfiguration('usewiki2.enableMeteors')) {
+        messenger.send('enableMeteors', {
+          text: enableMeteors(),
+        });
+      }
+      // lang switch
       if (e.affectsConfiguration('usewiki2.lang')) {
         messenger.send('changeLanguage', { text: getLang() });
         // 全局刷新, 但是需要webview 主动检查语言配置
@@ -48,7 +60,6 @@ export class usewikiViewProvider implements WebviewViewProvider {
       }
     });
 
-    const messenger = new WebviewMessenger({ context: this._view });
     this._messenger = messenger;
     messenger.on('changeTheme', () => {
       this.checkTheme();

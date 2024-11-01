@@ -5,6 +5,7 @@ export const config = () => workspace.getConfiguration('usewiki2');
 export const enableSendSound = () => config().get('enableSendSound', false);
 
 export const enableHttps = () => config().get('enableHttps', false);
+export const enableMeteors = () => config().get('enableMeteors', false);
 export const defaultTag = () => config().get('defaultTag', 'Journal');
 export const defaultUsername = () => config().get('defaultUsername', '');
 export const getLang = () => config().get('lang', 'en');
