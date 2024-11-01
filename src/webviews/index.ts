@@ -7,16 +7,20 @@ import {
   Uri,
   workspace,
   env,
+  window,
+  ColorTheme,
   type Webview,
   type WebviewView,
   type WebviewViewResolveContext,
   type CancellationToken,
   type ExtensionContext,
   type WebviewViewProvider,
+  ColorThemeKind,
 } from 'vscode';
 
 export class usewikiViewProvider implements WebviewViewProvider {
   private _view?: WebviewView;
+  private _messenger?: WebviewMessenger;
   constructor(
     private context: ExtensionContext,
     private _extensionUri = context.extensionUri
@@ -45,6 +49,18 @@ export class usewikiViewProvider implements WebviewViewProvider {
     });
 
     const messenger = new WebviewMessenger({ context: this._view });
+    this._messenger = messenger;
+    this.checkTheme();
+    window.onDidChangeActiveColorTheme((theme) => {
+      const themeKind = theme.kind;
+      if (themeKind === ColorThemeKind.Dark) {
+        messenger.send('changeTheme', { text: 'dark' });
+      } else if (themeKind === ColorThemeKind.Light) {
+        messenger.send('changeTheme', { text: 'light' });
+      } else {
+        messenger.send('changeTheme', { text: 'high-contrast' });
+      }
+    });
 
     messenger.send('changeLanguage', { text: getLang() });
     messenger.on('showVsCodeLanguageInputBox', async () => {
@@ -67,6 +83,18 @@ export class usewikiViewProvider implements WebviewViewProvider {
       });
     });
   }
+  // 初始化时检查当前主题模式
+  private checkTheme() {
+    const themeKind = window.activeColorTheme.kind;
+    if (themeKind === ColorThemeKind.Dark) {
+      this._messenger?.send('changeTheme', { text: 'dark' });
+    } else if (themeKind === ColorThemeKind.Light) {
+      this._messenger?.send('changeTheme', { text: 'light' });
+    } else {
+      this._messenger?.send('changeTheme', { text: 'high-contrast' });
+    }
+  }
+
   private getWebviewContent(webview: Webview) {
     const scriptUri = webview.asWebviewUri(
       Uri.joinPath(this._extensionUri, 'react-dist', 'main.js')

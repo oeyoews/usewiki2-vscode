@@ -26,6 +26,7 @@ import { WebviewMessenger } from './utils/WebViewMessenger';
 import { getLinks } from './links';
 import { useTranslation } from 'react-i18next';
 import { ILanguage } from './i18n';
+import Meteors from './components/ui/meteors';
 
 const vscode =
   // @ts-expect-error
@@ -39,6 +40,7 @@ function App() {
   const [inputValue, setInputValue] = useState('');
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const [placeholder, setPlaceholder] = useState(t('placeholder'));
+  const [dark, setDark] = useState(false);
 
   function changeLanguage(lang: ILanguage) {
     i18n.changeLanguage(lang);
@@ -84,6 +86,19 @@ function App() {
     }
   }, []);
 
+  // theme
+  useEffect(() => {
+    // 监听theme变化
+    messenger.on('changeTheme', (data) => {
+      console.log(data, 'changeTheme');
+      if (data.text === 'dark') {
+        setDark(true);
+      } else {
+        setDark(false);
+      }
+    });
+  }, []);
+
   useEffect(() => {
     messenger.on('playSound', () => {
       playSound();
@@ -124,7 +139,7 @@ function App() {
   // }
 
   return (
-    <div className="relative h-screen p-3 antialiased">
+    <div className="relative h-screen p-3 antialiased overflow-hidden">
       <h1 className="text-xl font-bold">
         {t('app_name')}
         <img
@@ -142,7 +157,13 @@ function App() {
           <ContextMenuItem>Coming</ContextMenuItem>
         </ContextMenuContent>
       </ContextMenu>
-
+      {/* meeteors */}
+      {/* TODO: 添加开关配置 */}
+      {dark && (
+        <div className="flex w-full flex-col items-center justify-center overflow-hidden pointer-events-none">
+          <Meteors number={20} />
+        </div>
+      )}
       {/* https://talks.antfu.me/2024/vue-fes-japan/15?clicks=6 */}
       <Accordion
         type="single"
@@ -175,7 +196,6 @@ function App() {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
-
       <div className="absolute inset-x-3 bottom-3 flex flex-col gap-2 p-0">
         <Textarea
           ref={inputRef}

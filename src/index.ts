@@ -3,7 +3,12 @@ import { usewikiViewProvider } from './webviews';
 import * as openWiki from './commands/openWikiCmd';
 import * as wikiInfo from './commands/wikiInfo';
 import * as opensetting from './commands/openSettings';
-import { type ExtensionContext, window, commands } from 'vscode';
+import {
+  type ExtensionContext,
+  window,
+  commands,
+  ColorThemeKind,
+} from 'vscode';
 
 // import * as usewikiCmd from './commands/usewikiCmd';
 // import * as refreshWiki from './commands/refreshWiki';
