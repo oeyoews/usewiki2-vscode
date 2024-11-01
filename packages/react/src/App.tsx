@@ -27,6 +27,7 @@ import { getLinks } from './links';
 import { useTranslation } from 'react-i18next';
 import { ILanguage } from './i18n';
 import Meteors from './components/ui/meteors';
+import SparklesText from './components/ui/sparkles-text';
 
 const vscode =
   // @ts-expect-error
@@ -150,7 +151,11 @@ function App() {
   return (
     <div className="relative h-screen p-3 antialiased overflow-hidden">
       <h1 className="text-xl font-bold">
-        {t('app_name')}
+        <SparklesText
+          text={t('app_name')}
+          className="inline"
+          sparklesCount={4}
+        />
         <img
           src={twsvg}
           className="inline align-baseline mx-1"
