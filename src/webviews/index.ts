@@ -50,7 +50,9 @@ export class usewikiViewProvider implements WebviewViewProvider {
 
     const messenger = new WebviewMessenger({ context: this._view });
     this._messenger = messenger;
-    this.checkTheme();
+    messenger.on('changeTheme', () => {
+      this.checkTheme();
+    });
     window.onDidChangeActiveColorTheme((theme) => {
       const themeKind = theme.kind;
       if (themeKind === ColorThemeKind.Dark) {

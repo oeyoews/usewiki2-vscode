@@ -89,8 +89,17 @@ function App() {
   // theme
   useEffect(() => {
     // 监听theme变化
+    // @NOTE： changetheme 只会在第一次插件初始化时（区别于webview初始化时）触发
+    // messenger.on('changeTheme', (data) => {
+    //   if (data.text === 'dark') {
+    //     setDark(true);
+    //   } else {
+    //     setDark(false);
+    //   }
+    // });
+    // 主动进行通信解决非初始化不处罚changetheme事件问题
+    messenger.send('changeTheme');
     messenger.on('changeTheme', (data) => {
-      console.log(data, 'changeTheme');
       if (data.text === 'dark') {
         setDark(true);
       } else {
