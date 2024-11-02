@@ -27,6 +27,7 @@ import { getLinks } from './links';
 import { useTranslation } from 'react-i18next';
 import { ILanguage } from './i18n';
 import Meteors from './components/ui/meteors';
+import bannerLogo from '/banner.svg';
 
 const vscode =
   // @ts-expect-error
@@ -162,6 +163,10 @@ function App() {
 
   return (
     <div className="relative h-screen p-3 antialiased overflow-hidden">
+      <img
+        src={bannerLogo}
+        className="absolute top-3 left-3 size-14"
+      />
       <h1 className="text-xl font-bold">
         {t('app_name')}
         <img
@@ -197,6 +202,7 @@ function App() {
             <div className="grid grid-cols-1 min-[540px]:grid-cols-2 md:grid-cols-3 gap-3 mt-4">
               {cards.map((card) => (
                 <Card
+                  key={card.title}
                   className={`rounded-sm shadow-none border-none cursor-pointer ${card.class}`}
                   onClick={() => openLink(card.link)}>
                   <CardHeader className="p-3">
