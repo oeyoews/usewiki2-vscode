@@ -81,6 +81,9 @@ pnpm install
 pnpm dev ## and press `F5` to debug
 ```
 
+> [!WARNING]
+> if your update app.tsx, you should run `pnpm build` first on packages/react
+
 <!-- * configuration: https://code.visualstudio.com/api/references/contribution-points#contributes.configuration -->
 
 <!-- ## Credits
