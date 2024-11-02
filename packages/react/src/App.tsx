@@ -162,6 +162,12 @@ function App() {
 
   return (
     <div className="relative h-screen p-3 antialiased overflow-hidden">
+      {/* meeteors */}
+      {dark && enableMeteors && (
+        <div className="absolute h-24 top-0 flex w-full flex-col items-center justify-center overflow-hidden pointer-events-none">
+          <Meteors number={20} />
+        </div>
+      )}
       <h1 className="text-xl font-bold">
         {t('app_name')}
         <img
@@ -179,12 +185,6 @@ function App() {
           <ContextMenuItem>Coming</ContextMenuItem>
         </ContextMenuContent>
       </ContextMenu>
-      {/* meeteors */}
-      {dark && enableMeteors && (
-        <div className="flex w-full flex-col items-center justify-center overflow-hidden pointer-events-none">
-          <Meteors number={20} />
-        </div>
-      )}
       {/* https://talks.antfu.me/2024/vue-fes-japan/15?clicks=6 */}
       <Accordion
         type="single"
