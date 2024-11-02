@@ -2,5 +2,8 @@
 	"Setup Language": "设置太微助手语言",
 	"Select Language": "选择语言",
 	"Undo": "撤回",
-	"Undo And Edit": "重新编辑","Successfully Undone":"已成功撤回"
+	"Undo And Edit": "重新编辑",
+	"Successfully Undone": "已成功撤回",
+	"Successfully Sent": "已成功发送:",
+	"Send Failed": "发送失败:"
 }

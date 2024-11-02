@@ -56,7 +56,10 @@ export default async function sendTiddler(
     });
 
     if (response.status === 204) {
-      notify(`发送成功(${title})`, 'info', [UNDO, UNDOEDIT]).then((data) => {
+      notify(`${l10n.t('Successfully Sent')}(${title})`, 'info', [
+        UNDO,
+        UNDOEDIT,
+      ]).then((data) => {
         if (data === UNDO) {
           undoSendTiddler();
         } else if (data === UNDOEDIT) {
@@ -65,7 +68,7 @@ export default async function sendTiddler(
         }
       });
     } else {
-      notify('发送失败', 'error');
+      notify(l10n.t('Send Failed'), 'error');
     }
   } catch (error) {
     notify((error as Error).message, 'error');
