@@ -86,14 +86,14 @@
         "usewiki2.ip": {
           "order": 0,
           "type": "string",
-          "default": "127.0.0.1",
+          "default": "",
           "title": "%usewiki2.ip.title%",
           "description": "%usewiki2.ip.description%"
         },
         "usewiki2.port": {
           "order": 1,
           "type": "number",
-          "default": 8080,
+          "default": 0,
           "title": "%usewiki2.port.title%",
           "description": "%usewiki2.port.description%"
         },
@@ -129,13 +129,15 @@
       "view/title": [
         {
           "command": "usewiki2.opensettings",
-          "group": "navigation@1",
+          "group": "navigation",
           "when": "view == usewiki2.sidebar"
-        },
+        }
+      ],
+      "editor/title": [
         {
-          "command": "usewiki2.showHint",
-          "group": "navigation@2",
-          "when": "view == usewiki2.sidebar"
+          "command": "usewiki2.sendToWiki",
+          "group": "navigation",
+          "when": "resourceScheme == usewiki-compose"
         }
       ]
     },
@@ -201,6 +203,8 @@
   "activationEvents": [
     "onCommand:usewiki2.openComposer",
     "onCommand:usewiki2.sendToWiki",
+    "onFileSystem:usewiki-compose",
+    "onStartupFinished",
     "onView:usewiki2.sidebar"
   ],
   "icon": "res/tiddlywiki01.png",

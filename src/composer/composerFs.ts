@@ -1,6 +1,7 @@
 /**
  * 虚拟文件系统 `usewiki-compose:`：单文件草稿，内容持久化到 globalState。
- * 路径名（中/英）在 getComposerUri 中按 VS Code 界面语言切换。
+ * 标签固定为 `新条目.md` / `New tiddler.md`（随 VS Code 界面语言）。
+ * 任意 `usewiki-compose:` 路径均映射同一缓冲（兼容重载后旧标签路径）。
  */
 import {
   EventEmitter,
@@ -14,24 +15,16 @@ import {
   type FileSystemProvider,
   type Disposable,
 } from "vscode";
-import en from "../../l10n/bundle.l10n.json";
-import zhCN from "../../l10n/bundle.l10n.zh-cn.json";
 import { t } from "../localize";
 
 const DRAFT_KEY = "usewiki2.composerDraft";
 
-/** 历史版本可能用过不同文件名，打开/判断 URI 时都认作同一草稿。 */
-const composerPaths = new Set(
-  [en["composer.fileName"], zhCN["composer.fileName"]].map((name) => `/${name}`),
-);
-
-/** 当前语言下的草稿 URI（仅应存在其中一个路径的标签页）。 */
 export function getComposerUri(): Uri {
   return Uri.from({ scheme: "usewiki-compose", path: `/${t("composer.fileName")}` });
 }
 
 export function isComposerUri(uri: Uri): boolean {
-  return uri.scheme === "usewiki-compose" && composerPaths.has(uri.path);
+  return uri.scheme === "usewiki-compose";
 }
 
 export class ComposerFileSystemProvider implements FileSystemProvider {
@@ -55,6 +48,12 @@ export class ComposerFileSystemProvider implements FileSystemProvider {
   setText(value: string): void {
     this.text = value;
     void this.context.globalState.update(DRAFT_KEY, value);
+    this.changeEmitter.fire([{ type: FileChangeType.Changed, uri: getComposerUri() }]);
+  }
+
+  clearDraft(): void {
+    this.text = "";
+    void this.context.globalState.update(DRAFT_KEY, "");
     this.changeEmitter.fire([{ type: FileChangeType.Changed, uri: getComposerUri() }]);
   }
 

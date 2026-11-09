@@ -1,4 +1,4 @@
-/** 打开或聚焦虚拟草稿文档（由 ComposerSession 处理分列与占位）。 */
+/** 打开固定「新条目」草稿（不要求先填标题）。 */
 import type { ComposerSession } from "../composer/composerSession";
 
 let session: ComposerSession | undefined;
@@ -10,5 +10,5 @@ export function bindComposer(s: ComposerSession) {
 export const name = "usewiki2.openComposer";
 
 export async function cli() {
-  await session?.open();
+  await session?.openNew();
 }

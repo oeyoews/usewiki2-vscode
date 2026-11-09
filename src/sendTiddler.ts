@@ -1,26 +1,60 @@
 /**
  * 向 Node.js TiddlyWiki 写入 tiddler：`PUT /recipes/default/tiddlers/{title}`。
- * 成功后通知支持撤回（DELETE）或撤回并恢复草稿编辑。
+ * 保存前检查同名条目；成功后通知可提供「撤回重写」（DELETE + 恢复草稿）。
  */
 import { notify } from "./notify";
-import { defaultTag, getPort, getIp, defaultUsername, getType, enableHttps } from "./config";
+import { defaultTag, defaultUsername, getType } from "./config";
 import { t } from "./localize";
+import { tiddlerExists, tiddlerRecipeUrl, tiddlerBagDeleteUrl, TW_HEADERS } from "./tiddlerApi";
+import { askTiddlerTitleOnSend, draftTemplateForTitle } from "./tiddlerTitle";
+import { window } from "vscode";
 
 type SendTiddlerHooks = {
-  onUndoEdit?: (text: string) => void;
+  onUndoEdit?: (draft: string) => void;
 };
 
-export default async function sendTiddler(text: string, hooks?: SendTiddlerHooks) {
+/** @returns 是否已成功保存（用户取消覆盖或失败时为 false） */
+export default async function sendTiddler(
+  title: string,
+  text: string,
+  hooks?: SendTiddlerHooks,
+): Promise<boolean> {
   const onUndoEdit = hooks?.onUndoEdit;
-  const UNDO = t("Undo");
-  const UNDOEDIT = t("Undo And Edit");
-  const port = getPort();
-  const ip = getIp();
-  const protocal = enableHttps() ? "https" : "http";
+  const UNDO_REWRITE = t("Undo And Rewrite");
+  const OVERWRITE = t("composer.titleOverwrite");
+  const EDIT_TITLE = t("composer.titleEdit");
 
-  // 标题：ISO 日期前缀 + 随机后缀，降低碰撞概率
-  const random = Math.random().toString(36).slice(2);
-  let title = new Date().toISOString().split("T")[0].replace("-", "/") + "-" + random;
+  let resolvedTitle = title;
+
+  try {
+    while (await tiddlerExists(resolvedTitle)) {
+      // showWarningMessage 自带「取消」，勿再传取消项，否则会出现两个取消按钮
+      const choice = await window.showWarningMessage(
+        `${t("composer.titleExists")}「${resolvedTitle}」`,
+        { modal: true },
+        OVERWRITE,
+        EDIT_TITLE,
+      );
+      if (choice === EDIT_TITLE) {
+        const next = await askTiddlerTitleOnSend(resolvedTitle);
+        if (!next) {
+          return false;
+        }
+        resolvedTitle = next;
+        continue;
+      }
+      if (choice !== OVERWRITE) {
+        return false;
+      }
+      break;
+    }
+  } catch (error) {
+    notify((error as Error).message, "error");
+    return false;
+  }
+
+  const restoreDraft = draftTemplateForTitle(resolvedTitle, text);
+
   const time = new Date().toISOString().split(".").shift()!.replace(/\D/g, "");
   const tiddler: ITiddler = {
     created: time,
@@ -29,27 +63,25 @@ export default async function sendTiddler(text: string, hooks?: SendTiddlerHooks
     creator: defaultUsername(),
     type: getType(),
     text,
-    title,
+    title: resolvedTitle,
   };
 
-  const url = `${protocal}://${ip}:${port}/recipes/default/tiddlers/${title}`;
+  const url = tiddlerRecipeUrl(resolvedTitle);
   const headers = {
     "Content-Type": "application/json",
-    "x-requested-with": "TiddlyWiki",
+    ...TW_HEADERS,
   };
 
-  async function undoSendTiddler() {
-    const url = `${protocal}://${ip}:${port}/bags/default/tiddlers/${title}`;
-
-    const response = await fetch(url, {
+  async function undoAndRewrite() {
+    const deleteUrl = tiddlerBagDeleteUrl(resolvedTitle);
+    const response = await fetch(deleteUrl, {
       method: "DELETE",
-      headers,
+      headers: TW_HEADERS,
     });
-
     if (response.status === 204) {
-      notify(`${t("Successfully Undone")}(${title})`, "info");
+      onUndoEdit?.(restoreDraft);
     } else {
-      notify(`撤回失败${title}`, "error");
+      notify(`撤回失败${resolvedTitle}`, "error");
     }
   }
 
@@ -61,17 +93,15 @@ export default async function sendTiddler(text: string, hooks?: SendTiddlerHooks
     });
 
     if (response.status === 204) {
-      notify(`${t("Successfully Sent")}(${title})`, "info", [UNDO, UNDOEDIT]).then((data) => {
-        if (data === UNDO) {
-          undoSendTiddler();
-        } else if (data === UNDOEDIT) {
-          void undoSendTiddler();
-          onUndoEdit?.(text);
+      notify(`${t("Successfully Sent")}(${resolvedTitle})`, "info", [UNDO_REWRITE]).then((data) => {
+        if (data === UNDO_REWRITE) {
+          void undoAndRewrite();
         }
       });
-    } else {
-      notify(t("Send Failed"), "error");
+      return true;
     }
+    notify(t("Send Failed"), "error");
+    return false;
   } catch (error) {
     notify((error as Error).message, "error");
     throw Error((error as Error).message);

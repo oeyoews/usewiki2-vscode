@@ -3,6 +3,7 @@
  */
 import { getComposerUri, isComposerUri, type ComposerFileSystemProvider } from "./composerFs";
 import { refreshComposerPlaceholder } from "./composerPlaceholder";
+import { splitFirstLineTitle } from "../tiddlerTitle";
 import {
   TabInputText,
   window,
@@ -16,13 +17,19 @@ import {
 export class ComposerSession {
   constructor(private readonly fs: ComposerFileSystemProvider) {}
 
+  /** 打开空草稿（固定「新条目」标签）。 */
+  async openNew(): Promise<void> {
+    this.fs.clearDraft();
+    await this.open();
+  }
+
   async open(content?: string) {
     if (content !== undefined) {
-      this.fs.setText(content);
+      const { text } = splitFirstLineTitle(content);
+      this.fs.setText(text);
     }
 
     const uri = getComposerUri();
-    // 切换界面语言后关闭旧文件名的标签，避免同一份草稿开两个 URI
     await closeComposerTabsExcept(uri);
 
     const doc = await workspace.openTextDocument(uri);
@@ -37,7 +44,6 @@ export class ComposerSession {
     if (tabOpen) {
       editor = await window.showTextDocument(doc, { preview: false, preserveFocus: false });
     } else {
-      // 首次打开占一侧栏位；已在该标签内则保持当前列
       const beside =
         window.activeTextEditor?.document.uri.toString() === uri.toString()
           ? ViewColumn.Active
@@ -53,7 +59,6 @@ export class ComposerSession {
     refreshComposerPlaceholder(editor);
   }
 
-  /** 优先读可见编辑器缓冲，以便未保存的编辑也能发送。 */
   getDraftText(): string {
     const editor = window.visibleTextEditors.find((e) => isComposerUri(e.document.uri));
     if (editor) {
@@ -63,11 +68,12 @@ export class ComposerSession {
   }
 
   async clearAfterSend() {
-    this.fs.setText("");
+    this.fs.clearDraft();
   }
 
   async restoreAfterUndoEdit(text: string) {
-    await this.open(text);
+    const { text: body } = splitFirstLineTitle(text);
+    await this.open(body);
   }
 }
 
