@@ -1,26 +1,24 @@
-import { config, getLang } from '../config';
-import { l10n, window, type QuickPickItem } from 'vscode';
+import { config, getLang } from "../config";
+import { l10n, window, type QuickPickItem } from "vscode";
 
-import { WebviewMessenger } from '../utils/extensionMessenger';
+import { WebviewMessenger } from "../utils/extensionMessenger";
 
-export async function showLanguagePicker(messenger: WebviewMessenger) {
+export async function showLanguagePicker(_messenger: WebviewMessenger) {
   const langOptions: QuickPickItem[] = [
-    { label: 'English', description: 'en' },
-    { label: '中文', description: 'zhCN' },
+    { label: "English", description: "en" },
+    { label: "中文", description: "zhCN" },
   ];
 
   // 存储原始语言设置，用于恢复
   const originalLanguage = getLang(); // 自定义函数，假设获取当前语言
-  const activeItemIndex = langOptions.findIndex(
-    (opt) => opt.description === originalLanguage
-  );
+  const activeItemIndex = langOptions.findIndex((opt) => opt.description === originalLanguage);
 
   // 创建自定义 QuickPick
   const quickPick = window.createQuickPick();
   quickPick.items = langOptions;
 
-  quickPick.title = l10n.t('Setup Language');
-  quickPick.placeholder = l10n.t('Select Language');
+  quickPick.title = l10n.t("Setup Language");
+  quickPick.placeholder = l10n.t("Select Language");
   quickPick.activeItems = [langOptions[activeItemIndex]];
 
   // TODO: selection 不起作用， 用active 的话accept 的时候也会触发active 事件
@@ -41,7 +39,11 @@ export async function showLanguagePicker(messenger: WebviewMessenger) {
   // 确认选择并应用
   quickPick.onDidAccept(() => {
     const selectedLanguage = quickPick.selectedItems[0].description;
-    config().update('lang', selectedLanguage, true);
+    config().update("lang", selectedLanguage, true);
+    quickPick.hide();
+  });
+
+  quickPick.onDidHide(() => {
     quickPick.dispose();
   });
 

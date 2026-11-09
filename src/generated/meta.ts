@@ -2,23 +2,20 @@
 // @see https://github.com/antfu/vscode-ext-gen
 
 // Meta info
-export const publisher = "oeyoews"
-export const name = "usewiki2"
-export const version = "2.8.4"
-export const displayName = "usewiki2"
-export const description = undefined
-export const extensionId = `${publisher}.${name}`
+export const publisher = "oeyoews";
+export const name = "usewiki2";
+export const version = "2.8.4";
+export const displayName = "usewiki2";
+export const description = undefined;
+export const extensionId = `${publisher}.${name}`;
 
 /**
  * Type union of all commands
  */
-export type CommandKey = 
-  | "usewiki2.wikiinfo"
-  | "usewiki2.openwiki"
-  | "usewiki2.opensettings"
+export type CommandKey = "usewiki2.wikiinfo" | "usewiki2.openwiki" | "usewiki2.opensettings";
 
 /**
- * Commands map registed by `oeyoews.usewiki2`
+ * Commands map registered by `oeyoews.usewiki2`
  */
 export const commands = {
   /**
@@ -36,12 +33,12 @@ export const commands = {
    * @value `usewiki2.opensettings`
    */
   opensettings: "usewiki2.opensettings",
-} satisfies Record<string, CommandKey>
+} satisfies Record<string, CommandKey>;
 
 /**
  * Type union of all configs
  */
-export type ConfigKey = 
+export type ConfigKey =
   | "usewiki2.enableMeteors"
   | "usewiki2.enableSendSound"
   | "usewiki2.defaultTag"
@@ -50,40 +47,51 @@ export type ConfigKey =
   | "usewiki2.port"
   | "usewiki2.enableHttps"
   | "usewiki2.lang"
-  | "usewiki2.type"
+  | "usewiki2.type";
 
 export interface ConfigKeyTypeMap {
-  "usewiki2.enableMeteors": boolean,
-  "usewiki2.enableSendSound": boolean,
-  "usewiki2.defaultTag": string,
-  "usewiki2.defaultUsername": string,
-  "usewiki2.ip": string,
-  "usewiki2.port": number,
-  "usewiki2.enableHttps": boolean,
-  "usewiki2.lang": ("en" | "zhCN"),
-  "usewiki2.type": ("text/markdown" | "text/vnd.tiddlywiki"),
+  "usewiki2.enableMeteors": boolean;
+  "usewiki2.enableSendSound": boolean;
+  "usewiki2.defaultTag": string;
+  "usewiki2.defaultUsername": string;
+  "usewiki2.ip": string;
+  "usewiki2.port": number;
+  "usewiki2.enableHttps": boolean;
+  "usewiki2.lang": "en" | "zhCN";
+  "usewiki2.type": "text/markdown" | "text/vnd.tiddlywiki";
 }
 
 export interface ConfigShorthandMap {
-  enableMeteors: "usewiki2.enableMeteors",
-  enableSendSound: "usewiki2.enableSendSound",
-  defaultTag: "usewiki2.defaultTag",
-  defaultUsername: "usewiki2.defaultUsername",
-  ip: "usewiki2.ip",
-  port: "usewiki2.port",
-  enableHttps: "usewiki2.enableHttps",
-  lang: "usewiki2.lang",
-  type: "usewiki2.type",
+  enableMeteors: "usewiki2.enableMeteors";
+  enableSendSound: "usewiki2.enableSendSound";
+  defaultTag: "usewiki2.defaultTag";
+  defaultUsername: "usewiki2.defaultUsername";
+  ip: "usewiki2.ip";
+  port: "usewiki2.port";
+  enableHttps: "usewiki2.enableHttps";
+  lang: "usewiki2.lang";
+  type: "usewiki2.type";
+}
+
+export interface ConfigShorthandTypeMap {
+  enableMeteors: boolean;
+  enableSendSound: boolean;
+  defaultTag: string;
+  defaultUsername: string;
+  ip: string;
+  port: number;
+  enableHttps: boolean;
+  lang: "en" | "zhCN";
+  type: "text/markdown" | "text/vnd.tiddlywiki";
 }
 
 export interface ConfigItem<T extends keyof ConfigKeyTypeMap> {
-  key: T,
-  default: ConfigKeyTypeMap[T],
+  key: T;
+  default: ConfigKeyTypeMap[T];
 }
 
-
 /**
- * Configs map registed by `oeyoews.usewiki2`
+ * Configs map registered by `oeyoews.usewiki2`
  */
 export const configs = {
   /**
@@ -176,32 +184,57 @@ export const configs = {
     key: "usewiki2.type",
     default: "text/vnd.tiddlywiki",
   } as ConfigItem<"usewiki2.type">,
-}
+};
 
 export interface ScopedConfigKeyTypeMap {
-  "enableMeteors": boolean,
-  "enableSendSound": boolean,
-  "defaultTag": string,
-  "defaultUsername": string,
-  "ip": string,
-  "port": number,
-  "enableHttps": boolean,
-  "lang": ("en" | "zhCN"),
-  "type": ("text/markdown" | "text/vnd.tiddlywiki"),
+  enableMeteors: boolean;
+  enableSendSound: boolean;
+  defaultTag: string;
+  defaultUsername: string;
+  ip: string;
+  port: number;
+  enableHttps: boolean;
+  lang: "en" | "zhCN";
+  type: "text/markdown" | "text/vnd.tiddlywiki";
 }
 
 export const scopedConfigs = {
   scope: "usewiki2",
   defaults: {
-    "enableMeteors": false,
-    "enableSendSound": false,
-    "defaultTag": "Journal",
-    "defaultUsername": "",
-    "ip": "127.0.0.1",
-    "port": 8080,
-    "enableHttps": false,
-    "lang": "en",
-    "type": "text/vnd.tiddlywiki",
+    enableMeteors: false,
+    enableSendSound: false,
+    defaultTag: "Journal",
+    defaultUsername: "",
+    ip: "127.0.0.1",
+    port: 8080,
+    enableHttps: false,
+    lang: "en",
+    type: "text/vnd.tiddlywiki",
   } satisfies ScopedConfigKeyTypeMap,
+};
+
+export interface NestedConfigs {
+  usewiki2: {
+    enableMeteors: boolean;
+    enableSendSound: boolean;
+    defaultTag: string;
+    defaultUsername: string;
+    ip: string;
+    port: number;
+    enableHttps: boolean;
+    lang: "en" | "zhCN";
+    type: "text/markdown" | "text/vnd.tiddlywiki";
+  };
 }
 
+export interface NestedScopedConfigs {
+  enableMeteors: boolean;
+  enableSendSound: boolean;
+  defaultTag: string;
+  defaultUsername: string;
+  ip: string;
+  port: number;
+  enableHttps: boolean;
+  lang: "en" | "zhCN";
+  type: "text/markdown" | "text/vnd.tiddlywiki";
+}

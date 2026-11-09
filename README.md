@@ -1,6 +1,7 @@
 # Usewiki2
 
 ![alt text](https://github.com/oeyoews/usewiki2-vscode/raw/main/banner.png)
+
 > TiddlyWiki AnyWhere. 快速发送文本保存到Tiddlywiki, 随时随地记录下你的想法.
 
 > [usewiki2](https://github.com/oeyoews/usewiki2) 浏览器扩展的 的 vscode 插件
@@ -20,28 +21,27 @@
 
 ## prerequisites
 
-* vscode
+- vscode
 
 > [!WARNING]
 > 你必须有一个可以在线或本地访问nodejs tiddlywiki实例.
 
 ## Features
 
-* 快速发送文本到 TiddlyWiki
-* 配置丰富
-* 支持声音提示
-* 支持消息撤回编辑
-* i18n 支持
-* ...
-
+- 快速发送文本到 TiddlyWiki
+- 配置丰富
+- 支持声音提示
+- 支持消息撤回编辑
+- i18n 支持
+- ...
 
 ## Install
 
-* 直接在vscode 的扩展里面搜索 `usewiki2` 或者直接点击 [安装](https://marketplace.visualstudio.com/items?itemName=oeyoews.usewiki2) 即可
+- 直接在vscode 的扩展里面搜索 `usewiki2` 或者直接点击 [安装](https://marketplace.visualstudio.com/items?itemName=oeyoews.usewiki2) 即可
 
 ## Usage
 
-* 点击侧边栏出现的小猫图片， 点击右上方的齿轮图标， 请先配置你的TiddlyWiki地址.
+- 点击侧边栏出现的小猫图片， 点击右上方的齿轮图标， 请先配置你的TiddlyWiki地址.
 
 ## Commands
 
@@ -59,16 +59,17 @@
 
 <!-- configs -->
 
-| Key                        | Description                                                                                    | Type      | Default                                   |
-| -------------------------- | ---------------------------------------------------------------------------------------------- | --------- | ----------------------------------------- |
-| `usewiki2.enableSendSound` | 启用发送声音                                                                                         | `boolean` | `false`                                   |
-| `usewiki2.placeholder`     | 默认提示符                                                                                          | `string`  | `"Write something... Ctrl+Enter to save"` |
-| `usewiki2.defaultTag`      | 默认标签                                                                                           | `string`  | `"Journal"`                               |
-| `usewiki2.defaultUsername` | 默认用户名                                                                                          | `string`  | `""`                                      |
+| Key                        | Description                                                                                                   | Type      | Default                                   |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------- | --------- | ----------------------------------------- |
+| `usewiki2.enableSendSound` | 启用发送声音                                                                                                  | `boolean` | `false`                                   |
+| `usewiki2.placeholder`     | 默认提示符                                                                                                    | `string`  | `"Write something... Ctrl+Enter to save"` |
+| `usewiki2.defaultTag`      | 默认标签                                                                                                      | `string`  | `"Journal"`                               |
+| `usewiki2.defaultUsername` | 默认用户名                                                                                                    | `string`  | `""`                                      |
 | `usewiki2.ip`              | 你的TiddlyWiki地址 (请确定你已经启动了[太微](https://tiddlywiki.com/#Installing%20TiddlyWiki%20on%20Node.js)) | `string`  | `"127.0.0.1"`                             |
-| `usewiki2.port`            | 端口 (请确定你已经启动了太微)                                                                               | `number`  | `8080`                                    |
-| `usewiki2.enableHttps`     | Enable or Disable HTTPS(untest for https)                                                      | `boolean` | `false`                                   |
-| `usewiki2.type`            | 选择要使用的文本格式 (Markdown 或 TiddlyWiki)                                                             | `string`  | `"text/vnd.tiddlywiki"`                   |
+| `usewiki2.port`            | 端口 (请确定你已经启动了太微)                                                                                 | `number`  | `8080`                                    |
+| `usewiki2.enableHttps`     | Enable or Disable HTTPS(untest for https)                                                                     | `boolean` | `false`                                   |
+| `usewiki2.type`            | 选择要使用的文本格式 (Markdown 或 TiddlyWiki)                                                                 | `string`  | `"text/vnd.tiddlywiki"`                   |
+
 <!-- ## TODO
 
 * [ ] 加入条目标题配置, author
@@ -78,11 +79,24 @@
 
 ```bash
 pnpm install
-pnpm dev ## and press `F5` to debug
+pnpm run build:react    # 首次或改过 packages/react
+pnpm run dev            # tsdown watch（另开终端亦可）
 ```
 
+**F5**：运行和调试 → **Extension** → F5，在 `[Extension Development Host]` 新窗口打开侧边栏 usewiki。
+
+**命令行启动开发宿主**（无需先点 F5）：
+
+```bash
+# 在仓库根目录
+cursor --new-window --extensionDevelopmentPath="$(pwd)" --disable-extensions
+# 或: code --new-window --extensionDevelopmentPath="$(pwd)" --disable-extensions
+```
+
+改 `src/` 时保持 `pnpm run dev` 运行，或改完后 `pnpm run build` 并在开发窗口 **Ctrl+Shift+F5** 重载。
+
 > [!WARNING]
-> if your update app.tsx, you should run `pnpm build` first on packages/react
+> 若更新 `App.tsx` 等 React 代码，需先 `pnpm run build:react` 再刷新侧边栏。
 
 <!-- * configuration: https://code.visualstudio.com/api/references/contribution-points#contributes.configuration -->
 
@@ -92,5 +106,5 @@ https://github.com/microsoft/vscode-extension-samples/blob/main/webview-view-sam
 
 ## Related Projects
 
-* [usewiki2](https://github.com/oeyoews/usewiki2)
-* [other tiddlywiki projects](https://github.com/stars/oeyoews/lists/tiddlywiki)
+- [usewiki2](https://github.com/oeyoews/usewiki2)
+- [other tiddlywiki projects](https://github.com/stars/oeyoews/lists/tiddlywiki)

@@ -1,38 +1,73 @@
 {
-  "publisher": "oeyoews",
   "name": "usewiki2",
   "displayName": "usewiki2",
   "version": "2.8.4",
   "private": true,
-  "packageManager": "pnpm@9.0.6",
   "description": "",
+  "categories": [
+    "Education"
+  ],
   "keywords": [
     "TiddlyWiki",
     "Usewiki2"
   ],
+  "homepage": "https://github.com/oeyoews/usewiki2-vscode#readme",
+  "license": "MIT",
   "author": {
     "name": "oeyoews"
   },
-  "pricing": "Free",
-  "license": "MIT",
-  "funding": "https://github.com/sponsors/oeyoews",
-  "homepage": "https://github.com/oeyoews/usewiki2-vscode#readme",
   "repository": {
     "type": "git",
     "url": "https://github.com/oeyoews/usewiki2-vscode#readme"
   },
-  "categories": [
-    "Education"
+  "funding": "https://github.com/sponsors/oeyoews",
+  "publisher": "oeyoews",
+  "files": [
+    "dist",
+    "res",
+    "react-dist",
+    "LICENSE",
+    "l10n",
+    "package.nls*.json"
   ],
   "main": "./dist/index.js",
-  "l10n": "./l10n",
-  "icon": "res/tiddlywiki01.png",
-  "engines": {
-    "vscode": "^1.94.0"
+  "scripts": {
+    "build": "tsdown",
+    "dev": "nr build --watch",
+    "update": "vscode-ext-gen --output src/generated/meta.ts",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
+    "vscode:prepublish": "nr build",
+    "publish": "vsce publish --no-dependencies",
+    "build:react": "cd packages/react && pnpm build && cd ../..",
+    "package": "pnpm build:react && vsce package --no-dependencies",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit && pnpm -C packages/react exec tsc -b",
+    "release": "bumpp && nr publish"
   },
-  "activationEvents": [
-    "onStartupFinished"
-  ],
+  "dependencies": {
+    "@vscode/l10n": "^0.0.18"
+  },
+  "devDependencies": {
+    "@antfu/ni": "^30.6.0",
+    "@types/node": "^22.15.0",
+    "@types/vscode": "^1.145.0",
+    "@vscode/vsce": "^4.1.0",
+    "bumpp": "^12.3.0",
+    "esno": "^4.8.0",
+    "oxfmt": "^0.78.0",
+    "oxlint": "^1.93.0",
+    "rimraf": "^6.1.4",
+    "tsdown": "^0.23.7",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.7",
+    "vitest": "^5.1.0",
+    "vscode-ext-gen": "^1.6.0"
+  },
+  "l10n": "./l10n",
   "contributes": {
     "configuration": {
       "type": "object",
@@ -164,53 +199,10 @@
       }
     ]
   },
-  "scripts": {
-    "build": "tsup src/index.ts --external vscode",
-    "dev": "nr build --watch",
-    "update": "vscode-ext-gen --output src/generated/meta.ts",
-    "lint": "eslint .",
-    "vscode:prepublish": "nr build",
-    "publish": "vsce publish --no-dependencies",
-    "build:react": "cd packages/react && pnpm build && cd ../..",
-    "package": "pnpm build:react && vsce package --no-dependencies",
-    "test": "vitest",
-    "typecheck": "tsc --noEmit",
-    "release": "bumpp && nr publish"
+  "icon": "res/tiddlywiki01.png",
+  "engines": {
+    "vscode": "^1.105.0"
   },
-  "devDependencies": {
-    "@antfu/eslint-config": "^1.2.1",
-    "@antfu/ni": "^0.21.12",
-    "@types/node": "^20.14.11",
-    "@types/vscode": "^1.91.0",
-    "@vscode/vsce": "3.2.0",
-    "bumpp": "^9.4.1",
-    "eslint": "^8.57.0",
-    "esno": "^4.7.0",
-    "pnpm": "^8.15.9",
-    "rimraf": "^5.0.9",
-    "tsup": "^7.2.0",
-    "typescript": "^5.5.4",
-    "vite": "^5.4.1",
-    "vitest": "^2.0.5",
-    "vscode-ext-gen": "^0.4.1"
-  },
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.mjs"
-    }
-  },
-  "files": [
-    "dist",
-    "res",
-    "react-dist",
-    "LICENSE",
-    "l10n",
-    "package.nls*.json"
-  ],
-  "dependencies": {
-    "@vscode/l10n": "^0.0.18",
-    "reactive-vscode": "0.2.0"
-  }
+  "packageManager": "pnpm@12.18.0",
+  "pricing": "Free"
 }

@@ -1,14 +1,13 @@
-import sendTiddler from '../sendTiddler';
-import * as openWikiCmd from '../commands/openWikiCmd';
-import { WebviewMessenger } from '../utils/extensionMessenger';
-import { enableMeteors, enableSendSound, getLang } from '../config';
-import { showLanguagePicker } from './showLangPicker';
+import sendTiddler from "../sendTiddler";
+import * as openWikiCmd from "../commands/openWikiCmd";
+import { WebviewMessenger } from "../utils/extensionMessenger";
+import { enableMeteors, enableSendSound, getLang } from "../config";
+import { showLanguagePicker } from "./showLangPicker";
 import {
   Uri,
   workspace,
   env,
   window,
-  ColorTheme,
   type Webview,
   type WebviewView,
   type WebviewViewResolveContext,
@@ -16,20 +15,20 @@ import {
   type ExtensionContext,
   type WebviewViewProvider,
   ColorThemeKind,
-} from 'vscode';
+} from "vscode";
 
 export class usewikiViewProvider implements WebviewViewProvider {
   private _view?: WebviewView;
   private _messenger?: WebviewMessenger;
   constructor(
     private context: ExtensionContext,
-    private _extensionUri = context.extensionUri
+    private _extensionUri = context.extensionUri,
   ) {}
 
   async resolveWebviewView(
     webviewView: WebviewView,
-    context: WebviewViewResolveContext,
-    _token: CancellationToken
+    _context: WebviewViewResolveContext,
+    _token: CancellationToken,
   ) {
     this._view = webviewView;
 
@@ -41,57 +40,67 @@ export class usewikiViewProvider implements WebviewViewProvider {
     const messenger = new WebviewMessenger({ context: this._view });
     webviewView.webview.html = this.getWebviewContent(webviewView.webview);
 
-    messenger.on('enableMeteors', () => {
-      messenger.send('enableMeteors', { text: enableMeteors() });
+    messenger.on("enableMeteors", () => {
+      messenger.send("enableMeteors", { text: enableMeteors() });
     });
 
-    workspace.onDidChangeConfiguration((e) => {
-      // switch meteors
-      if (e.affectsConfiguration('usewiki2.enableMeteors')) {
-        messenger.send('enableMeteors', {
-          text: enableMeteors(),
-        });
-      }
-      // lang switch
-      if (e.affectsConfiguration('usewiki2.lang')) {
-        messenger.send('changeLanguage', { text: getLang() });
-        // 全局刷新, 但是需要webview 主动检查语言配置
-        // webviewView.webview.html = this.getWebviewContent(webviewView.webview);
+    const disposables = [
+      workspace.onDidChangeConfiguration((e) => {
+        if (e.affectsConfiguration("usewiki2.enableMeteors")) {
+          messenger.send("enableMeteors", {
+            text: enableMeteors(),
+          });
+        }
+        if (e.affectsConfiguration("usewiki2.lang")) {
+          messenger.send("changeLanguage", { text: getLang() });
+        }
+      }),
+      window.onDidChangeActiveColorTheme((theme) => {
+        const themeKind = theme.kind;
+        if (themeKind === ColorThemeKind.Dark) {
+          messenger.send("changeTheme", { text: "dark" });
+        } else if (themeKind === ColorThemeKind.Light) {
+          messenger.send("changeTheme", { text: "light" });
+        } else {
+          messenger.send("changeTheme", { text: "high-contrast" });
+        }
+      }),
+    ];
+
+    webviewView.onDidDispose(() => {
+      for (const disposable of disposables) {
+        disposable.dispose();
       }
     });
 
     this._messenger = messenger;
-    messenger.on('changeTheme', () => {
+    messenger.on("changeTheme", () => {
       this.checkTheme();
     });
-    window.onDidChangeActiveColorTheme((theme) => {
-      const themeKind = theme.kind;
-      if (themeKind === ColorThemeKind.Dark) {
-        messenger.send('changeTheme', { text: 'dark' });
-      } else if (themeKind === ColorThemeKind.Light) {
-        messenger.send('changeTheme', { text: 'light' });
-      } else {
-        messenger.send('changeTheme', { text: 'high-contrast' });
-      }
-    });
 
-    messenger.send('changeLanguage', { text: getLang() });
-    messenger.on('showVsCodeLanguageInputBox', async () => {
+    messenger.send("changeLanguage", { text: getLang() });
+    messenger.on("showVsCodeLanguageInputBox", async () => {
       showLanguagePicker(messenger);
     });
 
-    messenger.on('openLink', (data) => {
-      env.openExternal(Uri.parse(data.link));
+    messenger.on("openLink", (data) => {
+      const link = data.link;
+      if (typeof link === "string") {
+        void env.openExternal(Uri.parse(link));
+      }
     });
 
-    messenger.on('openWiki', () => {
+    messenger.on("openWiki", () => {
       openWikiCmd.cli();
     });
 
-    messenger.on('sendWiki', ({ text }) => {
-      sendTiddler(text, messenger).then(() => {
+    messenger.on("sendWiki", ({ text }) => {
+      if (typeof text !== "string") {
+        return;
+      }
+      void sendTiddler(text, messenger).then(() => {
         if (enableSendSound()) {
-          messenger.send('playSound');
+          messenger.send("playSound");
         }
       });
     });
@@ -100,23 +109,23 @@ export class usewikiViewProvider implements WebviewViewProvider {
   private checkTheme() {
     const themeKind = window.activeColorTheme.kind;
     if (themeKind === ColorThemeKind.Dark) {
-      this._messenger?.send('changeTheme', { text: 'dark' });
+      this._messenger?.send("changeTheme", { text: "dark" });
     } else if (themeKind === ColorThemeKind.Light) {
-      this._messenger?.send('changeTheme', { text: 'light' });
+      this._messenger?.send("changeTheme", { text: "light" });
     } else {
-      this._messenger?.send('changeTheme', { text: 'high-contrast' });
+      this._messenger?.send("changeTheme", { text: "high-contrast" });
     }
   }
 
   private getWebviewContent(webview: Webview) {
     const scriptUri = webview.asWebviewUri(
-      Uri.joinPath(this._extensionUri, 'react-dist', 'main.js')
+      Uri.joinPath(this._extensionUri, "react-dist", "main.js"),
     );
     const styleResetUri = webview.asWebviewUri(
-      Uri.joinPath(this._extensionUri, 'res', 'reset.css')
+      Uri.joinPath(this._extensionUri, "res", "reset.css"),
     );
     const styleAppUri = webview.asWebviewUri(
-      Uri.joinPath(this._extensionUri, 'react-dist', 'main.css')
+      Uri.joinPath(this._extensionUri, "react-dist", "main.css"),
     );
     // const { tiddlywiki_version, username } = this._twdata;
     const nonce = getNonce();
@@ -126,7 +135,7 @@ export class usewikiViewProvider implements WebviewViewProvider {
             <html lang="en">
             <head>
                 <meta charset="UTF-8">
-	      <meta http-equiv="Content-Security-Policy" style-src ${webview.cspSource}; script-src 'nonce-${nonce}';">
+              <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource}; font-src ${webview.cspSource}; img-src ${webview.cspSource} data:; script-src 'nonce-${nonce}';">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>Custom Sidebar</title>
 	              <link href="${styleResetUri}" rel="stylesheet">
@@ -142,9 +151,8 @@ export class usewikiViewProvider implements WebviewViewProvider {
 }
 
 function getNonce() {
-  let text = '';
-  const possible =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let text = "";
+  const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   for (let i = 0; i < 32; i++) {
     text += possible.charAt(Math.floor(Math.random() * possible.length));
   }

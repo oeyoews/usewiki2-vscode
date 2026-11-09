@@ -3,12 +3,12 @@ name: Build
 on:
   push:
     tags:
-      - 'v*.*.*'
+      - "v*.*.*"
     branches:
       - main
     paths-ignore:
-      - 'README.md'
-      - 'LICENSE'
+      - "README.md"
+      - "LICENSE"
 
 permissions:
   contents: write
@@ -18,17 +18,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
         with:
-          version: 8
+          version: 12
       - name: Setup Node.js and Pnpm
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: latest
-          cache: 'pnpm'
+          cache: "pnpm"
       - name: Install Dependency
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint and format check
+        run: pnpm run lint && pnpm run format:check && pnpm run typecheck && pnpm run test
 
       - name: Build Page
         run: pnpm run package

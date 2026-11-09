@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "target": "es2017",
-    "lib": ["esnext"],
+    "lib": [
+      "esnext"
+    ],
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
@@ -10,5 +12,16 @@
     "esModuleInterop": true,
     "skipDefaultLibCheck": true,
     "skipLibCheck": true
-  }
+  },
+  "include": [
+    "src/**/*",
+    "test/**/*",
+    "types.d.ts",
+    "tsdown.config.mts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "packages"
+  ]
 }

@@ -9,9 +9,20 @@
       }
     ]
   },
-  // Enable the ESlint flat config support
-  "eslint.experimental.useFlatConfig": false,
-  // Disable the default formatter, use eslint instead
-  "prettier.enable": true,
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "[typescript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "oxc.fmt.configPath": ".oxfmtrc.json",
+  "oxc.linter.configPath": ".oxlintrc.json"
 }

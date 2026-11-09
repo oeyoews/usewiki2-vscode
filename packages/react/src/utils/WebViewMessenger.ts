@@ -15,7 +15,7 @@ export class WebviewMessenger {
   private handlers: { [command: string]: (payload: any) => void } = {};
 
   constructor({ context, vscode }: IOptions) {
-    if (context instanceof Object && 'webview' in context) {
+    if (context instanceof Object && "webview" in context) {
       // VSCode 扩展端
       this.panel = context;
       this.panel.webview.onDidReceiveMessage((message: Message) => {
@@ -26,8 +26,8 @@ export class WebviewMessenger {
     } else {
       // Webview 端
       this._vscode = vscode;
-      window.addEventListener('message', (event: MessageEvent<Message>) =>
-        this.handleMessage(event as any)
+      window.addEventListener("message", (event: MessageEvent<Message>) =>
+        this.handleMessage(event as any),
       );
     }
   }

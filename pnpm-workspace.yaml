@@ -1,2 +1,8 @@
 packages:
   - packages/*
+
+allowBuilds:
+  "@vscode/vsce-sign": true
+  esbuild: true
+
+minimumReleaseAge: 0

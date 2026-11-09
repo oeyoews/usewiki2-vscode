@@ -1,14 +1,10 @@
-import { window } from 'vscode';
+import { window } from "vscode";
 
-export const notify = (
-  message: string,
-  type: INotifyType = 'info',
-  options: string[] = []
-) => {
+export const notify = (message: string, type: INotifyType = "info", options: string[] = []) => {
   const typeMap: Record<INotifyType, string> = {
-    info: 'showInformationMessage',
-    error: 'showErrorMessage',
-    warning: 'showWarningMessage',
+    info: "showInformationMessage",
+    error: "showErrorMessage",
+    warning: "showWarningMessage",
   };
 
   const method = typeMap[type];
