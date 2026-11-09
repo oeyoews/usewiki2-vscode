@@ -8,6 +8,6 @@ alwaysApply: false
 
 - `engines.vscode` 与 `@types/vscode` 保持合理对齐；当前无手写 `activationEvents`（隐式激活）。
 - 改 `contributes`（commands / configuration / views）后：**必须** `pnpm run update`。
-- 发布字段：`main` → `./dist/index.js`；`files` 含 `dist`、`react-dist`、`res`、`l10n`、`package.nls*.json`。
+- 发布字段：`main` → `./dist/index.js`；`files` 含 `dist`、`res`、`l10n`、`package.nls*.json`。
 - 打包/发布脚本使用 `vsce ... --no-dependencies`。
 - 类型常量与命令名优先引用 `src/generated/meta.ts`，避免魔法字符串漂移。

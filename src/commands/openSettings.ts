@@ -1,10 +1,9 @@
+/** 在设置 UI 中筛选本扩展（`@ext:oeyoews.usewiki2`）。 */
 import { commands } from "vscode";
 
 export async function cli() {
   const searchQuery = "@ext:oeyoews.usewiki2";
   commands.executeCommand("workbench.action.openSettings", searchQuery);
-  // const mes = l10n.t('setup_language');
-  // window.showInformationMessage(mes);
 }
 
 export const name = "usewiki2.opensettings";

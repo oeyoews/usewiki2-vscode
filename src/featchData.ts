@@ -1,9 +1,12 @@
+/**
+ * 拉取 TiddlyWiki `GET /status`；失败时可引导修改端口并重载窗口。
+ * 文件名 featchData 为历史拼写，保留以免大范围重命名。
+ */
 import { window, commands } from "vscode";
 import { enableHttps, config, getIp, getPort } from "./config";
 import { notify } from "./notify";
 
 export default async function fetchData(): Promise<ITiddlyWikiStatus> {
-  // notify(`正在获取数据${getPort()}`, 'info');
   const protocal = enableHttps() ? "https" : "http";
   const twurl = `${protocal}://${getIp()}:${getPort()}/status`;
   notify(`正在获取数据${twurl}`, "info");

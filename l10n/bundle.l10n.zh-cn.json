@@ -1,9 +1,17 @@
 {
-  "Setup Language": "设置太微助手语言",
-  "Select Language": "选择语言",
   "Undo": "撤回",
   "Undo And Edit": "重新编辑",
   "Successfully Undone": "已成功撤回",
-  "Successfully Sent": "已成功发送:",
-  "Send Failed": "发送失败:"
+  "Successfully Sent": "已成功发送",
+  "Send Failed": "发送失败",
+  "composer.fileName": "新条目.md",
+  "composer.placeholder": "在此书写… Ctrl+Enter 保存到 TiddlyWiki。",
+  "composer.empty": "没有可发送的内容，请在「新条目」中输入。",
+  "view.sidebarTitle": "太微",
+  "status.sendHint": "$(cloud-upload) 保存到 TiddlyWiki",
+  "status.sendTooltip": "将草稿保存到 TiddlyWiki（Ctrl+Enter）",
+  "sidebar.hint": "在「新条目」中书写，用 Ctrl+Enter、侧栏「保存到 TiddlyWiki」或状态栏按钮发送。",
+  "sidebar.focusComposer": "写新条目",
+  "sidebar.sendToWiki": "保存到 TiddlyWiki",
+  "sidebar.openWiki": "在浏览器打开 Wiki"
 }

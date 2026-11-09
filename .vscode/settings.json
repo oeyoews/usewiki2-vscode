@@ -1,4 +1,6 @@
 {
+  "debug.allowBreakpointsEverywhere": false,
+  "debug.javascript.autoAttachFilter": "onlyWithFlag",
   "locale": "zh-CN",
   "emeraldwalk.runonsave": {
     "commands": [

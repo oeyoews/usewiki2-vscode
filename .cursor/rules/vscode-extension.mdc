@@ -1,5 +1,5 @@
 ---
-description: 扩展主进程与 Webview 宿主代码约定
+description: 扩展主进程代码约定
 globs: src/**/*.ts
 alwaysApply: false
 ---
@@ -7,8 +7,6 @@ alwaysApply: false
 # VS Code 扩展（`src/`）
 
 - `vscode` 仅在 tsdown 中 `deps.neverBundle`，禁止浏览器/DOM API。
-- Webview HTML/CSP：`src/webviews/index.ts` — 完整 `content="..."` CSP；`asWebviewUri` + script nonce。
-- `registerWebviewViewProvider(..., { webviewOptions: { retainContextWhenHidden: true } })`。
-- `resolveWebviewView` 内 `workspace` / `window` 监听须在 `webviewView.onDidDispose` 里 `dispose`。
+- 侧栏：`registerTreeDataProvider` + 命令；草稿区用 `workspace.openTextDocument` / 活动编辑器。
+- 订阅须在 `context.subscriptions` 或 `onDidDispose` 中释放。
 - 扩展 l10n：`l10n.t` + `l10n/`；配置：`workspace.getConfiguration('usewiki2')`。
-- 与 Webview 协议：改 `extensionMessenger.ts` 时同步 `packages/react/src/utils/WebViewMessenger.ts`。

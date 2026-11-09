@@ -1,13 +1,24 @@
+/**
+ * 向 Node.js TiddlyWiki 写入 tiddler：`PUT /recipes/default/tiddlers/{title}`。
+ * 成功后通知支持撤回（DELETE）或撤回并恢复草稿编辑。
+ */
 import { notify } from "./notify";
-import { defaultTag, getPort, getIp, defaultUsername, getType } from "./config";
-import { type WebviewMessenger } from "./utils/extensionMessenger";
-import { l10n } from "vscode";
-export default async function sendTiddler(text: string, messenger: WebviewMessenger) {
-  const UNDO = l10n.t("Undo");
-  const UNDOEDIT = l10n.t("Undo And Edit");
+import { defaultTag, getPort, getIp, defaultUsername, getType, enableHttps } from "./config";
+import { t } from "./localize";
+
+type SendTiddlerHooks = {
+  onUndoEdit?: (text: string) => void;
+};
+
+export default async function sendTiddler(text: string, hooks?: SendTiddlerHooks) {
+  const onUndoEdit = hooks?.onUndoEdit;
+  const UNDO = t("Undo");
+  const UNDOEDIT = t("Undo And Edit");
   const port = getPort();
   const ip = getIp();
+  const protocal = enableHttps() ? "https" : "http";
 
+  // 标题：ISO 日期前缀 + 随机后缀，降低碰撞概率
   const random = Math.random().toString(36).slice(2);
   let title = new Date().toISOString().split("T")[0].replace("-", "/") + "-" + random;
   const time = new Date().toISOString().split(".").shift()!.replace(/\D/g, "");
@@ -21,14 +32,14 @@ export default async function sendTiddler(text: string, messenger: WebviewMessen
     title,
   };
 
-  const url = `http://${ip}:${port}/recipes/default/tiddlers/${title}`;
+  const url = `${protocal}://${ip}:${port}/recipes/default/tiddlers/${title}`;
   const headers = {
     "Content-Type": "application/json",
     "x-requested-with": "TiddlyWiki",
   };
 
   async function undoSendTiddler() {
-    const url = `http://${ip}:${port}/bags/default/tiddlers/${title}`;
+    const url = `${protocal}://${ip}:${port}/bags/default/tiddlers/${title}`;
 
     const response = await fetch(url, {
       method: "DELETE",
@@ -36,9 +47,7 @@ export default async function sendTiddler(text: string, messenger: WebviewMessen
     });
 
     if (response.status === 204) {
-      // '撤回并重新编辑'
-      notify(`${l10n.t("Successfully Undone")}(${title})`, "info");
-      // window.showInformationMessage('发送成功', 'demo').then(() => {});
+      notify(`${t("Successfully Undone")}(${title})`, "info");
     } else {
       notify(`撤回失败${title}`, "error");
     }
@@ -52,16 +61,16 @@ export default async function sendTiddler(text: string, messenger: WebviewMessen
     });
 
     if (response.status === 204) {
-      notify(`${l10n.t("Successfully Sent")}(${title})`, "info", [UNDO, UNDOEDIT]).then((data) => {
+      notify(`${t("Successfully Sent")}(${title})`, "info", [UNDO, UNDOEDIT]).then((data) => {
         if (data === UNDO) {
           undoSendTiddler();
         } else if (data === UNDOEDIT) {
-          undoSendTiddler();
-          messenger.send("edit", { text });
+          void undoSendTiddler();
+          onUndoEdit?.(text);
         }
       });
     } else {
-      notify(l10n.t("Send Failed"), "error");
+      notify(t("Send Failed"), "error");
     }
   } catch (error) {
     notify((error as Error).message, "error");

@@ -1,13 +1,13 @@
 ---
 description: oxlint / oxfmt 与 TypeScript 范围
-globs: "{src,packages,test}/**/*.{ts,tsx,js,jsx,mjs,mts,json}"
+globs: "{src,test}/**/*.{ts,tsx,js,jsx,mjs,mts,json}"
 alwaysApply: false
 ---
 
 # 质量与风格
 
-- Lint：`pnpm run lint` / `lint:fix`（配置 `.oxlintrc.json`，含 typescript、react 插件）。
-- Format：`pnpm run format` / `format:check`（`.oxfmtrc.json` 忽略 `dist`、`react-dist`、`node_modules`）。
-- 根 `tsc`：`include` 仅 `src/`、`test/`；**exclude** `packages/`。React 类型：`pnpm -C packages/react exec tsc -b`（见 `pnpm run typecheck`）。
+- Lint：`pnpm run lint` / `lint:fix`（`.oxlintrc.json`）。
+- Format：`pnpm run format` / `format:check`（`.oxfmtrc.json` 忽略 `dist/`、`node_modules/`）。
+- 类型：`pnpm run typecheck`（根 `tsc` 含 `src/`、`test/`）。
 - 最小改动：不重构无关文件；未经要求不升级依赖或改 README。
-- 修改后建议跑：`typecheck` + 相关 `build` / `build:react`。
+- 修改 `src/` 后建议：`typecheck` + `pnpm run build`。

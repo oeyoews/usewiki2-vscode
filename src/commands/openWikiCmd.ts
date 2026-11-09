@@ -1,3 +1,4 @@
+/** 按配置的 IP/端口与 HTTPS 开关在系统浏览器打开 Wiki 根地址。 */
 import { env, Uri } from "vscode";
 import { getIp, getPort, enableHttps } from "../config";
 

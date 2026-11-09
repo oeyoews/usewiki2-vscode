@@ -25,7 +25,6 @@
   "files": [
     "dist",
     "res",
-    "react-dist",
     "LICENSE",
     "l10n",
     "package.nls*.json"
@@ -33,19 +32,19 @@
   "main": "./dist/index.js",
   "scripts": {
     "build": "tsdown",
-    "dev": "nr build --watch",
+    "dev": "tsdown --watch",
+    "open:devhost": "cursor --new-window --extensionDevelopmentPath=.",
     "update": "vscode-ext-gen --output src/generated/meta.ts",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "format": "oxfmt",
     "format:check": "oxfmt --check",
-    "vscode:prepublish": "nr build",
+    "vscode:prepublish": "tsdown",
     "publish": "vsce publish --no-dependencies",
-    "build:react": "cd packages/react && pnpm build && cd ../..",
-    "package": "pnpm build:react && vsce package --no-dependencies",
+    "package": "pnpm run build && vsce package --no-dependencies",
     "test": "vitest run",
     "test:watch": "vitest",
-    "typecheck": "tsc --noEmit && pnpm -C packages/react exec tsc -b",
+    "typecheck": "tsc --noEmit",
     "release": "bumpp && nr publish"
   },
   "dependencies": {
@@ -63,7 +62,6 @@
     "rimraf": "^6.1.4",
     "tsdown": "^0.23.7",
     "typescript": "^5.9.3",
-    "vite": "^8.3.7",
     "vitest": "^5.1.0",
     "vscode-ext-gen": "^1.6.0"
   },
@@ -71,58 +69,40 @@
   "contributes": {
     "configuration": {
       "type": "object",
-      "title": "UseWiki2",
+      "title": "%usewiki2.config.title%",
       "properties": {
-        "usewiki2.enableMeteors": {
-          "type": "boolean",
-          "default": false,
-          "description": "%usewiki2.enableMeteors%"
-        },
-        "usewiki2.enableSendSound": {
-          "type": "boolean",
-          "default": false,
-          "description": "%usewiki2.enableSendSound.title%"
-        },
         "usewiki2.defaultTag": {
           "type": "string",
           "default": "Journal",
-          "description": "%usewiki2.defaultTag.title%"
+          "title": "%usewiki2.defaultTag.title%",
+          "description": "%usewiki2.defaultTag.description%"
         },
         "usewiki2.defaultUsername": {
           "type": "string",
           "default": "",
-          "description": "%usewiki2.defaultUsername%"
+          "title": "%usewiki2.defaultUsername.title%",
+          "description": "%usewiki2.defaultUsername.description%"
         },
         "usewiki2.ip": {
           "order": 0,
           "type": "string",
           "default": "127.0.0.1",
-          "description": "%usewiki2.ip%"
+          "title": "%usewiki2.ip.title%",
+          "description": "%usewiki2.ip.description%"
         },
         "usewiki2.port": {
           "order": 1,
           "type": "number",
           "default": 8080,
-          "description": "%usewiki2.port%"
+          "title": "%usewiki2.port.title%",
+          "description": "%usewiki2.port.description%"
         },
         "usewiki2.enableHttps": {
           "order": 2,
           "type": "boolean",
           "default": false,
-          "description": "%usewiki2.enableHttps%"
-        },
-        "usewiki2.lang": {
-          "type": "string",
-          "default": "en",
-          "enum": [
-            "en",
-            "zhCN"
-          ],
-          "enumItemLabels": [
-            "English",
-            "Simplified Chinese"
-          ],
-          "description": "%usewiki2.lang%"
+          "title": "%usewiki2.enableHttps.title%",
+          "description": "%usewiki2.enableHttps.description%"
         },
         "usewiki2.type": {
           "order": 3,
@@ -133,33 +113,29 @@
             "text/vnd.tiddlywiki"
           ],
           "enumItemLabels": [
-            "Markdown",
-            "WikiText"
+            "%usewiki2.type.enum.markdown.label%",
+            "%usewiki2.type.enum.wiki.label%"
           ],
           "markdownEnumDescriptions": [
-            "use Markdown",
-            "use WikiText"
+            "%usewiki2.type.enum.markdown%",
+            "%usewiki2.type.enum.wiki%"
           ],
-          "description": "%usewiki2.type%"
+          "title": "%usewiki2.type.title%",
+          "description": "%usewiki2.type.description%"
         }
       }
     },
     "menus": {
       "view/title": [
         {
-          "command": "usewiki2.openwiki",
-          "group": "navigation",
-          "when": "view == usewiki2"
-        },
-        {
           "command": "usewiki2.opensettings",
-          "group": "navigation",
-          "when": "view == usewiki2"
+          "group": "navigation@1",
+          "when": "view == usewiki2.sidebar"
         },
         {
-          "command": "usewiki2.wikiinfo",
-          "group": "navigation",
-          "when": "view == usewiki2"
+          "command": "usewiki2.showHint",
+          "group": "navigation@2",
+          "when": "view == usewiki2.sidebar"
         }
       ]
     },
@@ -175,9 +151,9 @@
     "views": {
       "usewiki2Container": [
         {
-          "id": "usewiki2",
-          "type": "webview",
-          "name": "TiddlyWiki"
+          "id": "usewiki2.sidebar",
+          "name": "TiddlyWiki",
+          "type": "tree"
         }
       ]
     },
@@ -196,9 +172,37 @@
         "command": "usewiki2.opensettings",
         "title": "%usewiki2.opensettings.title%",
         "icon": "$(gear)"
+      },
+      {
+        "command": "usewiki2.openComposer",
+        "title": "%usewiki2.openComposer.title%",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "usewiki2.sendToWiki",
+        "title": "%usewiki2.sendToWiki.title%",
+        "icon": "$(save)"
+      },
+      {
+        "command": "usewiki2.showHint",
+        "title": "%usewiki2.showHint.title%",
+        "icon": "$(info)"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "usewiki2.sendToWiki",
+        "key": "ctrl+enter",
+        "mac": "cmd+enter",
+        "when": "editorTextFocus && resourceScheme == usewiki-compose"
       }
     ]
   },
+  "activationEvents": [
+    "onCommand:usewiki2.openComposer",
+    "onCommand:usewiki2.sendToWiki",
+    "onView:usewiki2.sidebar"
+  ],
   "icon": "res/tiddlywiki01.png",
   "engines": {
     "vscode": "^1.105.0"

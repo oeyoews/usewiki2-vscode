@@ -1,3 +1,4 @@
+/** Node.js TiddlyWiki `/status` 响应片段。 */
 interface ITiddlyWikiStatus {
   tiddlywiki_version: string;
   username: string;
@@ -5,6 +6,7 @@ interface ITiddlyWikiStatus {
 
 type INotifyType = "info" | "warning" | "error";
 
+/** PUT `/recipes/default/tiddlers/...` 请求体字段（与 TW5 JSON 格式对齐）。 */
 interface ITiddler {
   title: string;
   text: string;

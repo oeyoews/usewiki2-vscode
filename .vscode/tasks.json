@@ -1,24 +1,54 @@
 // See https://go.microsoft.com/fwlink/?LinkId=733558
-// for the documentation about the tasks.json format
 {
   "version": "2.0.0",
   "tasks": [
     {
-      "type": "npm",
-      "script": "dev",
-      "problemMatcher": [
-        {
-          "base": "$ts-webpack-watch",
-          "background": {
-            "activeOnStart": true,
-            "beginsPattern": "Build start",
-            "endsPattern": "Build success"
-          }
-        }
+      "label": "open extension dev host",
+      "type": "shell",
+      "command": "cursor",
+      "args": [
+        "--new-window",
+        "--extensionDevelopmentPath=${workspaceFolder}"
+      ],
+      "dependsOn": "build extension",
+      "problemMatcher": [],
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "build extension",
+      "type": "shell",
+      "command": "${workspaceFolder}/node_modules/.bin/tsdown",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "watch extension",
+      "type": "shell",
+      "command": "${workspaceFolder}/node_modules/.bin/tsdown",
+      "args": [
+        "--watch"
       ],
       "isBackground": true,
+      "problemMatcher": {
+        "owner": "tsdown",
+        "pattern": {
+          "regexp": "^(.*)$",
+          "message": 1
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Build start",
+          "endsPattern": "(Build complete|Rebuilt in)"
+        }
+      },
       "presentation": {
-        "reveal": "never"
+        "reveal": "silent",
+        "panel": "dedicated",
+        "close": false
       },
       "group": {
         "kind": "build",

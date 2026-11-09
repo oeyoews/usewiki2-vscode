@@ -5,15 +5,13 @@ alwaysApply: true
 
 # 项目核心
 
-- VS Code 扩展 `oeyoews.usewiki2`：侧边 Webview → Node TiddlyWiki HTTP API。
-- Monorepo：`src/` 扩展主机；`packages/react/` → 构建到 `react-dist/`。
+- VS Code 扩展 `oeyoews.usewiki2`：原生侧栏（TreeView + 编辑器草稿）→ Node TiddlyWiki HTTP API。
+- 源码仅 `src/`；打包输出 `dist/index.js`。
 - 包管理：**pnpm 12**；打包扩展：**tsdown**；质量：**oxlint / oxfmt**（勿引入 ESLint/Prettier）。
 
-改 UI 后必须 `pnpm run build:react` 再调试（Webview 读 `react-dist/`，非 Vite dev）。
+启动：**F5** / **Extension (Run)**，或 `pnpm run open:devhost`。改 `src/` 后 `pnpm run dev`（watch）或 `pnpm run build` + 重载窗口。
 
-启动：**F5**（Extension）或 CLI：`cursor --new-window --extensionDevelopmentPath="$(pwd)" --disable-extensions`（`code` 同理）。CLI 不自动 watch，另开 `pnpm run dev` 或改后 `pnpm run build` + 重载窗口。
-
-常用：`pnpm run build` | `build:react` | `package` | `typecheck` | `lint` | `format:check` | `test`。
+常用：`pnpm run build` | `package` | `typecheck` | `lint` | `format:check` | `test`。
 
 动 `package.json` 的 contributes → `pnpm run update`（`src/generated/meta.ts` 勿手改）。
 
