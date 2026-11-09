@@ -1,108 +1,46 @@
 # Usewiki2
 
-![alt text](https://github.com/oeyoews/usewiki2-vscode/raw/main/banner.png)
+> TiddlyWiki AnyWhere — 在 VS Code / Cursor 里快速写条目，保存到你的 TiddlyWiki。
 
-> TiddlyWiki AnyWhere. 快速发送文本保存到Tiddlywiki, 随时随地记录下你的想法.
+浏览器扩展 [usewiki2](https://github.com/oeyoews/usewiki2) 的编辑器版本：原生侧栏 + 草稿编辑区，通过 Node.js TiddlyWiki HTTP API 写入 tiddler。
 
-> [usewiki2](https://github.com/oeyoews/usewiki2) 浏览器扩展的 的 vscode 插件
+## 前置条件
 
-<video controls>
-	<source src="https://github.com/oeyoews/usewiki2-vscode/raw/main/demo.mp4" type="video/mp4">
-	<source src="demo.mp4" type="video/mp4">
-</video>
+你需要一个可访问的 [Node.js TiddlyWiki](https://tiddlywiki.com/#Installing%20TiddlyWiki%20on%20Node.js) 实例（本地或远程），并确认服务已启动。
 
-<!--
-* manage: https://marketplace.visualstudio.com/manage/publishers/oeyoews
-* publish: https://vscode.github.net.cn/api/working-with-extensions/publishing-extension
-* https://code.visualstudio.com/api/extension-guides/webview
-* icon: https://code.visualstudio.com/api/references/icons-in-labels
-* l10n: https://code.visualstudio.com/api/references/vscode-api#l10n and https://github.com/microsoft/vscode-extension-samples/tree/main/l10n-sample and https://github.com/microsoft/vscode-l10n/issues/150
--->
+## 功能
 
-## prerequisites
+- Activity Bar 侧栏，一键打开草稿编辑区
+- `Ctrl+Enter`（macOS：`Cmd+Enter`）保存到 TiddlyWiki
+- 默认连接 `127.0.0.1:8080`，可在设置中修改地址 / 端口 / HTTPS
+- 首次安装提示用法
+- 支持撤回重写
+- Markdown / WikiText 保存格式
+- 中英文界面
 
-- vscode
+## 使用
 
-> [!WARNING]
-> 你必须有一个可以在线或本地访问nodejs tiddlywiki实例.
+1. 启动 Node.js TiddlyWiki（默认本机 `127.0.0.1:8080`；若不同，打开扩展设置修改服务器地址与端口）。
+2. 首次安装激活后会弹出简要提示。
+3. 点击 Activity Bar 的 **usewiki** → **写新条目**，书写正文后按 **Ctrl+Enter** / **Cmd+Enter**，或点状态栏 / 工具栏保存。
+4. 保存时填写条目标题；默认标签为 `Journal`。
 
-## Features
+也可通过命令面板搜索：`写新条目`、`保存到 TiddlyWiki`、`扩展设置`、`使用说明`。
 
-- 快速发送文本到 TiddlyWiki
-- 配置丰富
-- 支持消息撤回编辑
-- i18n 支持
-- ...
+## 设置
 
-## Install
+| 设置项                     | 说明                           | 默认值                |
+| -------------------------- | ------------------------------ | --------------------- |
+| `usewiki2.ip`              | TiddlyWiki 服务器地址          | `127.0.0.1`           |
+| `usewiki2.port`            | HTTP(S) 端口                   | `8080`                |
+| `usewiki2.enableHttps`     | 是否使用 HTTPS                 | `false`               |
+| `usewiki2.defaultTag`      | 保存时的默认标签               | `Journal`             |
+| `usewiki2.defaultUsername` | 服务端需要身份时的用户名       | （空）                |
+| `usewiki2.type`            | 保存格式：Markdown 或 WikiText | `text/vnd.tiddlywiki` |
 
-- 直接在vscode 的扩展里面搜索 `usewiki2` 或者直接点击 [安装](https://marketplace.visualstudio.com/items?itemName=oeyoews.usewiki2) 即可
+侧栏标题栏的齿轮也可直接打开本扩展设置。
 
-## Usage
+## 相关
 
-- 点击 Activity Bar 的 usewiki 图标，用 **写新条目** 写内容，**Ctrl+Enter** 或状态栏 **保存到 TiddlyWiki**。
-- 点击视图标题栏齿轮，先配置 TiddlyWiki 地址（`usewiki2.ip` / `usewiki2.port`）。
-
-## Commands
-
-<!-- commands -->
-
-| Command                 | Title                         |
-| ----------------------- | ----------------------------- |
-| `usewiki2.wikiinfo`     | %usewiki2.tiddlywiki.title%   |
-| `usewiki2.openwiki`     | %usewiki2.openwiki.title%     |
-| `usewiki2.opensettings` | %usewiki2.opensettings.title% |
-| `usewiki2.openComposer` | %usewiki2.openComposer.title% |
-| `usewiki2.sendToWiki`   | %usewiki2.sendToWiki.title%   |
-| `usewiki2.showHint`     | %usewiki2.showHint.title%     |
-
-<!-- commands -->
-
-## Configurations
-
-<!-- configs -->
-
-| Key                        | Description                                                                                                   | Type      | Default                                   |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------- | --------- | ----------------------------------------- |
-| `usewiki2.placeholder`     | 默认提示符                                                                                                    | `string`  | `"Write something... Ctrl+Enter to save"` |
-| `usewiki2.defaultTag`      | 默认标签                                                                                                      | `string`  | `"Journal"`                               |
-| `usewiki2.defaultUsername` | 默认用户名                                                                                                    | `string`  | `""`                                      |
-| `usewiki2.ip`              | 你的TiddlyWiki地址 (请确定你已经启动了[太微](https://tiddlywiki.com/#Installing%20TiddlyWiki%20on%20Node.js)) | `string`  | `"127.0.0.1"`                             |
-| `usewiki2.port`            | 端口 (请确定你已经启动了太微)                                                                                 | `number`  | `8080`                                    |
-| `usewiki2.enableHttps`     | Enable or Disable HTTPS(untest for https)                                                                     | `boolean` | `false`                                   |
-| `usewiki2.type`            | 选择要使用的文本格式 (Markdown 或 TiddlyWiki)                                                                 | `string`  | `"text/vnd.tiddlywiki"`                   |
-
-<!-- ## TODO
-
-* [ ] 加入条目标题配置, author
-* [x] use vue/react framework to refactor usewiki2 -->
-
-## For Dev
-
-```bash
-pnpm install
-pnpm run build          # 或 pnpm run dev（watch）
-```
-
-**F5**：选 **Extension (Run)**，在 `[Extension Development Host]` 中打开 usewiki 侧栏。
-
-**命令行启动开发宿主**（无需先点 F5）：
-
-```bash
-# 在仓库根目录
-cursor --new-window --extensionDevelopmentPath="$(pwd)" --disable-extensions
-# 或: code --new-window --extensionDevelopmentPath="$(pwd)" --disable-extensions
-```
-
-改 `src/` 时保持 `pnpm run dev` 运行，或改完后 `pnpm run build` 并在开发窗口 **Ctrl+Shift+F5** 重载。
-
-<!-- * configuration: https://code.visualstudio.com/api/references/contribution-points#contributes.configuration -->
-
-<!-- ## Credits
-
-https://github.com/microsoft/vscode-extension-samples/blob/main/webview-view-sample -->
-
-## Related Projects
-
-- [usewiki2](https://github.com/oeyoews/usewiki2)
-- [other tiddlywiki projects](https://github.com/stars/oeyoews/lists/tiddlywiki)
+- [usewiki2 浏览器扩展](https://github.com/oeyoews/usewiki2)
+- [更多 TiddlyWiki 相关项目](https://github.com/stars/oeyoews/lists/tiddlywiki)
