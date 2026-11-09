@@ -127,22 +127,22 @@ export const configs = {
   /**
    * %usewiki2.ip.description%
    * @key `usewiki2.ip`
-   * @default `""`
+   * @default `"127.0.0.1"`
    * @type `string`
    */
   ip: {
     key: "usewiki2.ip",
-    default: "",
+    default: "127.0.0.1",
   } as ConfigItem<"usewiki2.ip">,
   /**
    * %usewiki2.port.description%
    * @key `usewiki2.port`
-   * @default `0`
+   * @default `8080`
    * @type `number`
    */
   port: {
     key: "usewiki2.port",
-    default: 0,
+    default: 8080,
   } as ConfigItem<"usewiki2.port">,
   /**
    * %usewiki2.enableHttps.description%
@@ -180,8 +180,8 @@ export const scopedConfigs = {
   defaults: {
     "defaultTag": "Journal",
     "defaultUsername": "",
-    "ip": "",
-    "port": 0,
+    "ip": "127.0.0.1",
+    "port": 8080,
     "enableHttps": false,
     "type": "text/vnd.tiddlywiki",
   } satisfies ScopedConfigKeyTypeMap,
