@@ -201,11 +201,8 @@
     ]
   },
   "activationEvents": [
-    "onCommand:usewiki2.openComposer",
-    "onCommand:usewiki2.sendToWiki",
     "onFileSystem:usewiki-compose",
-    "onStartupFinished",
-    "onView:usewiki2.sidebar"
+    "onStartupFinished"
   ],
   "icon": "res/tiddlywiki01.png",
   "engines": {
