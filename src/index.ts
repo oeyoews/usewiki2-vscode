@@ -15,6 +15,7 @@ import * as opensetting from "./commands/openSettings";
 import * as openComposer from "./commands/openComposer";
 import * as sendToWiki from "./commands/sendToWiki";
 import * as showHint from "./commands/showHint";
+import { maybeShowWelcome } from "./welcome";
 import {
   type ExtensionContext,
   window,
@@ -144,4 +145,5 @@ export async function activate(context: ExtensionContext) {
   }
 
   void wikiContext.refresh();
+  void maybeShowWelcome(context);
 }

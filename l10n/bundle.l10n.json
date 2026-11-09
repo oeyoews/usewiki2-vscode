@@ -31,5 +31,6 @@
   "wiki.status.offline": "Offline",
   "wiki.status.offlineHint": "Check IP, port, or whether Wiki is running",
   "wiki.configRequired": "Set the TiddlyWiki server address (IP) and port in settings first.",
-  "wiki.openSettings": "Open settings"
+  "wiki.openSettings": "Open settings",
+  "welcome.firstInstall": "usewiki2 is ready. Default server is 127.0.0.1:8080. Open the sidebar to write, then Ctrl+Enter to save."
 }
