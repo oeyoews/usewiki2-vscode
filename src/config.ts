@@ -21,4 +21,4 @@ export const defaultTag = () => config().get("defaultTag", "Journal");
 export const defaultUsername = () => config().get("defaultUsername", "");
 export const getIp = () => config().get("ip", "127.0.0.1");
 export const getPort = () => config().get("port", 8080);
-export const getType = (): ITiddler["type"] => config().get("type", "text/vnd.tiddlywiki");
+export const getType = (): ITiddler["type"] => config().get("type", "text/markdown");

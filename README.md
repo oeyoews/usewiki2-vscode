@@ -36,7 +36,7 @@
 | `usewiki2.enableHttps`     | 是否使用 HTTPS                 | `false`               |
 | `usewiki2.defaultTag`      | 保存时的默认标签               | `Journal`             |
 | `usewiki2.defaultUsername` | 服务端需要身份时的用户名       | （空）                |
-| `usewiki2.type`            | 保存格式：Markdown 或 WikiText | `text/vnd.tiddlywiki` |
+| `usewiki2.type`            | 保存格式：Markdown 或 WikiText | `text/markdown` |
 
 侧栏标题栏的齿轮也可直接打开本扩展设置。
 

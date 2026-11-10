@@ -107,7 +107,7 @@
         "usewiki2.type": {
           "order": 3,
           "type": "string",
-          "default": "text/vnd.tiddlywiki",
+          "default": "text/markdown",
           "enum": [
             "text/markdown",
             "text/vnd.tiddlywiki"

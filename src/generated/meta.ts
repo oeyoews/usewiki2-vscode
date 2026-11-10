@@ -4,7 +4,7 @@
 // Meta info
 export const publisher = "oeyoews"
 export const name = "usewiki2"
-export const version = "2.8.4"
+export const version = "3.0.0"
 export const displayName = "usewiki2"
 export const description = undefined
 export const extensionId = `${publisher}.${name}`
@@ -157,12 +157,12 @@ export const configs = {
   /**
    * %usewiki2.type.description%
    * @key `usewiki2.type`
-   * @default `"text/vnd.tiddlywiki"`
+   * @default `"text/markdown"`
    * @type `string`
    */
   type: {
     key: "usewiki2.type",
-    default: "text/vnd.tiddlywiki",
+    default: "text/markdown",
   } as ConfigItem<"usewiki2.type">,
 }
 
@@ -183,7 +183,7 @@ export const scopedConfigs = {
     "ip": "127.0.0.1",
     "port": 8080,
     "enableHttps": false,
-    "type": "text/vnd.tiddlywiki",
+    "type": "text/markdown",
   } satisfies ScopedConfigKeyTypeMap,
 }
 
