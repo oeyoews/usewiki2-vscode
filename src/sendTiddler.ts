@@ -71,17 +71,19 @@ export default async function sendTiddler(
     "Content-Type": "application/json",
     ...TW_HEADERS,
   };
+  const requestTimeoutMs = 30_000;
 
   async function undoAndRewrite() {
     const deleteUrl = tiddlerBagDeleteUrl(resolvedTitle);
     const response = await fetch(deleteUrl, {
       method: "DELETE",
       headers: TW_HEADERS,
+      signal: AbortSignal.timeout(requestTimeoutMs),
     });
     if (response.status === 204) {
       onUndoEdit?.(restoreDraft);
     } else {
-      notify(`撤回失败${resolvedTitle}`, "error");
+      notify(t("send.undoFailed", { title: resolvedTitle }), "error");
     }
   }
 
@@ -90,6 +92,7 @@ export default async function sendTiddler(
       method: "PUT",
       headers,
       body: JSON.stringify(tiddler),
+      signal: AbortSignal.timeout(requestTimeoutMs),
     });
 
     if (response.status === 204) {
@@ -104,6 +107,6 @@ export default async function sendTiddler(
     return false;
   } catch (error) {
     notify((error as Error).message, "error");
-    throw Error((error as Error).message);
+    return false;
   }
 }

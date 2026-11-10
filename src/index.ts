@@ -15,7 +15,8 @@ import * as opensetting from "./commands/openSettings";
 import * as openComposer from "./commands/openComposer";
 import * as sendToWiki from "./commands/sendToWiki";
 import * as showHint from "./commands/showHint";
-import { maybeShowWelcome } from "./welcome";
+import { notifyExtensionLifecycle } from "./welcome";
+import { commands as commandIds } from "./generated/meta";
 import {
   type ExtensionContext,
   window,
@@ -76,7 +77,7 @@ export async function activate(context: ExtensionContext) {
   );
 
   const statusBar = window.createStatusBarItem(StatusBarAlignment.Right, 80);
-  statusBar.command = "usewiki2.sendToWiki";
+  statusBar.command = commandIds.sendToWiki;
   context.subscriptions.push(statusBar);
 
   const contextStatusBar = window.createStatusBarItem(StatusBarAlignment.Left, 20);
@@ -119,15 +120,10 @@ export async function activate(context: ExtensionContext) {
   context.subscriptions.push(
     window.onDidChangeActiveTextEditor(syncStatusBar),
     workspace.onDidChangeConfiguration((e) => {
-      if (
-        e.affectsConfiguration("usewiki2.ip") ||
-        e.affectsConfiguration("usewiki2.port") ||
-        e.affectsConfiguration("usewiki2.enableHttps") ||
-        e.affectsConfiguration("usewiki2.defaultTag") ||
-        e.affectsConfiguration("usewiki2.type")
-      ) {
-        void wikiContext.refresh();
+      if (!e.affectsConfiguration("usewiki2")) {
+        return;
       }
+      applyLocalizedChrome();
     }),
   );
 
@@ -145,5 +141,5 @@ export async function activate(context: ExtensionContext) {
   }
 
   void wikiContext.refresh();
-  void maybeShowWelcome(context);
+  void notifyExtensionLifecycle(context);
 }

@@ -13,7 +13,7 @@
 - Activity Bar 侧栏，一键打开草稿编辑区
 - `Ctrl+Enter`（macOS：`Cmd+Enter`）保存到 TiddlyWiki
 - 默认连接 `127.0.0.1:8080`，可在设置中修改地址 / 端口 / HTTPS
-- 首次安装提示用法
+- 首次安装通知用法
 - 支持撤回重写
 - Markdown / WikiText 保存格式
 - 中英文界面
@@ -21,7 +21,7 @@
 ## 使用
 
 1. 启动 Node.js TiddlyWiki（默认本机 `127.0.0.1:8080`；若不同，打开扩展设置修改服务器地址与端口）。
-2. 首次安装激活后会弹出简要提示。
+2. 首次安装激活后右下角会出现简要通知。
 3. 点击 Activity Bar 的 **usewiki** → **写新条目**，书写正文后按 **Ctrl+Enter** / **Cmd+Enter**，或点状态栏 / 工具栏保存。
 4. 保存时填写条目标题；默认标签为 `Journal`。
 
@@ -29,13 +29,13 @@
 
 ## 设置
 
-| 设置项                     | 说明                           | 默认值                |
-| -------------------------- | ------------------------------ | --------------------- |
-| `usewiki2.ip`              | TiddlyWiki 服务器地址          | `127.0.0.1`           |
-| `usewiki2.port`            | HTTP(S) 端口                   | `8080`                |
-| `usewiki2.enableHttps`     | 是否使用 HTTPS                 | `false`               |
-| `usewiki2.defaultTag`      | 保存时的默认标签               | `Journal`             |
-| `usewiki2.defaultUsername` | 服务端需要身份时的用户名       | （空）                |
+| 设置项                     | 说明                           | 默认值          |
+| -------------------------- | ------------------------------ | --------------- |
+| `usewiki2.ip`              | TiddlyWiki 服务器地址          | `127.0.0.1`     |
+| `usewiki2.port`            | HTTP(S) 端口                   | `8080`          |
+| `usewiki2.enableHttps`     | 是否使用 HTTPS                 | `false`         |
+| `usewiki2.defaultTag`      | 保存时的默认标签               | `Journal`       |
+| `usewiki2.defaultUsername` | 服务端需要身份时的用户名       | （空）          |
 | `usewiki2.type`            | 保存格式：Markdown 或 WikiText | `text/markdown` |
 
 侧栏标题栏的齿轮也可直接打开本扩展设置。

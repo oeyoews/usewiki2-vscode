@@ -1,23 +1,20 @@
 /**
  * Node.js TiddlyWiki HTTP 辅助：拼接地址、探测 tiddler 是否已存在。
  */
-import { enableHttps, getIp, getPort } from "./config";
+import { wikiServerUrl } from "./wikiUrl";
 
 const TW_HEADERS = {
   "x-requested-with": "TiddlyWiki",
 } as const;
 
-function baseUrl(): string {
-  const protocal = enableHttps() ? "https" : "http";
-  return `${protocal}://${getIp()}:${getPort()}`;
-}
+const STATUS_TIMEOUT_MS = 15_000;
 
 export function tiddlerRecipeUrl(title: string): string {
-  return `${baseUrl()}/recipes/default/tiddlers/${encodeURIComponent(title)}`;
+  return `${wikiServerUrl()}/recipes/default/tiddlers/${encodeURIComponent(title)}`;
 }
 
 export function tiddlerBagDeleteUrl(title: string): string {
-  return `${baseUrl()}/bags/default/tiddlers/${encodeURIComponent(title)}`;
+  return `${wikiServerUrl()}/bags/default/tiddlers/${encodeURIComponent(title)}`;
 }
 
 export { TW_HEADERS };
@@ -27,6 +24,7 @@ export async function tiddlerExists(title: string): Promise<boolean> {
   const response = await fetch(tiddlerRecipeUrl(title), {
     method: "GET",
     headers: TW_HEADERS,
+    signal: AbortSignal.timeout(STATUS_TIMEOUT_MS),
   });
   if (response.status === 404) {
     return false;

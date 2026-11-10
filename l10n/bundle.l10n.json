@@ -32,5 +32,14 @@
   "wiki.status.offlineHint": "Check IP, port, or whether Wiki is running",
   "wiki.configRequired": "Set the TiddlyWiki server address (IP) and port in settings first.",
   "wiki.openSettings": "Open settings",
-  "welcome.firstInstall": "usewiki2 is ready. Default server is 127.0.0.1:8080. Open the sidebar to write, then Ctrl+Enter to save."
+  "wiki.infoDetail": "TiddlyWiki {version} · {username}",
+  "wiki.configurePort": "Configure port",
+  "wiki.portPrompt": "HTTP(S) port for your TiddlyWiki server",
+  "wiki.portInvalid": "Enter a valid port (1–65535).",
+  "wiki.portUpdated": "Port updated. Reload the window to apply.",
+  "wiki.reloadWindow": "Reload window",
+  "send.undoFailed": "Could not undo save for “{title}”.",
+  "welcome.firstInstall": "usewiki2 is ready. Default server is 127.0.0.1:8080. Open the sidebar to write, then Ctrl+Enter to save.",
+  "welcome.upgraded": "usewiki2 updated to {version}.",
+  "welcome.viewHint": "How to use"
 }

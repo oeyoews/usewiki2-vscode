@@ -1,8 +1,9 @@
 /**
  * 保存 / 打开 Wiki 前检查 `usewiki2.ip` 与 `usewiki2.port` 是否已填写。
  */
-import { commands, window } from "vscode";
+import { commands as vscodeCommands, window } from "vscode";
 import { getIp, getPort } from "./config";
+import { commands } from "./generated/meta";
 import { t } from "./localize";
 
 const OPEN_SETTINGS = t("wiki.openSettings");
@@ -24,7 +25,7 @@ export async function ensureWikiServerConfigured(): Promise<boolean> {
     OPEN_SETTINGS,
   );
   if (choice === OPEN_SETTINGS) {
-    await commands.executeCommand("usewiki2.opensettings");
+    await vscodeCommands.executeCommand(commands.opensettings);
   }
   return false;
 }

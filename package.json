@@ -1,9 +1,9 @@
 {
   "name": "usewiki2",
   "displayName": "usewiki2",
-  "version": "3.0.0",
+  "version": "3.0.2",
   "private": true,
-  "description": "",
+  "description": "Write tiddlers in VS Code and save to your Node.js TiddlyWiki via the HTTP API.",
   "categories": [
     "Education"
   ],
@@ -47,9 +47,6 @@
     "typecheck": "tsc --noEmit",
     "release": "bumpp && nr publish"
   },
-  "dependencies": {
-    "@vscode/l10n": "^0.0.18"
-  },
   "devDependencies": {
     "@antfu/ni": "^30.6.0",
     "@types/node": "^22.15.0",
@@ -59,7 +56,6 @@
     "esno": "^4.8.0",
     "oxfmt": "^0.78.0",
     "oxlint": "^1.93.0",
-    "rimraf": "^6.1.4",
     "tsdown": "^0.23.7",
     "typescript": "^5.9.3",
     "vitest": "^5.1.0",

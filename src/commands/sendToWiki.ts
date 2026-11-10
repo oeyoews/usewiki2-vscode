@@ -1,10 +1,11 @@
 /** 保存时填写标题，再发送到 Wiki。 */
+import { window } from "vscode";
 import sendTiddler from "../sendTiddler";
 import type { ComposerSession } from "../composer/composerSession";
 import { askTiddlerTitleOnSend } from "../tiddlerTitle";
+import { commands } from "../generated/meta";
 import { t } from "../localize";
 import { ensureWikiServerConfigured } from "../wikiServerReady";
-import { window } from "vscode";
 
 let session: ComposerSession | undefined;
 
@@ -12,7 +13,7 @@ export function bindComposer(s: ComposerSession) {
   session = s;
 }
 
-export const name = "usewiki2.sendToWiki";
+export const name = commands.sendToWiki;
 
 export async function cli() {
   if (!(await ensureWikiServerConfigured())) {

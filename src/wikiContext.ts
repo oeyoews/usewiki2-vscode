@@ -1,8 +1,11 @@
 /**
  * 侧栏/状态栏展示的 Wiki 连接与配置摘要；`GET /status` 静默探测。
  */
-import { defaultTag, enableHttps, getIp, getPort, getType } from "./config";
+import { defaultTag, getIp, getPort, getType } from "./config";
 import { t } from "./localize";
+import { wikiServerUrl } from "./wikiUrl";
+
+export { wikiServerUrl };
 
 export type WikiConnectionStatus = "checking" | "connected" | "offline";
 
@@ -15,11 +18,6 @@ export type WikiContextSnapshot = {
   statusIcon: "check" | "error" | "loading~spin";
   connectionStatus: WikiConnectionStatus;
 };
-
-export function wikiServerUrl(): string {
-  const protocal = enableHttps() ? "https" : "http";
-  return `${protocal}://${getIp()}:${getPort()}`;
-}
 
 function saveFormatLabel(): string {
   return getType() === "text/markdown" ? "Markdown" : "WikiText";
@@ -64,11 +62,13 @@ export function buildWikiContextFromStatus(
   };
 }
 
+const STATUS_TIMEOUT_MS = 15_000;
+
 /** 不弹通知，仅供 UI 刷新。 */
 export async function pingWikiStatus(): Promise<ITiddlyWikiStatus | null> {
   const url = `${wikiServerUrl()}/status`;
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, { signal: AbortSignal.timeout(STATUS_TIMEOUT_MS) });
     if (!response.ok) {
       return null;
     }

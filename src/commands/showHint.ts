@@ -2,7 +2,9 @@
 import { window } from "vscode";
 import { t } from "../localize";
 
-export const name = "usewiki2.showHint";
+import { commands } from "../generated/meta";
+
+export const name = commands.showHint;
 
 export function cli() {
   void window.showInformationMessage(t("sidebar.hint"), { modal: true });

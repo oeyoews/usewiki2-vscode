@@ -6,10 +6,7 @@
       "label": "open extension dev host",
       "type": "shell",
       "command": "cursor",
-      "args": [
-        "--new-window",
-        "--extensionDevelopmentPath=${workspaceFolder}"
-      ],
+      "args": ["--new-window", "--extensionDevelopmentPath=${workspaceFolder}"],
       "dependsOn": "build extension",
       "problemMatcher": [],
       "group": "none",
@@ -29,9 +26,7 @@
       "label": "watch extension",
       "type": "shell",
       "command": "${workspaceFolder}/node_modules/.bin/tsdown",
-      "args": [
-        "--watch"
-      ],
+      "args": ["--watch"],
       "isBackground": true,
       "problemMatcher": {
         "owner": "tsdown",

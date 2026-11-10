@@ -19,7 +19,6 @@
   "usewiki2.type.enum.wiki.label": "Wiki 文本",
   "usewiki2.type.enum.markdown": "以 Markdown 保存（`text/markdown`）。",
   "usewiki2.type.enum.wiki": "以 Wiki 文本保存（`text/vnd.tiddlywiki`）。",
-  "usewiki2.sidebarWelcome": "在 **New tiddler.md** 中书写，**Ctrl+Enter** 或工具栏 $(save) 保存。\n\n[写新条目](command:usewiki2.openComposer) · [设置](command:usewiki2.opensettings)",
   "usewiki2.openComposer.title": "写新条目",
   "usewiki2.sendToWiki.title": "保存到 TiddlyWiki",
   "usewiki2.showHint.title": "使用说明"

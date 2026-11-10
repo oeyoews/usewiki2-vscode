@@ -4,9 +4,9 @@
 // Meta info
 export const publisher = "oeyoews"
 export const name = "usewiki2"
-export const version = "3.0.0"
+export const version = "3.0.2"
 export const displayName = "usewiki2"
-export const description = undefined
+export const description = "Write tiddlers in VS Code and save to your Node.js TiddlyWiki via the HTTP API."
 export const extensionId = `${publisher}.${name}`
 
 /**

@@ -1,9 +1,10 @@
 /** 在设置 UI 中筛选本扩展（`@ext:oeyoews.usewiki2`）。 */
-import { commands } from "vscode";
+import { commands as vscodeCommands } from "vscode";
+import { commands, name as extensionName, publisher } from "../generated/meta";
 
-export async function cli() {
-  const searchQuery = "@ext:oeyoews.usewiki2";
-  commands.executeCommand("workbench.action.openSettings", searchQuery);
+export const name = commands.opensettings;
+
+export async function cli(): Promise<void> {
+  const searchQuery = `@ext:${publisher}.${extensionName}`;
+  await vscodeCommands.executeCommand("workbench.action.openSettings", searchQuery);
 }
-
-export const name = "usewiki2.opensettings";

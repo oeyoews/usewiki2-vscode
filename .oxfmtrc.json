@@ -1,9 +1,4 @@
 {
   "$schema": "./node_modules/oxfmt/configuration_schema.json",
-  "ignorePatterns": [
-    "dist/**",
-    "node_modules/**",
-    "pnpm-lock.yaml",
-    "**/*.tsbuildinfo"
-  ]
+  "ignorePatterns": ["dist/**", "node_modules/**", "pnpm-lock.yaml", "**/*.tsbuildinfo"]
 }

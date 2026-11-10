@@ -10,6 +10,7 @@ import {
   type Event,
   type TreeDataProvider,
 } from "vscode";
+import { commands as commandIds } from "../generated/meta";
 import { t } from "../localize";
 import type { WikiContextSnapshot } from "../wikiContext";
 import type { WikiContextStore } from "../wikiContextStore";
@@ -93,19 +94,19 @@ export class SidebarTreeProvider implements TreeDataProvider<SidebarNode> {
     return [
       {
         kind: "action",
-        command: "usewiki2.openComposer",
+        command: commandIds.openComposer,
         icon: "edit",
         labelKey: "sidebar.focusComposer",
       },
       {
         kind: "action",
-        command: "usewiki2.sendToWiki",
+        command: commandIds.sendToWiki,
         icon: "cloud-upload",
         labelKey: "sidebar.sendToWiki",
       },
       {
         kind: "action",
-        command: "usewiki2.openwiki",
+        command: commandIds.openwiki,
         icon: "link-external",
         labelKey: "sidebar.openWiki",
       },

@@ -13,8 +13,14 @@ const bundles = {
   zhCN,
 } as const satisfies Record<string, Record<MessageKey, string>>;
 
-export function t(key: MessageKey): string {
+export function t(key: MessageKey, params?: Record<string, string>): string {
   const lang = getLang();
   const bundle = lang === "zhCN" ? bundles.zhCN : bundles.en;
-  return bundle[key] ?? bundles.en[key] ?? key;
+  let message = bundle[key] ?? bundles.en[key] ?? key;
+  if (params) {
+    for (const [name, value] of Object.entries(params)) {
+      message = message.replaceAll(`{${name}}`, value);
+    }
+  }
+  return message;
 }

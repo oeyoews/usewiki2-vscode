@@ -32,5 +32,14 @@
   "wiki.status.offlineHint": "请检查 IP、端口或 Wiki 是否已启动",
   "wiki.configRequired": "请先在设置中填写 TiddlyWiki 的服务器地址（IP）和端口。",
   "wiki.openSettings": "打开设置",
-  "welcome.firstInstall": "usewiki2 已就绪。默认连接 127.0.0.1:8080。打开侧栏写条目，Ctrl+Enter 保存。"
+  "wiki.infoDetail": "TiddlyWiki {version} · {username}",
+  "wiki.configurePort": "配置端口",
+  "wiki.portPrompt": "TiddlyWiki 服务的 HTTP(S) 端口",
+  "wiki.portInvalid": "请输入有效端口（1–65535）。",
+  "wiki.portUpdated": "端口已更新，请重载窗口以生效。",
+  "wiki.reloadWindow": "重载窗口",
+  "send.undoFailed": "无法撤回条目「{title}」的保存。",
+  "welcome.firstInstall": "usewiki2 已就绪。默认连接 127.0.0.1:8080。打开侧栏写条目，Ctrl+Enter 保存。",
+  "welcome.upgraded": "usewiki2 已更新至 {version}。",
+  "welcome.viewHint": "使用说明"
 }

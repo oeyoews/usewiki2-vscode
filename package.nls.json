@@ -19,7 +19,6 @@
   "usewiki2.type.enum.wiki.label": "WikiText",
   "usewiki2.type.enum.markdown": "Save as Markdown (`text/markdown`).",
   "usewiki2.type.enum.wiki": "Save as WikiText (`text/vnd.tiddlywiki`).",
-  "usewiki2.sidebarWelcome": "Write in **New tiddler.md**, then **Ctrl+Enter** or $(save) in the toolbar.\n\n[New tiddler](command:usewiki2.openComposer) · [Settings](command:usewiki2.opensettings)",
   "usewiki2.openComposer.title": "New tiddler",
   "usewiki2.sendToWiki.title": "Save to TiddlyWiki",
   "usewiki2.showHint.title": "How to use"
