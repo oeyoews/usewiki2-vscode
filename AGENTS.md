@@ -36,7 +36,7 @@
 | UI       | VS Code TreeView、命令、编辑器草稿、`vscode` l10n |
 | 质量     | **oxlint** / **oxfmt**                            |
 | 测试     | Vitest **5**                                      |
-| VS Code  | `engines.vscode` **^1.105.0**                     |
+| VS Code  | `engines.vscode` **^1.128.0**                     |
 
 ## 常用命令
 

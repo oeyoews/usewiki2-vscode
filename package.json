@@ -53,7 +53,7 @@
   "devDependencies": {
     "@antfu/ni": "^30.6.0",
     "@types/node": "^22.15.0",
-    "@types/vscode": "^1.145.0",
+    "@types/vscode": "1.125.0",
     "@vscode/vsce": "^4.1.0",
     "bumpp": "^12.3.0",
     "esno": "^4.8.0",
@@ -206,7 +206,7 @@
   ],
   "icon": "res/tiddlywiki01.png",
   "engines": {
-    "vscode": "^1.145.0"
+    "vscode": "^1.128.0"
   },
   "packageManager": "pnpm@12.18.0",
   "pricing": "Free"
