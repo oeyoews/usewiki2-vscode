@@ -41,7 +41,7 @@
     "format:check": "oxfmt --check",
     "vscode:prepublish": "tsdown",
     "publish": "vsce publish --no-dependencies",
-    "package": "pnpm run build && vsce package --no-dependencies",
+    "package": "pnpm run build && mkdir -p out && vsce package --no-dependencies --out out/$npm_package_name-$npm_package_version.vsix",
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
